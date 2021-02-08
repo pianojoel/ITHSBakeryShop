@@ -8,7 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.EntityFrameworkCore;
+using Grupp9WebbShop.Data;
 namespace Grupp9WebbShop.Web
 {
     public class Startup
@@ -23,6 +24,8 @@ namespace Grupp9WebbShop.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ShopContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("BakeryShopDb")));
             services.AddRazorPages();
         }
 
