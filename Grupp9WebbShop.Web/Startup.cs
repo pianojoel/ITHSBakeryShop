@@ -26,6 +26,7 @@ namespace Grupp9WebbShop.Web
         {
             services.AddDbContext<ShopContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("BakeryShopDb")));
+            services.AddScoped<IShopDataService, ShopDataService>();
             services.AddRazorPages();
         }
 
