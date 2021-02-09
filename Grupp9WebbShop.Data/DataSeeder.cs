@@ -15,20 +15,26 @@ namespace Grupp9WebbShop.Data
             ctx.ProductCategories.AddRange(cats);
             ctx.SaveChanges();
             var c = ctx.ProductCategories.Where(n => n.Name == "Bullar").FirstOrDefault();
-            List<Product> prods = CreateProducts(c);
+            List<Product> prods = new();
+            prods.Add(CreateProducts(c, "Kanelbulle", 10));
+            prods.Add(CreateProducts(c, "Vaniljbulle", 12));
+            prods.Add(CreateProducts(c, "Kardemummabulle", 10));
+            prods.Add(CreateProducts(c, "Saffransbulle", 15));
             ctx.Products.AddRange(prods);
             ctx.SaveChanges();
 
         }
 
-        private static List<Product> CreateProducts(ProductCategory c)
+        private static Product CreateProducts(ProductCategory c, string name, decimal price, string description = "")
         {
-            List<Product> prods = new();
-            prods.Add(new Product() { 
-            Name = "Kanelbulle",
-            Category = c
-            });
-            return prods;
+            Product prod = new()
+            {
+                Name = name,
+                Description = description,
+                Price = price,
+                Category = c
+            };
+            return prod;
         }
 
         private static List<ProductCategory> CreateCategories()
