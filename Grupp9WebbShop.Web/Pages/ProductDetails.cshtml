@@ -1,0 +1,16 @@
+﻿@page
+@model Grupp9WebbShop.Web.Pages.ProductDetailsModel
+@{
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <img style="width:100%" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
+        </div>
+        <div class="col-sm-6">
+            <h1>Detaljer för @Model.Product.Name</h1>
+            <p>@Model.Product.Description</p>
+            <p>Pris: @Math.Round(Model.Product.Price, 0) kr</p>
+        </div>
+    </div>
+</div>
