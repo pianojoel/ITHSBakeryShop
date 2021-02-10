@@ -10,5 +10,7 @@ namespace Grupp9WebbShop.Data.Models
         [Required]
         public string Name { get; set; }
         public List<Product> Products { get; set; }
+        public string ImageFile { get; set; }
+        public string Description { get; set; }
     }
 }

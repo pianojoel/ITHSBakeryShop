@@ -1,0 +1,68 @@
+﻿@page
+@model Grupp9WebbShop.Web.Pages.CategoriesModel
+@{
+}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                @foreach (var cat in Model.Categories)
+                {
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-route-categoryID="@cat.Id">@cat.Name</a>
+                    </li>
+                }
+
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+@if (Model.CategoryId == null)
+{
+    <div class="row">
+        @foreach (var cat in Model.Categories)
+        {
+            <a class="text-decoration-none text-body" asp-route-categoryID="@cat.Id">
+                <div class="col-sm-3">
+                    <div class="card m-2" style="width: 14rem;">
+                        <img class="card-img-top" src="~/images/cupcake.jpg" alt="cupcake">
+                        <div class="card-body">
+                            <h5 class="card-title">@cat.Name</h5>
+                            <p class="card-text">@cat.Description</p>
+
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var prod in Model.Products)
+        {
+            <a class="text-decoration-none text-body" asp-route-categoryID="@prod.Id">
+                <div class="col-sm-3">
+                    <div class="card m-2" style="width: 14rem;">
+                        <img class="card-img-top" src="~/images/cupcake.jpg" alt="cupcake">
+                        <div class="card-body">
+                            <h5 class="card-title">@prod.Name</h5>
+                            <h5 class="card-text">@Math.Round(prod.Price, 0) kr</h5>
+
+                            <p class="card-text">@prod.Description</p>
+
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+}
