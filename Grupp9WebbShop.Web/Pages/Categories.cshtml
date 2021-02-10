@@ -32,7 +32,7 @@
             <a class="text-decoration-none text-body" asp-route-categoryID="@cat.Id">
                 <div class="col-sm-3">
                     <div class="card m-2" style="width: 14rem;">
-                        <img class="card-img-top" src="~/images/cupcake.jpg" alt="cupcake">
+                        <img height=150 class="card-img-top" src="~/images/CategoryImages/@cat.ImageFile" alt="@cat.ImageDescription">
                         <div class="card-body">
                             <h5 class="card-title">@cat.Name</h5>
                             <p class="card-text">@cat.Description</p>
@@ -52,12 +52,12 @@ else
             <a class="text-decoration-none text-body" asp-route-categoryID="@prod.Id">
                 <div class="col-sm-3">
                     <div class="card m-2" style="width: 14rem;">
-                        <img class="card-img-top" src="~/images/cupcake.jpg" alt="cupcake">
+                        <img class="card-img-top" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                         <div class="card-body">
                             <h5 class="card-title">@prod.Name</h5>
                             <h5 class="card-text">@Math.Round(prod.Price, 0) kr</h5>
 
-                            <p class="card-text">@prod.Description</p>
+                            <p class="card-text">@prod.Summary</p>
 
                         </div>
                     </div>
