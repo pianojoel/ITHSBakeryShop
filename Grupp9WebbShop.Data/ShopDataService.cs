@@ -21,12 +21,12 @@ namespace Grupp9WebbShop.Data
         }
         public IEnumerable<ProductCategory> GetProductCategories()
         {
-            return _ctx.ProductCategories.ToList();
+            return _ctx.ProductCategories.OrderBy(o => o.Name).ToList();
         }
         public IEnumerable<Product> GetProductsByCategory(int categoryId)
         {
-            ProductCategory category = _ctx.ProductCategories.Find(categoryId);
-            return category.Products.ToList();
+            ProductCategory category = _ctx.ProductCategories.Include(i => i.Products).Where(i => i.Id == categoryId).FirstOrDefault();
+            return category.Products.OrderBy(o => o.Name).ToList();
         }
         public Product GetProductById(int id)
         {
