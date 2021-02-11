@@ -31,7 +31,7 @@
         {
             <a class="text-decoration-none text-body" asp-route-categoryID="@cat.Id">
                 <div class="col-sm-3">
-                    <div class="card m-2" style="width: 14rem;">
+                    <div class="card m-2 " style="width: 14rem;height:22rem">
                         <img height=150 class="card-img-top" src="~/images/CategoryImages/@cat.ImageFile" alt="@cat.ImageDescription">
                         <div class="card-body">
                             <h5 class="card-title">@cat.Name</h5>
@@ -51,7 +51,7 @@ else
         {
             <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
                 <div class="col-sm-3">
-                    <div class="card m-2" style="width: 14rem;">
+                    <div class="card m-2" style="width: 14rem;height:22rem">
                         <img class="card-img-top" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                         <div class="card-body">
                             <h5 class="card-title">@prod.Name</h5>
