@@ -11,6 +11,37 @@
             <h1>Detaljer för @Model.Product.Name</h1>
             <p>@Model.Product.Description</p>
             <p>Pris: @Math.Round(Model.Product.Price, 0) kr</p>
+            
+                <form method="post">
+                    <button type="submit">Köp</button>
+                </form>
+
+            
         </div>
     </div>
+    
+        
+    
 </div>
+@if (Model.Animate)
+{
+
+
+<script>
+    let cart = document.getElementById("Cart");
+   
+    cart.classList.remove('bg-dark');
+    cart.classList.remove('text-light');
+    cart.classList.add('btn-success');
+
+    setTimeout(function () {
+       
+        cart.classList.remove('btn-success');
+
+        cart.classList.add('bg-dark');
+        cart.classList.add('text-light');
+
+    }, 1500);               
+
+</script>
+}

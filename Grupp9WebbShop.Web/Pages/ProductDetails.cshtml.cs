@@ -15,7 +15,7 @@ namespace Grupp9WebbShop.Web.Pages
         [BindProperty(SupportsGet = true)]
         public int? ProductId { get; set; }
         public Product Product { get; set; }
-        
+        public bool Animate { get; set; }
         public ProductDetailsModel(IShopDataService ds)
         {
             _ds = ds;
@@ -28,6 +28,11 @@ namespace Grupp9WebbShop.Web.Pages
                 Product = _ds.GetProductById(ProductId.Value);
             }
 
+        }
+        public void OnPost()
+        {
+            Animate = true;
+            OnGet();
         }
     }
 }
