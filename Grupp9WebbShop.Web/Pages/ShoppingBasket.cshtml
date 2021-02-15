@@ -1,0 +1,30 @@
+﻿@page
+@using Grupp9WebbShop.Data.Models
+@model Grupp9WebbShop.Web.Pages.ShoppingBasketModel
+@{
+
+}
+
+<h1>Din varukorg</h1>
+<p>Antal varor: @Grupp9WebbShop.Web.Helpers.BasketHelper.NumItems(HttpContext.Session)</p>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Produkt</th>
+            <th>Antal</th>
+            <th>Pris</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Basket.Items)
+        {
+                Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
+            <tr>
+                <td>@p.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.RowPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>Totalt: @Model.Basket.Total</p>
