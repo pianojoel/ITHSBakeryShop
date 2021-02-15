@@ -11,12 +11,13 @@
             <h1>Detaljer för @Model.Product.Name</h1>
             <p>@Model.Product.Description</p>
             <p>Pris: @Math.Round(Model.Product.Price, 0) kr</p>
-            
-                <form method="post">
-                    <button type="submit">Köp</button>
-                </form>
-
-            
+            <select name="number">
+                @for (int i = 1; i < 11; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <button onclick="">Köp</button>
         </div>
     </div>
     

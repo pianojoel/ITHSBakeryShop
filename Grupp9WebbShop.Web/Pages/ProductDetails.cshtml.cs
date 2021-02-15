@@ -29,6 +29,13 @@ namespace Grupp9WebbShop.Web.Pages
             }
 
         }
+
+        [BindProperty]
+        public int Number { get; set; }
+        public void OnPost()
+        {
+            
+        }
         public void OnPost()
         {
             Animate = true;
