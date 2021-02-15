@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grupp9WebbShop.Data;
 using Grupp9WebbShop.Data.Models;
+using Grupp9WebbShop.Web.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -36,6 +37,8 @@ namespace Grupp9WebbShop.Web.Pages
         public void OnPost()
         {
             Animate = true;
+            Product = _ds.GetProductById(ProductId.Value);
+            BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.Price, Number);
             OnGet();
         }
     }

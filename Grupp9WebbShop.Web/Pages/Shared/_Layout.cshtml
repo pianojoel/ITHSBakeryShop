@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Grupp9WebbShop.Web.Helpers
+<!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="utf-8" />
@@ -32,7 +33,7 @@
                         </li>
                        
                         <li class="nav-item">
-                            <a id="Cart" class="nav-link text-light btn bg-dark" asp-area="" asp-page="/Privacy"> <img src="~/images/Kundvagn_Vit.png" width="30px" /> Din kundvagn</a>
+                            <a id="Cart" class="nav-link text-light btn bg-dark" asp-area="" asp-page="/Privacy"> <img src="~/images/Kundvagn_Vit.png" width="30px" /> Varukorg (@BasketHelper.NumItems(Context.Session))</a>
                         </li>
                         
 
