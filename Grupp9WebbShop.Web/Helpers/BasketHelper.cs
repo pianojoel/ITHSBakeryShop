@@ -36,7 +36,16 @@ Quantity = quantity
                 });
             SaveBasket(session, b);
         }
-
+        public static void RemoveItem(ISession session, int productId)
+        {
+            var b = GetBasket(session);
+            if (b.Items.Count == 0) return;
+            var row = b.Items.Where(i => i.ProductId == productId).FirstOrDefault();
+            if (row == null) return;
+            row.Quantity--;
+            if (row.Quantity == 0) b.Items.Remove(row);
+            SaveBasket(session, b);
+        }
         private static void SaveBasket(ISession session, ShoppingBasket b)
         {
             session.SetObjectAsJson(key, b);

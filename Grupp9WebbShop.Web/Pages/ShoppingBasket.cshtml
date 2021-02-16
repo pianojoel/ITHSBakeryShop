@@ -13,6 +13,7 @@
             <th>Produkt</th>
             <th>Antal</th>
             <th>Pris</th>
+            <th>Åtgärd</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
                 <td>@p.Name</td>
                 <td>@item.Quantity</td>
                 <td>@item.RowPrice</td>
+                <td><a class="btn btn-primary" asp-route-pid="@item.ProductId" asp-page-handler="RemoveItem">Ta bort</a></td>
             </tr>
         }
     </tbody>
