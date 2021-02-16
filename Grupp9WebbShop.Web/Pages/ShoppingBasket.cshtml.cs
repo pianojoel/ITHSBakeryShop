@@ -25,9 +25,9 @@ namespace Grupp9WebbShop.Web.Pages
             Basket = BasketHelper.GetBasket(HttpContext.Session);
                         Products =  _ds.GetProducts();
         }
-        public IActionResult OnGetRemoveItem(int pid)
+        public IActionResult OnGetModifyItem(int pid, bool inc = false, bool delete = false)
         {
-            BasketHelper.RemoveItem(HttpContext.Session, pid);
+            BasketHelper.ModifyItem(HttpContext.Session, pid, inc, delete);
             return RedirectToPage("/shoppingBasket");
         }
     }

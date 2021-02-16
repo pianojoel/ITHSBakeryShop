@@ -30,19 +30,27 @@ namespace Grupp9WebbShop.Web.Helpers
             else
                 b.Items.Add(new ShoppingBasketItem()
                 {
-ProductId = prodId,
-Price = price,
-Quantity = quantity
+                    ProductId = prodId,
+                    Price = price,
+                    Quantity = quantity
                 });
             SaveBasket(session, b);
         }
-        public static void RemoveItem(ISession session, int productId)
+        public static void ModifyItem(ISession session, int productId, bool increment, bool delete)
         {
             var b = GetBasket(session);
             if (b.Items.Count == 0) return;
             var row = b.Items.Where(i => i.ProductId == productId).FirstOrDefault();
             if (row == null) return;
-            row.Quantity--;
+            if (delete)
+            {
+                b.Items.Remove(row);
+                SaveBasket(session, b);
+                return;
+            }
+            if (increment) row.Quantity++;
+            else
+                row.Quantity--;
             if (row.Quantity == 0) b.Items.Remove(row);
             SaveBasket(session, b);
         }

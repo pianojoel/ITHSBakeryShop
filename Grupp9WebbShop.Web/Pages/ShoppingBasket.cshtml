@@ -22,9 +22,13 @@
                 Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
             <tr>
                 <td>@p.Name</td>
-                <td>@item.Quantity</td>
+                <td>
+                    <span><a style="width:38px;" class="btn btn-primary font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem">-</a></span>
+                <span>@item.Quantity </span>
+                    <span><a class="btn btn-primary font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true">+</a></span>
+                </td>
                 <td>@item.RowPrice</td>
-                <td><a class="btn btn-primary" asp-route-pid="@item.ProductId" asp-page-handler="RemoveItem">Ta bort</a></td>
+                <td><a class="btn btn-primary" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true">Ta bort</a></td>
             </tr>
         }
     </tbody>
