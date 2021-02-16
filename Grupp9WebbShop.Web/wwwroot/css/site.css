@@ -74,8 +74,11 @@ body {
 .noLink{
     text-decoration:none;
 }
-.card:hover {
-    
-    opacity: 0.5;
+.card{
+    border:2px solid transparent;
 }
+    .card:hover {
+        /*box-shadow: 0 -3px red;*/
+        border: solid 2px black;
+    }
 
