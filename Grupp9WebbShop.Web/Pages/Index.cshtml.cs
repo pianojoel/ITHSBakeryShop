@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grupp9WebbShop.Data;
+using Grupp9WebbShop.Web.Helpers;
+
 namespace Grupp9WebbShop.Web.Pages
 {
     public class IndexModel : BasePageModel
@@ -20,6 +22,7 @@ namespace Grupp9WebbShop.Web.Pages
 
         public void OnGet()
         {
+            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
         }
     }

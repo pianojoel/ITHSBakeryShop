@@ -8,5 +8,6 @@ namespace Grupp9WebbShop.Web.Models
     {
         public bool ShowNavigation { get; internal set; }
         public IEnumerable<ProductCategory> Categories { get; internal set; }
+        public ShoppingBasket ShoppingBasket { get; internal set; }
     }
 }

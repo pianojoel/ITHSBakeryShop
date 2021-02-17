@@ -25,6 +25,7 @@ namespace Grupp9WebbShop.Web.Pages
         {
             Basket = BasketHelper.GetBasket(HttpContext.Session);
                         Products =  _ds.GetProducts();
+            MainLayout.ShoppingBasket = Basket;
             ViewData["MainLayout"] = MainLayout;
         }
         public IActionResult OnGetModifyItem(int pid, bool inc = false, bool delete = false)

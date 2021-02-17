@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Grupp9WebbShop.Data;
 using Grupp9WebbShop.Web.Models;
+using Grupp9WebbShop.Web.Helpers;
 
 namespace Grupp9WebbShop.Web.Pages
 {
@@ -29,6 +30,7 @@ namespace Grupp9WebbShop.Web.Pages
             {
                 Products = _ds.GetProductsByCategory(CategoryId.Value);
             }
+            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
         }
     }

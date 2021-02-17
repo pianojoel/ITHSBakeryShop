@@ -29,6 +29,7 @@ namespace Grupp9WebbShop.Web.Pages
             {
                 Product = _ds.GetProductById(ProductId.Value);
             }
+            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
         }
 
@@ -41,6 +42,7 @@ namespace Grupp9WebbShop.Web.Pages
             Product = _ds.GetProductById(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.Price, Number);
             OnGet();
+            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
         }
     }
