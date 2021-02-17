@@ -16,7 +16,8 @@ namespace Grupp9WebbShop.Web.Models
             MainLayout = new LayoutModel()
             {
                 ShowNavigation = true,
-                Categories = _ds.GetProductCategories()
+                Categories = _ds.GetProductCategories(),
+                Products = _ds.GetProducts()
             };
             
         }
