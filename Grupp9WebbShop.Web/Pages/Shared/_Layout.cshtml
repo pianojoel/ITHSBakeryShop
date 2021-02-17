@@ -10,34 +10,34 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 offset-5">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Grupp 9 Webbshop</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hem</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Categories">Sortiment</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Om oss</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Min sida</a>
-                        </li>
-                       
-                        <li class="nav-item">
-                            <a id="Cart" class="nav-link text-light btn bg-dark" asp-area="" asp-page="/ShoppingBasket"> <img src="~/images/Kundvagn_Vit.png" width="30px" /> Varukorg (@BasketHelper.NumItems(Context.Session))</a>
-                        </li>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid navstyles">
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @*@foreach (var cat in Model.Categories)
+                        {
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-route-categoryID="@cat.Id">@cat.Name</a>
+                            </li>
+                        }*@
+
                         
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
+                        </li>
+
+
 
                     </ul>
+
                 </div>
             </div>
         </nav>

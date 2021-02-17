@@ -82,3 +82,19 @@ body {
         border: solid 2px black;
     }
 
+.navstyles{
+    background-color:#b5d8eb;
+    color:#38b6ff;
+    border-radius:25px;
+}
+
+li a {
+    color: #38b6ff!important;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:larger;
+    font-weight:bold;
+    
+}
+.divider{
+    border-right:1px solid #f8f6ea;
+}
