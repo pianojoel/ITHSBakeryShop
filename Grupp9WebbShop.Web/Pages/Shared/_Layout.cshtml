@@ -24,11 +24,11 @@
             </div>
 
             <div class="dropdown" style="float:right">
-                <a id="Cart" class="btn bg-transparent text-dark shadow-none" asp-area="" asp-page="/ShoppingBasket">
+                <a id="cart" class="btn bg-transparent text-dark shadow-none" asp-page="/ShoppingBasket">
                     <img src="~/images/Varukorg_ikon.png" width="40" />
-                    (0)
+                    (@BasketHelper.NumItems(Context.Session))
                 </a>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu">
                     <p class="text-center">Innehåll</p>
                     @foreach (var item in LayoutData.ShoppingBasket.Items)
                         {
@@ -39,11 +39,11 @@
                                 <img src="~/images/@p.ImageFile" width="70" style="float: left">
                                 <p>
                                     &nbsp;@p.Name<br />
-                                    &nbsp;&nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
+                                    &nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
                                 </p>
                             </div>
                         }
-                    <a class="nav-link text-dark" style="text-align:center" asp-area="" asp-page="/ShoppingBasket">Till varukorgen</a>
+                    <a class="nav-link text-dark" style="text-align:center" asp-page="/ShoppingBasket">Till varukorgen</a>
                 </div>
             </div>
 
