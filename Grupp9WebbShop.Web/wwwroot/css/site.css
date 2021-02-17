@@ -79,7 +79,7 @@ body {
 }
     .card:hover {
         /*box-shadow: 0 -3px red;*/
-        border: solid 2px black;
+        border: solid 2px #fab0c8;
     }
 
 .navstyles{
