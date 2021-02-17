@@ -22,12 +22,37 @@
                     <img style="width:200px" src="~/images/Logo.png" />
                 </a>
             </div>
+
+            <div class="dropdown" style="float:right">
+                <a id="Cart" class="btn bg-transparent text-dark shadow-none" asp-area="" asp-page="/ShoppingBasket">
+                    <img src="~/images/Varukorg_ikon.png" width="40" />
+                    (0)
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <p class="text-center">Innehåll</p>
+                    @foreach (var item in LayoutData.ShoppingBasket.Items)
+                        {
+
+                        var p = LayoutData.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
+
+                            <div>
+                                <img src="~/images/@p.ImageFile" width="70" style="float: left">
+                                <p>
+                                    &nbsp;@p.Name<br />
+                                    &nbsp;&nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
+                                </p>
+                            </div>
+                        }
+                    <a class="nav-link text-dark" style="text-align:center" asp-area="" asp-page="/ShoppingBasket">Till varukorgen</a>
+                </div>
+            </div>
+
             <div class="searchbox">
 
 
                 <form class="form-inline">
                     <input class="searchstyle form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <img width ="25"src="~/images/searchicon.png" />
+                    <img width="25" src="~/images/searchicon.png" />
                     <button style="visibility:hidden" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
@@ -86,6 +111,17 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(function () {
+                var dropdownMenu = $(this).children(".dropdown-menu");
+                if (dropdownMenu.is(":visible")) {
+                    dropdownMenu.parent().toggleClass("open");
+                }
+            });
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
