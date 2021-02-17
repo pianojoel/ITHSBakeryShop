@@ -1,7 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
- body {
-    background-image:linear-gradient(white,rgb(251, 235, 209));
+body {
+    background-color: #f8f6ea;
 }
 a.navbar-brand {
   white-space: normal;
@@ -86,6 +86,7 @@ body {
     background-color:#b5d8eb;
     color:#38b6ff;
     border-radius:25px;
+    width:100%;
 }
 
 li a {
@@ -97,4 +98,22 @@ li a {
 }
 .divider{
     border-right:1px solid #f8f6ea;
+}
+.searchstyle{
+    border:none;
+    border-bottom:3px solid #fab0c8;
+    margin:20px;
+}
+.centertext{
+    
+    margin:auto;
+}
+.navbar{
+    padding:0px;
+}
+.searchbox{
+    
+}
+.searchicon{
+    right:80px;
 }
