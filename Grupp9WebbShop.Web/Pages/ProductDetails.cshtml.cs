@@ -5,19 +5,20 @@ using System.Threading.Tasks;
 using Grupp9WebbShop.Data;
 using Grupp9WebbShop.Data.Models;
 using Grupp9WebbShop.Web.Helpers;
+using Grupp9WebbShop.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Grupp9WebbShop.Web.Pages
 {
-    public class ProductDetailsModel : PageModel
+    public class ProductDetailsModel : BasePageModel
     {
         private readonly IShopDataService _ds;
         [BindProperty(SupportsGet = true)]
         public int? ProductId { get; set; }
         public Product Product { get; set; }
         public bool Animate { get; set; }
-        public ProductDetailsModel(IShopDataService ds)
+        public ProductDetailsModel(IShopDataService ds) : base(ds)
         {
             _ds = ds;
         }
@@ -28,7 +29,7 @@ namespace Grupp9WebbShop.Web.Pages
             {
                 Product = _ds.GetProductById(ProductId.Value);
             }
-
+            ViewData["MainLayout"] = MainLayout;
         }
 
         [BindProperty]
@@ -40,6 +41,7 @@ namespace Grupp9WebbShop.Web.Pages
             Product = _ds.GetProductById(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.Price, Number);
             OnGet();
+            ViewData["MainLayout"] = MainLayout;
         }
     }
 }
