@@ -22,42 +22,42 @@
                     <img style="width:200px" src="~/images/Logo.png" />
                 </a>
             </div>
-
-            <div class="dropdown" style="float:right">
-                <a id="cart" class="btn bg-transparent text-dark shadow-none" asp-page="/ShoppingBasket">
-                    <img src="~/images/Varukorg_ikon.png" width="40" />
-                    (@BasketHelper.NumItems(Context.Session))
-                </a>
-                <div class="dropdown-menu">
-                    <p class="text-center">Innehåll</p>
-                    @foreach (var item in LayoutData.ShoppingBasket.Items)
+            <div class="row">
+                <div class="dropdown offset-11">
+                    <a id="cart" class="btn bg-transparent text-dark shadow-none" asp-page="/ShoppingBasket">
+                        <img src="~/images/Varukorg_ikon.png" width="40" />
+                        (@BasketHelper.NumItems(Context.Session))
+                    </a>
+                    <div class="dropdown-menu">
+                        <p class="text-center">Innehåll</p>
+                        @foreach (var item in LayoutData.ShoppingBasket.Items)
                         {
 
-                        var p = LayoutData.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
+                            var p = LayoutData.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
 
                             <div>
-                                <img src="~/images/@p.ImageFile" width="70" style="float: left">
+                                <img src="~/images/@p.ImageFile" width="70" style="float: left; margin-left:10px;">
                                 <p>
                                     &nbsp;@p.Name<br />
                                     &nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
                                 </p>
                             </div>
                         }
-                    <a class="nav-link text-dark" style="text-align:center" asp-page="/ShoppingBasket">Till varukorgen</a>
+                        <a class="nav-link text-dark" style="text-align:center" asp-page="/ShoppingBasket">Till varukorgen</a>
+                    </div>
                 </div>
             </div>
-
-            <!--<div class="searchbox">
+            @*<div class="searchbox">
 
 
                 <form class="searchstyle">
-                    <input id="search" class="searchinput" type="search"  aria-label="Search">-->
+                    <input id="search" class="searchinput" type="search"  aria-label="Search">
                     
-                    @*<button style="visibility:hidden" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>*@
-                <!--</form>
+                    <button style="visibility:hidden" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
 
 
-            </div>-->
+            </div>*@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid navstyles">
 
