@@ -28,7 +28,7 @@
                         <img src="~/images/Varukorg_ikon.png" width="40" />
                         (@BasketHelper.NumItems(Context.Session))
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu dropdown-menu-right">
                         <p class="text-center">Innehåll</p>
                         @foreach (var item in LayoutData.ShoppingBasket.Items)
                         {
