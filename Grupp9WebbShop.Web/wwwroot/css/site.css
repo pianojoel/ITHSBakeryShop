@@ -147,3 +147,7 @@ input#search {
 #cart:hover, #cart:active, #cart:focus {
     background-color: transparent;
 }
+
+a #cart{
+    transition: background-color 1s;
+}

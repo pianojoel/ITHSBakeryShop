@@ -23,9 +23,9 @@
                 </a>
             </div>
             <div class="row">
-                <div class="dropdown offset-11">
-                    <a id="cart" class="btn bg-transparent text-dark shadow-none" asp-page="/ShoppingBasket">
-                        <img src="~/images/Varukorg_ikon.png" width="40" />
+                <div id="cart" class="dropdown offset-11">
+                    <a  asp-page="/ShoppingBasket">
+                        <img id ="cartImg" src="~/images/Varukorg_ikon.png" width="40" />
                         (@BasketHelper.NumItems(Context.Session))
                     </a>
                     <div class="dropdown-menu">

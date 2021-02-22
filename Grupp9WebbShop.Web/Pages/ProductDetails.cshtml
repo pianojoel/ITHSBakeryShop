@@ -32,20 +32,14 @@
 
 
 <script>
-    let cart = document.getElementById("cart");
    
-    cart.classList.remove('bg-dark');
-    cart.classList.remove('text-light');
-    cart.classList.add('btn-success');
+    let cart = document.getElementById("cart");
 
-    setTimeout(function () {
-       
-        cart.classList.remove('btn-success');
+    cart.style.backgroundColor = "pink";
+    function myFunction() {
+        myVar = setTimeout(function () { alert("Hello") }, 3000);
+    }
 
-        //cart.classList.add('bg-dark');
-        cart.classList.add('text-light');
-
-    }, 1500);               
 
 </script>
 }
