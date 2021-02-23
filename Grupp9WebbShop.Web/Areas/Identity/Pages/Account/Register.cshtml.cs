@@ -47,6 +47,15 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Förnamn")]
+            [StringLength(20)]
+            public string FirstName { get; set; }
+            [Required]
+            [Display(Name = "Efternamn")]
+            [StringLength(20)]
+            public string LastName { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "E-postadress")]
             public string Email { get; set; }
@@ -75,7 +84,7 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new WebbShopUser { UserName = Input.Email, Email = Input.Email };
+                var user = new WebbShopUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
