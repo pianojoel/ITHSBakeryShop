@@ -8,6 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Grupp9WebbShop.Data;
+using Grupp9WebbShop.Web.Areas.Identity.Data;
+using Grupp9WebbShop.Web.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Grupp9WebbShop.Web
 {
@@ -22,11 +25,13 @@ namespace Grupp9WebbShop.Web
             using (var scope = scopeFactory.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<ShopContext>();
+                var udb = scope.ServiceProvider.GetRequiredService<Grupp9WebbShopUserContext>();
                 // Uncoment if you want to delete an existing database and start over.
                 // db.Database.EnsureDeleted();
                 if (db.Database.EnsureCreated())
                 {
                     DataSeeder.SeedDatabase(db);
+                    udb.Database.Migrate();
                 }
             }
 
