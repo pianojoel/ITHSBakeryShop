@@ -32,19 +32,19 @@
                         <p class="text-center">Innehåll</p>
                         @if (LayoutData != null)
                         {
-                        @foreach (var item in LayoutData.ShoppingBasket.Items)
-                        {
+                            @foreach (var item in LayoutData.ShoppingBasket.Items)
+                            {
 
-                            var p = LayoutData.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
+                                var p = LayoutData.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
 
-                            <div>
-                                <img src="~/images/@p.ImageFile" width="70" style="float: left; margin-left:10px;">
-                                <p>
-                                    &nbsp;@p.Name<br />
-                                    &nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
-                                </p>
-                            </div>
-                        }
+                                <div>
+                                    <img src="~/images/@p.ImageFile" width="70" style="float: left; margin-left:10px;">
+                                    <p>
+                                        &nbsp;@p.Name<br />
+                                        &nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
+                                    </p>
+                                </div>
+                            }
                         }
                         <a class="nav-link text-dark" style="text-align:center" asp-page="/ShoppingBasket">Till varukorgen</a>
                     </div>
@@ -53,14 +53,15 @@
             @*<div class="searchbox">
 
 
-                <form class="searchstyle">
-                    <input id="search" class="searchinput" type="search"  aria-label="Search">
-                    
-                    <button style="visibility:hidden" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+            <form class="searchstyle">
+                <input id="search" class="searchinput" type="search"  aria-label="Search">
+
+                <button style="visibility:hidden" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
 
 
-            </div>*@
+        </div>*@
+            
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid navstyles">
 
@@ -68,31 +69,32 @@
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             @if (LayoutData != null)
                             {
-                            @foreach (var cat in LayoutData.Categories)
-                            {
+                                @foreach (var cat in LayoutData.Categories)
+                                {
 
 
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@cat.Id">@cat.Name</a>
-                                </li>
-                                <li class="divider"></li>
-                            }
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@cat.Id">@cat.Name</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                }
                             }
 
 
                             @*<li class="nav-item">
-                                <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
-                            </li>*@
+                    <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
+                </li>*@
 
 
 
                         </ul>
 
                     </div>
+                    <partial name="_LoginPartial" />
                 </div>
             </nav>
         </div>
