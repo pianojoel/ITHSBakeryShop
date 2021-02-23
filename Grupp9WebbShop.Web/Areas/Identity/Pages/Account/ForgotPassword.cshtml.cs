@@ -33,6 +33,7 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
+            [Display(Name = "E-postadress")]
             public string Email { get; set; }
         }
 
