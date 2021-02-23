@@ -29,17 +29,8 @@
 </div>
 @if (Model.Animate)
 {
-
-
-<script>
-   
-    let cart = document.getElementById("cart");
-
-    cart.style.backgroundColor = "pink";
-    function myFunction() {
-        myVar = setTimeout(function () { alert("Hello") }, 3000);
-    }
-
-
+<script>   
+    let cartImg = document.getElementById("cartImg");
+    cartImg.classList.add('animate-cart');             
 </script>
 }

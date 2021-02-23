@@ -148,6 +148,38 @@ input#search {
     background-color: transparent;
 }
 
-a #cart{
-    transition: background-color 1s;
+div #cart {
+    transition: background-color 0.5s;
+    border-radius: 50%;
+    
+    
+}
+
+
+#myRow{
+    position:relative;
+    z-index:1;
+    height:50px;
+}
+.animate-cart {
+    animation-name: cartBuy;
+    animation-duration: 1s;
+    border-radius:50%;
+    
+}
+
+@keyframes cartBuy {
+    0% {
+        width: 40px;
+       
+    }
+
+    50% {
+        background-color: pink;
+        width: 50px;
+    }
+
+    100% {
+        width: 40px
+    }
 }
