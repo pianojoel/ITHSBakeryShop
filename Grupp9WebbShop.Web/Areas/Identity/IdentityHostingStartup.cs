@@ -21,7 +21,8 @@ namespace Grupp9WebbShop.Web.Areas.Identity
                         context.Configuration.GetConnectionString("Grupp9WebbShopUserContextConnection")));
 
                 services.AddDefaultIdentity<WebbShopUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<Grupp9WebbShopUserContext>();
+                .AddErrorDescriber<CustomIdentityErrorDescriber>()    
+                .AddEntityFrameworkStores<Grupp9WebbShopUserContext>();
             });
         }
     }
