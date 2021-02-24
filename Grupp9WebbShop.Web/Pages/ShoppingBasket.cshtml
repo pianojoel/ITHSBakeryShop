@@ -12,7 +12,8 @@
         <tr>
             <th>Produkt</th>
             <th>Antal</th>
-            <th>Pris</th>
+            <th>Pris / st</th>
+            <th>Totalt</th>
             <th>Åtgärd</th>
         </tr>
     </thead>
@@ -27,10 +28,11 @@
                 <span>@item.Quantity </span>
                     <span><a class="btn btn-primary font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true">+</a></span>
                 </td>
-                <td>@item.RowPrice</td>
+                <td>@Math.Round(p.Price, 2) kr</td>
+                <td>@Math.Round(item.RowPrice, 2) kr</td>
                 <td><a class="btn btn-primary" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true">Ta bort</a></td>
             </tr>
         }
     </tbody>
 </table>
-<p>Totalt: @Model.Basket.Total</p>
+<p>Totalt: @Math.Round(Model.Basket.Total, 2) kr</p>
