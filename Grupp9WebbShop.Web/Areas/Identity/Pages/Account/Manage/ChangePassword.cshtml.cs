@@ -34,13 +34,13 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="Detta fält är obligatoriskt")]
             [DataType(DataType.Password)]
             [Display(Name = "Nuvarande lösenord")]
             public string OldPassword { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "{0}et måste vara minst {2} och max {1} tecken långt.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Du måste ange ett nytt lösenord")]
+            [StringLength(100, ErrorMessage = "{0} måste vara minst {2} och max {1} tecken långt.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Nytt lösenord")]
             public string NewPassword { get; set; }
