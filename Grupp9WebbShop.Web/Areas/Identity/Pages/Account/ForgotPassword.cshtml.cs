@@ -31,7 +31,7 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "E-postadress måste fyllas i")]
             [EmailAddress]
             [Display(Name = "E-postadress")]
             public string Email { get; set; }
