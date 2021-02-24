@@ -29,23 +29,8 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account.Manage
         public string StatusMessage { get; set; }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public ProfileInputModel Input { get; set; }
 
-        public class InputModel
-        {
-            [Required]
-            [Display(Name = "Förnamn")]
-            [StringLength(20)]
-            public string FirstName { get; set; }
-            [Required]
-            [Display(Name = "Efternamn")]
-            [StringLength(20)]
-            public string LastName { get; set; }
-
-            [Phone]
-            [Display(Name = "Telefon")]
-            public string PhoneNumber { get; set; }
-        }
 
         private async Task LoadAsync(WebbShopUser user)
         {
@@ -54,11 +39,14 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
 
-            Input = new InputModel
+            Input = new ProfileInputModel
             {
                 PhoneNumber = phoneNumber,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                StreetAddress = user.StreetAddress,
+                PostalCode = user.PostalCode,
+                City = user.City
             };
         }
 
@@ -98,14 +86,14 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
-            if (Input.FirstName != user.FirstName || Input.LastName != user.LastName)
-            {
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+            user.StreetAddress = Input.StreetAddress;
+            user.PostalCode = Input.PostalCode;
+            user.City = Input.City;
                 await _userManager.UpdateAsync(user);
-            }
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Din profil har uppdaterats";
             return RedirectToPage();
         }
     }
