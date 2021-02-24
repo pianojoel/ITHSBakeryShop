@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -18,7 +17,7 @@ using Microsoft.Extensions.Logging;
 namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public partial class RegisterModel : PageModel
     {
         private readonly SignInManager<WebbShopUser> _signInManager;
         private readonly UserManager<WebbShopUser> _userManager;
@@ -38,39 +37,11 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public RegisterInputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
-        public class InputModel
-        {
-            [Required]
-            [Display(Name = "Förnamn")]
-            [StringLength(20)]
-            public string FirstName { get; set; }
-            [Required]
-            [Display(Name = "Efternamn")]
-            [StringLength(20)]
-            public string LastName { get; set; }
-
-            [Required]
-            [EmailAddress]
-            [Display(Name = "E-postadress")]
-            public string Email { get; set; }
-
-            [Required]
-            [StringLength(100, ErrorMessage = "{0}et måste vara minst {2} och max {1} tecken långt.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Lösenord")]
-            public string Password { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Bekräfta lösenord")]
-            [Compare("Password", ErrorMessage = "Lösenorden matchar inte.")]
-            public string ConfirmPassword { get; set; }
-        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -84,7 +55,10 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new WebbShopUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName };
+                var user = new WebbShopUser 
+                { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName,
+                StreetAddress = Input.StreetAddress,
+                PostalCode = Input.PostalCode, City = Input.City};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

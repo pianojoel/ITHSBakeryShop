@@ -13,5 +13,11 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Data
         public string FirstName { get; set; }
         [ProtectedPersonalData]
         public string LastName { get; set; }
+        [ProtectedPersonalData]
+        public string StreetAddress { get; set; }
+        [ProtectedPersonalData]
+        public string PostalCode { get; set; }
+        [ProtectedPersonalData]
+        public string City { get; set; }
     }
 }
