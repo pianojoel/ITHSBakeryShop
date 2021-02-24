@@ -17,24 +17,15 @@
 <body>
     <header>
         <div class="container">
-            <div class="row">
-                <div class=" col-sm">
-
-                </div>
-                <div class=" col-sm text-center">
-                    <a href="/Index">
-                        <img class="" style="width:200px" src="~/images/Logo.png" />
-                    </a>
-                </div>
-                <div class="col-sm text-right">
-                    <partial name="_LoginPartial" />
-                </div>
+            <div class="text-center">
+                <a href="/Index">
+                    <img style="width:200px" src="~/images/Logo.png" />
+                </a>
             </div>
-
             <div class="row" id="myRow">
                 <div id="cart" class="dropdown offset-11">
-                    <a asp-page="/ShoppingBasket">
-                        <img id="cartImg" src="~/images/Varukorg_ikon.png" width="40" />
+                    <a  asp-page="/ShoppingBasket">
+                        <img id ="cartImg" src="~/images/Varukorg_ikon.png" width="40" />
                         (@BasketHelper.NumItems(Context.Session))
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -70,7 +61,7 @@
 
 
         </div>*@
-
+            
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid navstyles">
 
@@ -91,17 +82,19 @@
 
 
                             @*<li class="nav-item">
-                            <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
-                        </li>*@
+                    <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
+                </li>*@
 
 
 
                         </ul>
+
                     </div>
+                    <partial name="_LoginPartial" />
                 </div>
             </nav>
         </div>

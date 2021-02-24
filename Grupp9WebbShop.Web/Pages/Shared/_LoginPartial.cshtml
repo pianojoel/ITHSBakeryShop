@@ -3,28 +3,28 @@
 
 @inject SignInManager<WebbShopUser> SignInManager
 @inject UserManager<WebbShopUser> UserManager
-
 @*<ul class="navbar-nav">*@
 @if (SignInManager.IsSignedIn(User))
 {
     var user = await UserManager.GetUserAsync(User);
     var fullName = user.FirstName != null ? $"{user.FirstName} {user.LastName}" : "";
     @*<li class="nav-item">*@
-        <a id="manage" class=" text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @user.FirstName!<img width="50" src="~/images/MyPageIcon.png" /></a>
+    <a id="manage" class=" text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @user.FirstName!<img width="50" src="~/images/MyPageIcon.png" /></a>
     @*</li>*@
     @*<li class="nav-item">*@
-        <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-            <button id="logout" type="submit" class="">Logga ut</button>
-        </form>
+    <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+        <button id="logout" type="submit" class="">Logga ut</button>
+    </form>
     @*</li>*@
 }
 else
 {
-  @*  <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Registrera</a>
-    </li>*@
+    @*  <li class="nav-item">
+            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Registrera</a>
+        </li>*@
     @*<li class="nav-item">*@
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><img width ="50"src ="~/images/MyPageIcon.png" /></a>
+    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><img width="50" src="~/images/MyPageIcon.png" /></a>
     @*</li>*@
 }
 @*</ul>*@
+
