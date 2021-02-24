@@ -10,7 +10,7 @@
     var user = await UserManager.GetUserAsync(User);
     var fullName = user.FirstName != null ? $"{user.FirstName} {user.LastName}" : "";
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @fullName!</a>
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @user.FirstName!</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
@@ -20,11 +20,11 @@
 }
 else
 {
-    <li class="nav-item">
+  @*  <li class="nav-item">
         <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Registrera</a>
-    </li>
+    </li>*@
     <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Logga in</a>
+        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><img width ="50"src ="~/images/MyPageIcon.png" /></a>
     </li>
 }
 </ul>

@@ -24,15 +24,15 @@
             <tr>
                 <td>@p.Name</td>
                 <td>
-                    <span><a style="width:38px;" class="btn btn-primary font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem">-</a></span>
+                    <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30"src ="~/images/MinusCartIcon.png"/></a></span>
                 <span>@item.Quantity </span>
-                    <span><a class="btn btn-primary font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true">+</a></span>
+                    <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30"src="~/images/PlusCartIcon.png"/></a></span>
                 </td>
                 <td>@Math.Round(p.Price, 2) kr</td>
                 <td>@Math.Round(item.RowPrice, 2) kr</td>
-                <td><a class="btn btn-primary" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true">Ta bort</a></td>
+                <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
             </tr>
         }
     </tbody>
 </table>
-<p>Totalt: @Math.Round(Model.Basket.Total, 2) kr</p>
+<p>Totalbelopp inkl. moms: @Math.Round(Model.Basket.Total, 2) kr</p>
