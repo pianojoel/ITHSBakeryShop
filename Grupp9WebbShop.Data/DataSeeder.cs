@@ -52,7 +52,7 @@ namespace Grupp9WebbShop.Data
 
         }
 
-        private static Product CreateProducts(ProductCategory c, string name, decimal price, string description = "", string imageFile = "", string imageDesc = "", string summary = "Foo")
+        private static Product CreateProducts(ProductCategory c, string name, decimal price, string description = "", string imageFile = "", string imageDesc = "", string summary = "")
         {
             Product prod = new()
             {
