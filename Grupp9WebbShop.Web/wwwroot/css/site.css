@@ -1,14 +1,28 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+html {
+    font-family:Thonburi;
+}
 body {
     background-color: #f8f6ea;
+    font-family:Thonburi;
 }
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
-
+@font-face {
+    font-family: Thonburi;
+    src: url(../fonts/Thonburi-01.ttf);
+}
+@font-face {
+    font-family: Thonburi-bold;
+    src: url(../fonts/Thonburi-Bold-02.ttf);
+}
+p a h1 h2 h3 h4 h5 h6{
+    font-family:Thonburi;
+}
 
 /* Provide sufficient contrast against white background */
 a {
@@ -92,9 +106,9 @@ body {
 
 li a {
     color: #38b6ff!important;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:larger;
-    font-weight:bold;
+    font-family:Thonburi-bold;
+   /* font-size:larger;
+    font-weight:bold;*/
     
 }
 .divider{
