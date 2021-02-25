@@ -7,7 +7,7 @@ namespace Grupp9WebbShop.Data.Models
     public class Product
     {
         public int Id { get; set; }
-        [StringLength(40)]
+        [StringLength(60)]
         [Required]
         public string Name { get; set; }
         [StringLength(500)]
@@ -21,7 +21,7 @@ namespace Grupp9WebbShop.Data.Models
 
         [StringLength(40)]
         public string ImageFile { get; set; }
-        [StringLength(40)]
+        [StringLength(80)]
         public string ImageDescription { get; set; }
 
     }

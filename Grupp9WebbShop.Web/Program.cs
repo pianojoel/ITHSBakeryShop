@@ -30,7 +30,7 @@ namespace Grupp9WebbShop.Web
                 // db.Database.EnsureDeleted();
                 if (db.Database.EnsureCreated())
                 {
-                    DataSeeder.SeedDatabase(db);
+                    DataSeeder.SeedDatabaseFromCsv(db);
                     udb.Database.Migrate();
                 }
             }

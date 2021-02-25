@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Grupp9WebbShop.Data\Grupp9WebbShop.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="DataImport.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
