@@ -19,6 +19,11 @@ namespace Grupp9WebbShop.Data
         {
             return _ctx.Products.Include(i => i.Category).ToList();
         }
+        public IEnumerable<Product> GetHighlightedProducts()
+        {
+            return _ctx.Products.Where(h => h.Highlighted).Include(i => i.Category).ToList();
+        }
+
         public IEnumerable<ProductCategory> GetProductCategories()
         {
             return _ctx.ProductCategories.OrderBy(o => o.Name).ToList();

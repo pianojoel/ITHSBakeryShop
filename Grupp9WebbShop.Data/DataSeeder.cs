@@ -30,6 +30,11 @@ namespace Grupp9WebbShop.Data
                 //ctx.SaveChanges();
             }
             ctx.Products.AddRange(prods);
+            var highlightList = ctx.Products.Take(3);
+            foreach (var p in highlightList)
+            {
+                p.Highlighted = true;
+            }
             ctx.SaveChanges();
         }
         public static void SeedDatabase(ShopContext ctx)

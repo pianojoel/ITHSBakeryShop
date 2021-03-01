@@ -23,6 +23,6 @@ namespace Grupp9WebbShop.Data.Models
         public string ImageFile { get; set; }
         [StringLength(80)]
         public string ImageDescription { get; set; }
-
+        public bool Highlighted { get; set; }
     }
 }
