@@ -9,6 +9,7 @@ namespace Grupp9WebbShop.Data
         IEnumerable<ProductCategory> GetProductCategories();
         IEnumerable<Product> GetProducts();
         IEnumerable<Product> GetHighlightedProducts();
+        int GetProductStock(int id);
         IEnumerable<Product> GetProductsByCategory(int categoryId);
     }
 }
