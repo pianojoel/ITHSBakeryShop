@@ -26,12 +26,17 @@ namespace Grupp9WebbShop.Web
             {
                 var db = scope.ServiceProvider.GetRequiredService<ShopContext>();
                 var udb = scope.ServiceProvider.GetRequiredService<Grupp9WebbShopUserContext>();
+                var ds = scope.ServiceProvider.GetRequiredService<IShopDataService>();
                 // Uncoment if you want to delete an existing database and start over.
                 // db.Database.EnsureDeleted();
                 if (db.Database.EnsureCreated())
                 {
                     DataSeeder.SeedDatabaseFromCsv(db);
                     udb.Database.Migrate();
+                    foreach (var prod in ds.GetProducts())
+                    {
+                        ds.SetProductStock(prod.Id, 10);
+                    }
                 }
             }
 
