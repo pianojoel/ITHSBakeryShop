@@ -28,7 +28,15 @@ namespace Grupp9WebbShop.Web
             options.UseSqlServer(Configuration.GetConnectionString("BakeryShopDb")));
             services.AddScoped<IShopDataService, ShopDataService>();
             services.AddSession();
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeAreaFolder("ShopAdmin", "/", "RequireAdministratorRole");
+            });
+            services.AddAuthorization( options =>
+                    {
+                options.AddPolicy("RequireAdministratorRole",
+                     policy => policy.RequireRole("Administrator"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

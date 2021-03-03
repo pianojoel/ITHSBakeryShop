@@ -1,0 +1,134 @@
+﻿@using Grupp9WebbShop.Web.Helpers
+@using Grupp9WebbShop.Web.Models
+
+@{
+    var LayoutData = (LayoutModel)ViewData["MainLayout"];
+}
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Grupp 9 Webbshop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class=" col text-center">
+                    <a href="/Index">
+                        <img class="" style="width:200px" src="~/images/Logo.png" />
+                    </a>
+                </div>
+                <div class="col text-right">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+
+            @*<div class="searchbox">
+
+
+                    <form class="searchstyle">
+                        <input id="search" class="searchinput" type="search"  aria-label="Search">
+
+                        <button style="visibility:hidden" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+
+                </div>*@
+
+            <nav class="navbar navbar-expand-md navbar-light">
+                <div class="container-fluid navstyles">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100">
+                            @if (LayoutData != null)
+                            {
+                                var category = LayoutData.Categories.ToList();
+                                @for (int i = 0; i < category.Count() - 1; i++)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@category[i].Id">@category[i].Name</a>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@category.Last().Id">@category.Last().Name</a>
+                                </li>
+
+
+                            }
+
+
+                            @*<li class="nav-item">
+                                    <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
+                                </li>*@
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div>
+                <h4>Admin meny</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-md-3">
+                        <partial name="_AdminNav" />
+                    </div>
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
+                </div>
+
+
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <div class="row">
+                <img style="width:100px" src="~/images/Logo.png" />
+
+                <h3 class="centertext">Följ oss på sociala medier!</h3>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(function () {
+                var dropdownMenu = $(this).children(".dropdown-menu");
+                if (dropdownMenu.is(":visible")) {
+                    dropdownMenu.parent().toggleClass("open");
+                }
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
