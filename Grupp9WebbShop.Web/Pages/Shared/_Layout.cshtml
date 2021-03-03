@@ -18,15 +18,15 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class=" col-sm">
+                <div class="col">
 
                 </div>
-                <div class=" col-sm text-center">
+                <div class=" col text-center">
                     <a href="/Index">
                         <img class="" style="width:200px" src="~/images/Logo.png" />
                     </a>
                 </div>
-                <div class="col-sm text-right">
+                <div class="col text-right">
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -71,32 +71,40 @@
 
                 </div>*@
 
-            <nav class="navbar navbar-expand-lg navbar-light">
+            <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid navstyles">
-
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100">
                             @if (LayoutData != null)
                             {
-                                @foreach (var cat in LayoutData.Categories)
+                                var category = LayoutData.Categories.ToList();
+                                @for (int i = 0; i < category.Count() - 1; i++)
                                 {
-
-
                                     <li class="nav-item">
-                                        <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@cat.Id">@cat.Name</a>
+                                        <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@category[i].Id">@category[i].Name</a>
                                     </li>
                                     <li class="divider"></li>
+
                                 }
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@category.Last().Id">@category.Last().Name</a>
+                                </li>
+
+
                             }
 
 
                             @*<li class="nav-item">
-                                    <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
-                                </li>*@
+                    <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
+                </li>*@
 
 
 
