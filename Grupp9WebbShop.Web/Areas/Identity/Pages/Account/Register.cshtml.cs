@@ -21,16 +21,19 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<WebbShopUser> _signInManager;
         private readonly UserManager<WebbShopUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<WebbShopUser> userManager,
+            RoleManager<IdentityRole> roleMan,
             SignInManager<WebbShopUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleMan;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -42,10 +45,11 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
+        public bool AdminCreated { get; set; }
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+            AdminCreated = await _roleManager.RoleExistsAsync("Administrator");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -74,7 +78,14 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Bekräfta din e-post.",
                         $"Vänligen bekräfta ditt konto genom att <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klicka här</a>.");
-
+                    AdminCreated = await _roleManager.RoleExistsAsync("Administrator");
+                    if (!AdminCreated)
+                    {
+                        var role = new IdentityRole();
+                        role.Name = "Administrator";
+                        await _roleManager.CreateAsync(role);
+                        await _userManager.AddToRoleAsync(user, "Administrator");
+                    }
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
