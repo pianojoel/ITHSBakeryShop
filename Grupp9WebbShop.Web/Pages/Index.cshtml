@@ -6,14 +6,14 @@
 
 <div>
     <img style="width:100%" src="~/images/sloganbild.png" />
-    @*<img style="width:50%" src="~/images/Slogan.png" />*@
+    
 
 </div>
 <div class="text-center mt-5">
     <h2 style="font-family:Thonburi-bold;color:#642714">Utvalda Produkter</h2>
 </div>
 <div class="row justify-content-sm-around mt-5 g-0" style="margin:auto; width:80%; background-color: #E0D4C7;">
-    @*<div class="row col-md-9 justify-content-md-center" style="background-color: #E0D4C7;">*@
+   
         @foreach (var prod in Model.Highlighted)
         {
             
@@ -28,7 +28,7 @@
 
                             <p class="card-text">@prod.Summary</p>
 
-                            <form method="post" id=@($"F{@prod.Id}")>
+                           
                                 <select name="number" id=@($"S{@prod.Id}")>
                                     @for (int i = 1; i < 11; i++)
                                     {
@@ -36,14 +36,14 @@
                                     }
                                 </select>
 
-                            </form>
+                           
                             <button class="border-0" onclick="buy(@prod.Id)" style="background-color:#CF7697; color:#642714;">Köp</button>
                         </div>
                     </div>
                 </div>
             
         }
-        @*</div>*@
+       
 </div>
 <form method="post" id="myHiddenForm" >
 
@@ -53,9 +53,9 @@
 </form> 
 <script>
     function buy(id) {
-        const formId = "F" + id;
+       
         const selectId = "S" + id;
-        const myForm = document.getElementById(formId);
+       
         const mySelect = document.getElementById(selectId);
         const hiddenForm = document.getElementById("myHiddenForm");
         const hiddenId = document.getElementById("productId");
@@ -64,11 +64,11 @@
         hiddenId.value = id;
         hiddenAmount.value = mySelect.value;
 
-
-
-        console.log("buying no" + myForm.id + "amount" + mySelect.value);
-
         hiddenForm.submit();
+
+
+        
+
     }
 
 </script>
