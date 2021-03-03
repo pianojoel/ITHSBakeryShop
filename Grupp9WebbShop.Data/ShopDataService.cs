@@ -23,7 +23,38 @@ namespace Grupp9WebbShop.Data
         {
             return _ctx.Products.Where(h => h.Highlighted).Include(i => i.Category).ToList();
         }
-
+        public int GetProductStock(int id)
+        {
+            var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault().Quantity;
+            return q;
+        }
+        public void SetProductStock(int id, int quant)
+        {
+            var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault();
+            if (q == null)
+            {
+                q = new InventoryItem()
+                {
+                    ProductId = id,
+                    Quantity = quant
+                };
+                _ctx.Inventory.Add(q);
+            }
+            else
+            {
+                q.Quantity = quant;
+            }
+            _ctx.SaveChanges();
+        }
+        public bool DecreaseProductStock(int id, int quant)
+        {
+            
+            var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault();
+            if (q == null || (q.Quantity - quant < 0)) return false;
+            q.Quantity -= quant;
+            _ctx.SaveChanges();
+            return true;
+        }
         public IEnumerable<ProductCategory> GetProductCategories()
         {
             return _ctx.ProductCategories.OrderBy(o => o.Name).ToList();
