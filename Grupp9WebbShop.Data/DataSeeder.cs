@@ -30,6 +30,7 @@ namespace Grupp9WebbShop.Data
                 //ctx.SaveChanges();
             }
             ctx.Products.AddRange(prods);
+            ctx.SaveChanges();
             var highlightList = ctx.Products.Take(3);
             foreach (var p in highlightList)
             {
