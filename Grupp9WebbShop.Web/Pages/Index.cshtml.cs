@@ -21,6 +21,7 @@ namespace Grupp9WebbShop.Web.Pages
         public Product Product { get; set; }
         [BindProperty]
         public int Number { get; set; }
+        public bool Animate { get; set; }
 
         public IndexModel(IShopDataService ds) : base(ds)
         {
@@ -38,7 +39,7 @@ namespace Grupp9WebbShop.Web.Pages
 
         public void OnPost()
         {
-            //Animate = true;
+            Animate = true;
             Product = _ds.GetProductById(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.Price, Number);
             OnGet();
