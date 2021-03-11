@@ -12,7 +12,7 @@
 <div class="text-center mt-5">
     <h2 style="font-family:Thonburi-bold;color:#642714">Utvalda Produkter</h2>
 </div>
-<div class="row justify-content-sm-around mt-5 g-0" style="margin:auto; width:80%; background-color: #E0D4C7;">
+<div class="row justify-content-sm-around mt-5 g-0" id="highlighted" style="margin:auto; width:80%; background-color: #E0D4C7;">
 
     @foreach (var prod in Model.Highlighted)
     {
@@ -57,6 +57,11 @@
     <script>
         let cartImg = document.getElementById("cartImg");
         cartImg.classList.add('animate-cart');
+        let highlighted = document.getElementById('highlighted');
+        setTimeout(function () {
+            highlighted.scrollIntoView({behavior: 'smooth'});
+        }, 1000);
+       
     </script>
 }
 
