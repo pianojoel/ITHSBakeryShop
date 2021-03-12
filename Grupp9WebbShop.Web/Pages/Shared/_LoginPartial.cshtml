@@ -12,6 +12,11 @@
     string isAdmin = await UserManager.IsInRoleAsync(user, "Administrator") ? " (Admin)" : "";
     @*<li class="nav-item">*@
     <a id="manage" class=" text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @user.FirstName@isAdmin!<img width="50" src="~/images/MyPageIcon.png" /></a>
+    @if (!string.IsNullOrEmpty(isAdmin))
+    {
+        <a id="admin" class=" text-dark" asp-area="ShopAdmin" asp-page="./index" title="admin">Administration</a>
+    }
+
     @*</li>*@
     @*<li class="nav-item">*@
     <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
