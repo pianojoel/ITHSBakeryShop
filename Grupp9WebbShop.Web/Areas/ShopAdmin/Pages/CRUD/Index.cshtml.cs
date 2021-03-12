@@ -21,10 +21,22 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
 
         public IList<Product> Product { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             Product = await _context.Products
                 .Include(p => p.Category).ToListAsync();
+            if (id != null)
+            {
+                await SetHighlighted(id.Value);
+                return RedirectToPage("./Index");
+            }
+            return Page();
+        }
+        public async Task SetHighlighted(int pid)
+        {
+            Product p = await _context.Products.FindAsync(pid);
+            p.Highlighted = !p.Highlighted;
+            await _context.SaveChangesAsync();
         }
     }
 }

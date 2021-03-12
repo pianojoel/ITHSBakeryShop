@@ -32,9 +32,6 @@
                 @Html.DisplayNameFor(model => model.Product[0].ImageFile)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].ImageDescription)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Product[0].Highlighted)
             </th>
             <th></th>
@@ -42,6 +39,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Product) {
+    var highlightText = item.Highlighted ? "Ta bort från utvald" : "Sätt som utvald";
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -59,13 +57,10 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageFile)
+                <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Highlighted)
+                <a asp-route-id="@item.Id">@highlightText</a>
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

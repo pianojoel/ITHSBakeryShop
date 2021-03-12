@@ -9,6 +9,7 @@ namespace Grupp9WebbShop.Data.Models
         public int Id { get; set; }
         [StringLength(60)]
         [Required]
+        [Display(Name = "Produktnamn")]
         public string Name { get; set; }
         [StringLength(500)]
         public string Description { get; set; }
