@@ -16,9 +16,10 @@ namespace Grupp9WebbShop.Data.Models
         public string Summary { get; set; }
 
         public decimal Price { get; set; }
-        [Required]
+        
         public ProductCategory Category { get; set; }
-
+        [Required]
+        public int CategoryId { get; set; }
         [StringLength(40)]
         public string ImageFile { get; set; }
         [StringLength(80)]
