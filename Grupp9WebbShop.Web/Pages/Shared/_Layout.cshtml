@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Grupp 9 Webbshop</title>
+    <title>@ViewData["Title"] - My Sweets</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" />
@@ -23,8 +23,8 @@
 
                 </div>
                 <div class=" col text-center">
-                    <a href="/Index">
-                        <img class="" style="width:200px" src="~/images/Logo.png" />
+                    <a href="/">
+                        <img class="" style="width:200px" src="~/images/Logo.png" alt="Logga" />
                     </a>
                 </div>
                 <div class="col text-right">
@@ -35,7 +35,7 @@
             <div class="row" id="myRow">
                 <div id="cart" class="dropdown offset-11">
                     <a asp-page="/ShoppingBasket">
-                        <img id="cartImg" src="~/images/Varukorg_ikon.png" width="40" />
+                        <img id="cartImg" src="~/images/Varukorg_ikon.png" width="40" alt="Varukorg" />
                         (@BasketHelper.NumItems(Context.Session))
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -124,7 +124,7 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             <div class="row">
-                <img style="width:100px" src="~/images/Logo.png" />
+                <img style="width:100px" src="~/images/Logo.png" alt="Logga" />
 
                 <h3 class="centertext">Följ oss på sociala medier!</h3>
             </div>

@@ -1,6 +1,7 @@
 ﻿@page
 @model Grupp9WebbShop.Web.Pages.ProductDetailsModel
 @{
+    ViewData["Title"] = Model.Product.Name;
 }
 <div class="container">
     <div class="row">
@@ -8,7 +9,7 @@
             <img style="width:100%" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
         </div>
         <div class="col-sm-6">
-            <h1>Detaljer för @Model.Product.Name</h1>
+            <h1>@Model.Product.Name</h1>
             <p>@Model.Product.Description</p>
             <p>Pris: @Math.Round(Model.Product.Price, 0) kr</p>
             
