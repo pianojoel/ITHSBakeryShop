@@ -1,4 +1,49 @@
 ﻿@page
+@using Grupp9WebbShop.Data
+@inject IShopDataService _ds
 @model Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.InventoryAdminModel
 @{
+    ViewData["Title"] = "Lagerhantering";
 }
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produkt</th>
+            <th></th>
+            <th>Kategori</th>
+            <th>I lager</th>
+            <th>Åtgärd</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
+                </td>
+                <td>@item.Category.Name</td>
+                @if (Model.EditId != null && item.Id == Model.EditId.Value)
+                {
+<form>
+    <input type="hidden" name="id" value="@item.Id" />
+    <td><input type="number" id="q" name="q" value="@_ds.GetProductStock(item.Id)" /></td>
+    <td><button class="btn btn-primary" type="submit">Spara</button></td>
+</form>
+                <script>
+                    var elem = document.querySelector("#q");
+                    elem.focus();
+                </script>
+                }
+                else
+                {
+                    <td>@_ds.GetProductStock(item.Id)</td>
+                    <td>
+                        <a asp-page="./InventoryAdmin" asp-route-editId="@item.Id" title="Ändra lagersaldo"><i class="bi bi-pencil-square"></i></a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
