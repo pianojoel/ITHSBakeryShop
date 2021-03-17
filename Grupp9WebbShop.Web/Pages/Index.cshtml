@@ -18,17 +18,20 @@
     {
 
         <div class="col-3" style="max-width: none;">
-            <div class="card m-3 border-0" style="width: 14rem;height:20rem">
+            <div class="card m-3 border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
                 <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>
-                <div class="card-body text-center" style="background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
+                <div class="card-body flex-grow-0 text-center" style="height: 100px; background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
                     <h5 class="card-title">@prod.Name</h5>
-                    <h5 class="card-text">@Math.Round(prod.Price, 0) kr</h5>
+                </div>
+                <div class="card-body text-center overflow-hidden" style="background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
+        <h5 class="card-text">@Math.Round(prod.Price, 0) kr</h5>
 
-                    <p class="card-text">@prod.Summary</p>
 
-
+                </div>
+                <div class="card-footer text-center border-0" style="background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
+                    <span class="card-text"></span>
                     <select name="number" id=@($"S{@prod.Id}")>
                         @for (int i = 1; i < 11; i++)
                         {
