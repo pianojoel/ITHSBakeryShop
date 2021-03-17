@@ -17,6 +17,7 @@ namespace Grupp9WebbShop.Web.Pages
         [BindProperty(SupportsGet = true)]
         public int? ProductId { get; set; }
         public Product Product { get; set; }
+        public int ProductQuantity { get; set; }
         public bool Animate { get; set; }
         public ProductDetailsModel(IShopDataService ds) : base(ds)
         {
@@ -28,6 +29,7 @@ namespace Grupp9WebbShop.Web.Pages
             if (ProductId != null)
             {
                 Product = _ds.GetProductById(ProductId.Value);
+                ProductQuantity = _ds.GetProductStock(ProductId.Value);
             }
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
