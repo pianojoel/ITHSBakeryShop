@@ -20,9 +20,6 @@
                 @Html.DisplayNameFor(model => model.Product[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Product[0].Summary)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Product[0].Price)
             </th>
             <th>
@@ -34,7 +31,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Highlighted)
             </th>
-            <th></th>
+            <th class="w-auto">Åtgärder</th>
         </tr>
     </thead>
     <tbody>
@@ -48,9 +45,6 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Summary)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
@@ -60,12 +54,12 @@
                 <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
             </td>
             <td>
-                <a asp-route-id="@item.Id">@highlightText</a>
+                <a asp-route-id="@item.Id" aria-label="@highlightText" title="Välj om produkten ska vara utvald"><i class="bi @(item.Highlighted ? "bi-check2-square" : "bi-square")"></i></a>
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id" title="Redigera"><i class="bi bi-pencil-square"></i></a>
+                <a asp-page="./Details" asp-route-id="@item.Id" title="Detaljer"><i class="bi bi-info-square"></i></a>
+                <a asp-page="./Delete" asp-route-id="@item.Id" title="Ta bort"><i class="bi bi-x-square"></i></a>
             </td>
         </tr>
 }
