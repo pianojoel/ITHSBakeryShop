@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product.Name" class="control-label"></label>
@@ -24,17 +24,22 @@
                 <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Product.AllergyInfo" class="control-label"></label>
+                <input asp-for="Product.AllergyInfo" class="form-control" />
+                <span asp-validation-for="Product.AllergyInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Product.Price" class="control-label"></label>
                 <input asp-for="Product.Price" class="form-control" />
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.CategoryId" class="control-label"></label>
-                <select asp-for="Product.CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Product.ImageFile" class="control-label"></label>
-                <input asp-for="Product.ImageFile" class="form-control" />
+                <input asp-for="UploadedFile" type="file" class="form-control-file" />
                 <span asp-validation-for="Product.ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,6 +50,11 @@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Product.Highlighted" /> @Html.DisplayNameFor(model => model.Product.Highlighted)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Product.OnSale" /> @Html.DisplayNameFor(model => model.Product.OnSale)
                 </label>
             </div>
             <div class="form-group">

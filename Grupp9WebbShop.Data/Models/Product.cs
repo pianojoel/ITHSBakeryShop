@@ -33,5 +33,10 @@ namespace Grupp9WebbShop.Data.Models
         public string ImageDescription { get; set; }
         [Display(Name = "Utvald")]
         public bool Highlighted { get; set; }
+        [Display(Name = "Nedsatt Pris")]    
+        public bool OnSale { get; set; }
+        [StringLength(500)]
+        [Display(Name = "Allergiinformation")]
+        public string AllergyInfo { get; set; }
     }
 }
