@@ -42,6 +42,7 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
 
             if (UploadedFile != null)
             {
+                if (!System.IO.Directory.Exists("./wwwroot/Images/Uploads")) Directory.CreateDirectory("./wwwroot/Images/Uploads");
                 var file = "./wwwroot/Images/Uploads/" + UploadedFile.FileName;
                 using (var fileStream = new FileStream(file, FileMode.Create))
                 {
@@ -51,6 +52,13 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
             }
 
             _context.Products.Add(Product);
+            await _context.SaveChangesAsync();
+            InventoryItem inventoryRecord = new()
+            {
+                ProductId = Product.Id,
+                Quantity = 0
+            };
+            _context.Inventory.Add(inventoryRecord);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
