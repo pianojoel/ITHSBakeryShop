@@ -12,7 +12,7 @@
             <h1>@Model.Product.Name</h1>
             <p>@Model.Product.Description</p>
             <p>@Model.Product.AllergyInfo</p>
-            <p>Pris: @Math.Round(Model.Product.Price, 0) kr</p>
+            <p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>
             <p>I butik: @Model.ProductQuantity</p>
 
             <form method="post">
