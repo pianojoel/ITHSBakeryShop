@@ -8,13 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Grupp9WebbShop.Data;
 using Grupp9WebbShop.Data.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
 {
     public class EditModel : PageModel
     {
         private readonly Grupp9WebbShop.Data.ShopContext _context;
-
+        public IFormFile UploadedFile { get; set; }
         public EditModel(Grupp9WebbShop.Data.ShopContext context)
         {
             _context = context;
@@ -51,6 +53,19 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
             }
 
             _context.Attach(Product).State = EntityState.Modified;
+
+            if (UploadedFile != null)
+            {
+                var file = "~/Images/Uploads/" + UploadedFile.FileName;
+                System.IO.File.Delete("./wwwroot/images/" + Product.ImageFile);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    await UploadedFile.CopyToAsync(fileStream);
+                }
+
+                Product.ImageFile = "Uploads/" + UploadedFile.FileName;
+            }
+
 
             try
             {
