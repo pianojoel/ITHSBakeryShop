@@ -39,7 +39,7 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
             {
                 return NotFound();
             }
-           ViewData["CategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
             return Page();
         }
 
@@ -56,8 +56,10 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
 
             if (UploadedFile != null)
             {
-                var file = "~/Images/Uploads/" + UploadedFile.FileName;
-                System.IO.File.Delete("./wwwroot/images/" + Product.ImageFile);
+                var file = "./wwwroot/Images/Uploads/" + UploadedFile.FileName;
+                var deleteFile = "./wwwroot/images/" + Product.ImageFile;
+                if (deleteFile.Contains("Uploads/"))
+                    System.IO.File.Delete(deleteFile);
                 using (var fileStream = new FileStream(file, FileMode.Create))
                 {
                     await UploadedFile.CopyToAsync(fileStream);
