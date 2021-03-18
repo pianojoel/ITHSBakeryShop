@@ -63,7 +63,7 @@ namespace Grupp9WebbShop.Data
             Product prod = new()
             {
                 Name = name,
-                Description = description,
+                AllergyInfo = description,
                 Price = price,
                 Category = c,
                 ImageFile = imageFile,
