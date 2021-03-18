@@ -16,6 +16,8 @@ namespace Grupp9WebbShop.Web.Pages
     {
         private readonly IShopDataService _ds;
         public List<Product> Highlighted { get; set; }
+        public List<Product> OnSale { get; set; }
+
         [BindProperty]
         public int? ProductId { get; set; }
         public Product Product { get; set; }
@@ -35,6 +37,7 @@ namespace Grupp9WebbShop.Web.Pages
 
 
             Highlighted = _ds.GetHighlightedProducts().ToList();
+            OnSale = _ds.GetProductsOnSale().ToList();
         }
 
         public void OnPost()

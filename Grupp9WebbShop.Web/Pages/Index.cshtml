@@ -26,7 +26,7 @@
                     <h5 class="card-title">@prod.Name</h5>
                 </div>
                 <div class="card-body text-center overflow-hidden" style="background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
-        <h5 class="card-text">@Math.Round(prod.Price, 0) kr</h5>
+                    <h5 class="card-text">@Math.Round((prod.OnSale ? prod.Price * (decimal)0.8 : prod.Price), 0) kr</h5>
 
 
                 </div>
@@ -48,6 +48,47 @@
     }
 
 </div>
+
+<div class="text-center mt-5">
+    <h2 style="font-family:Thonburi-bold;color:#642714">Nedsatt Pris</h2>
+</div>
+<div class="row justify-content-sm-around mt-5 g-0" id="highlighted" style="margin:auto; width:80%; background-color: #E0D4C7;">
+
+    @foreach (var prod in Model.OnSale)
+    {
+
+        <div class="col-3" style="max-width: none;">
+            <div class="card m-3 border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
+                <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
+                    <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
+                </a>
+                <div class="card-body flex-grow-0 text-center" style="height: 100px; background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
+                    <h5 class="card-title">@prod.Name</h5>
+                </div>
+                <div class="card-body text-center overflow-hidden" style="background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
+                    <h5 class="card-text">@Math.Round((prod.OnSale ? prod.Price * (decimal)0.8:prod.Price), 0) kr</h5>
+
+
+                </div>
+                <div class="card-footer text-center border-0" style="background-color: #E0D4C7;color:#642714;font-family:Thonburi-bold">
+                    <span class="card-text"></span>
+                    <select name="number" id=@($"S{@prod.Id}")>
+                        @for (int i = 1; i < 11; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+
+
+                    <button class="border-0" onclick="buy(@prod.Id)" style="background-color:#CF7697; color:#642714;">Köp</button>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>
+
 <form method="post" id="myHiddenForm">
 
     <input type="hidden" id="productId" asp-for="ProductId" />
@@ -62,9 +103,9 @@
         cartImg.classList.add('animate-cart');
         let highlighted = document.getElementById('highlighted');
         setTimeout(function () {
-            highlighted.scrollIntoView({behavior: 'smooth'});
+            highlighted.scrollIntoView({ behavior: 'smooth' });
         }, 1000);
-       
+
     </script>
 }
 

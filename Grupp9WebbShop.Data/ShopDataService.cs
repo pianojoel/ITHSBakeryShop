@@ -23,6 +23,10 @@ namespace Grupp9WebbShop.Data
         {
             return _ctx.Products.Where(h => h.Highlighted).Include(i => i.Category).ToList();
         }
+        public IEnumerable<Product> GetProductsOnSale()
+        {
+            return _ctx.Products.Where(p => p.OnSale).Include(i => i.Category).ToList();
+        }
         public int GetProductStock(int id)
         {
             var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault().Quantity;

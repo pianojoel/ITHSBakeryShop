@@ -9,6 +9,7 @@ namespace Grupp9WebbShop.Data
         IEnumerable<ProductCategory> GetProductCategories();
         IEnumerable<Product> GetProducts();
         IEnumerable<Product> GetHighlightedProducts();
+        IEnumerable<Product> GetProductsOnSale();
         int GetProductStock(int id);
         void SetProductStock(int id, int quant);
         bool DecreaseProductStock(int id, int quant);
