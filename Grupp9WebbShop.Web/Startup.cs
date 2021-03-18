@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Grupp9WebbShop.Data;
+using System.Globalization;
+
 namespace Grupp9WebbShop.Web
 {
     public class Startup
@@ -42,6 +44,12 @@ namespace Grupp9WebbShop.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var cultureInfo = new CultureInfo("sv");
+            cultureInfo.NumberFormat.NumberGroupSeparator = " ";
+            cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
