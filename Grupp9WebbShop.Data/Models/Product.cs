@@ -24,6 +24,7 @@ namespace Grupp9WebbShop.Data.Models
         [Display(Name = "Kategori")]
         public ProductCategory Category { get; set; }
         [Required]
+        [Display(Name = "Kategori")]
         public int CategoryId { get; set; }
         [StringLength(40)]
         [Display(Name = "Bild")]
