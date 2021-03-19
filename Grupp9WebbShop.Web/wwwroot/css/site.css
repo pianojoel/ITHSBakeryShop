@@ -197,3 +197,8 @@ div #cart {
         width: 40px
     }
 }
+.pink-border {
+    border-style:solid;
+    border-color: #FAB0C8;
+    border-width:3px;
+}
