@@ -14,5 +14,9 @@ namespace Grupp9WebbShop.Data
         void SetProductStock(int id, int quant);
         bool DecreaseProductStock(int id, int quant);
         IEnumerable<Product> GetProductsByCategory(int categoryId);
+        void SaveOrder(Order newOrder);
+        Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment);
+        IEnumerable<Order> GetOrdersForUser(string userId);
+        IEnumerable<Order> GetAllOrders();
     }
 }
