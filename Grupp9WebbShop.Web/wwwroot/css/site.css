@@ -203,10 +203,28 @@ div #cart {
     border-width:3px;
 }
 
-.pink-button{
+.pink-button {
     background-color: #fab0c8;
     color: #642714;
-    border: #2px solid #cf7697;
-    padding: 2px;
+    border: 2px solid #cf7697;
+    padding: 3px;
     text-decoration: none;
+    font-weight: 700;
+}
+    .pink-button:hover {
+        text-decoration: none;
+        color: #642714;
+    }
+
+.blue-button {
+    background-color: #b5d8eb;
+    color: #642714;
+    border: 2px solid #38b6ff;
+    padding: 3px;
+    text-decoration: none;
+    
+}
+.blue-button:hover {
+    text-decoration: none;
+    color: #642714;
 }
