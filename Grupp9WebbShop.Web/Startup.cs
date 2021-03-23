@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Grupp9WebbShop.Data;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 
 namespace Grupp9WebbShop.Web
 {
@@ -39,6 +40,13 @@ namespace Grupp9WebbShop.Web
                 options.AddPolicy("RequireAdministratorRole",
                      policy => policy.RequireRole("Administrator"));
             });
+
+            // Handles Cookie
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,11 +71,12 @@ namespace Grupp9WebbShop.Web
             app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy(); // Using Cookie
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+         
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
