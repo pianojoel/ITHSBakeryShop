@@ -202,3 +202,11 @@ div #cart {
     border-color: #FAB0C8;
     border-width:3px;
 }
+
+.pink-button{
+    background-color: #fab0c8;
+    color: #642714;
+    border: #2px solid #cf7697;
+    padding: 2px;
+    text-decoration: none;
+}

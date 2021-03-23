@@ -5,34 +5,39 @@
 
 }
 
-<h1>Din varukorg</h1>
-<p>Antal varor: @Grupp9WebbShop.Web.Helpers.BasketHelper.NumItems(HttpContext.Session)</p>
-<table class="table">
-    <thead class="thead-light">
-        <tr>
-            <th>Produkt</th>
-            <th>Antal</th>
-            <th>Pris / st</th>
-            <th>Totalt</th>
-            <th>Åtgärd</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Basket.Items)
-        {
-                Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
-            <tr>
-                <td>@p.Name</td>
-                <td>
-                    <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30"src ="~/images/MinusCartIcon.png"/></a></span>
-                <span>@item.Quantity </span>
-                    <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30"src="~/images/PlusCartIcon.png"/></a></span>
-                </td>
-                <td>@Math.Round(p.Price, 2) kr</td>
-                <td>@Math.Round(item.RowPrice, 2) kr</td>
-                <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
+<div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+    <h1><strong>1. Din varukorg</strong></h1>
+    @*<p>Antal varor: @Grupp9WebbShop.Web.Helpers.BasketHelper.NumItems(HttpContext.Session)</p>*@
+    <table class="table" style="color:#642714">
+        <thead class="" style="border:none; border-bottom:2px solid">
+            <tr style="border:none; border-bottom:2px solid">
+                <th>Produkter</th>
+                <th></th>
+                <th class="pl-4">Antal</th>
+                <th>Summa</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<p>Totalbelopp inkl. moms: @Math.Round(Model.Basket.Total, 2) kr</p>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Basket.Items)
+            {
+                Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
+                <tr>
+                    <td><img src="./images/@p.ImageFile" width="100" class="pink-border" /></td>
+                    <td>@p.Name <br />@Math.Round(p.Price, 2) kr</td>
+                    <td>
+                        <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
+                        <span>@item.Quantity </span>
+                        <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
+                    </td>
+                    <td>@Math.Round(item.RowPrice, 2) kr</td>
+                    <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
+                </tr>
+
+            }
+            <tr><td></td><td></td><td>Orderbelopp inkl.moms:</td><td><strong>@Math.Round(Model.Basket.Total, 2) kr</strong></td></tr>
+        </tbody>
+    </table>
+    <a class="pink-button" asp-page="/">Nästa steg</a>
+    <a asp-page="#">Fortsätt handla</a>
+</div>
