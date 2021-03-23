@@ -52,7 +52,7 @@ namespace Grupp9WebbShop.Data
         }
         public bool DecreaseProductStock(int id, int quant)
         {
-            
+
             var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault();
             if (q == null || (q.Quantity - quant < 0)) return false;
             q.Quantity -= quant;
@@ -71,6 +71,42 @@ namespace Grupp9WebbShop.Data
         public Product GetProductById(int id)
         {
             return _ctx.Products.Find(id);
+        }
+        public Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment)
+        {
+            Order order = new()
+            {
+                Date = DateTime.Now,
+                UserID = userId,
+                PaymentType = payment,
+                ShippingType = shipping
+            };
+            foreach (var item in basket.Items)
+            {
+                OrderItem oi = new()
+                {
+                    ProductId = item.ProductId,
+                    Price = item.Price,
+                    Quantity = item.Quantity
+                };
+                order.OrderItems.Add(oi);
+            }
+            return order;
+        }
+
+        public IEnumerable<Order> GetOrdersForUser(string userId)
+        {
+            return _ctx.Orders.Where(o => o.UserID == userId).ToList();
+        }
+        public IEnumerable<Order> GetAllOrders()
+        {
+            return _ctx.Orders.ToList();
+        }
+
+        public void SaveOrder(Order newOrder)
+        {
+            _ctx.Orders.Add(newOrder);
+            _ctx.SaveChanges();
         }
     }
 }
