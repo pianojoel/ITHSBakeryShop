@@ -21,6 +21,14 @@ namespace Grupp9WebbShop.Data.Models
         [Display(Name = "Pris")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+        [NotMapped]
+        public decimal CalculatedPrice
+        {
+            get
+            {
+                return Math.Round((Price * (decimal)OnSalePercentage), 0);
+            }
+        }
         [Display(Name = "Kategori")]
         public ProductCategory Category { get; set; }
         [Required]
@@ -41,5 +49,7 @@ namespace Grupp9WebbShop.Data.Models
         public string AllergyInfo { get; set; }
         [Display(Name= "Produkten tillaggd")]
         public DateTime AddedDate { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal OnSalePercentage { get; set; } = 0.8M;
     }
 }
