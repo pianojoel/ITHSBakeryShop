@@ -50,7 +50,6 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
                 }
                 Product.ImageFile = "Uploads/" + UploadedFile.FileName;
             }
-            Product.AddedDate = DateTime.Now;
             _context.Products.Add(Product);
             await _context.SaveChangesAsync();
             InventoryItem inventoryRecord = new()

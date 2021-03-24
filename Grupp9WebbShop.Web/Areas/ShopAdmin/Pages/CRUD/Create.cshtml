@@ -38,6 +38,11 @@
                 <select asp-for="Product.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
+                <label asp-for="Product.AddedDate" class="control-label"></label>
+                <input asp-for="Product.AddedDate" type="date" value="@DateTime.Now.ToShortDateString()" class="form-control"/>   
+                <span asp-validation-for="Product.AddedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Product.ImageFile" class="control-label"></label>
                 <input asp-for="UploadedFile" type="file" class="form-control-file" />
                 <span asp-validation-for="Product.ImageFile" class="text-danger"></span>
