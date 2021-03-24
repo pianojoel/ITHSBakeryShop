@@ -34,7 +34,7 @@
                         <h5 class="card-text text-">
                             <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
 
-                            @Math.Round((prod.Price * (decimal)0.8), 0)
+                            @prod.CalculatedPrice
                             kr
                         </h5>
 
@@ -96,20 +96,20 @@
 
                     @if (prod.OnSale)
                     {
-                        <h5 class="card-text text-">
-                            <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
+                    <h5 class="card-text text-">
+                        <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
 
-                            @Math.Round((prod.Price * (decimal)0.8), 0)
-                            kr
-                        </h5>
+                        @prod.CalculatedPrice
+                        kr
+                    </h5>
 
                     }
                     else
                     {
-                        <h5 class="card-text ">
-                            @Math.Round(prod.Price, 0) kr
+                <h5 class="card-text ">
+                    @prod.CalculatedPrice kr
 
-                        </h5>
+                </h5>
                     }
 
 
@@ -158,20 +158,20 @@
 
                     @if (prod.OnSale)
                     {
-                        <h5 class="card-text text-">
-                            <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
+                    <h5 class="card-text text-">
+                        <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
 
-                            @Math.Round((prod.Price * (decimal)0.8), 0)
-                            kr
-                        </h5>
+                        @prod.CalculatedPrice
+                        kr
+                    </h5>
 
                     }
                     else
                     {
-                        <h5 class="card-text ">
-                            @Math.Round(prod.Price, 0) kr
+                <h5 class="card-text ">
+                    @prod.CalculatedPrice kr
 
-                        </h5>
+                </h5>
                     }
 
 
