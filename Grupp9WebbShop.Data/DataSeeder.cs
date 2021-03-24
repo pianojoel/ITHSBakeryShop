@@ -12,6 +12,7 @@ namespace Grupp9WebbShop.Data
     public class DataSeeder
     {
         private static string fileName = "DataImport.csv";
+        private static Random rnd = new();
         public static void SeedDatabaseFromCsv(ShopContext ctx)
         {
             List<Product> prods = new();
@@ -68,7 +69,8 @@ namespace Grupp9WebbShop.Data
                 Category = c,
                 ImageFile = imageFile,
                 ImageDescription = imageDesc,
-                Summary = summary
+                Summary = summary,
+                AddedDate = CreateRandomDate()
             };
             return prod;
         }
@@ -107,6 +109,12 @@ namespace Grupp9WebbShop.Data
 
 
             return cats;
+        }
+        private static DateTime CreateRandomDate()
+        {
+            DateTime startDate = DateTime.Now - TimeSpan.FromDays(30);
+            var randomDay = rnd.Next(1, 31);
+            return startDate + TimeSpan.FromDays(randomDay);
         }
     }
 }

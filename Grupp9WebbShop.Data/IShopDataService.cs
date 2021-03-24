@@ -18,5 +18,6 @@ namespace Grupp9WebbShop.Data
         Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment);
         IEnumerable<Order> GetOrdersForUser(string userId);
         IEnumerable<Order> GetAllOrders();
+        IEnumerable<Product> GetLatestProducts();
     }
 }

@@ -39,5 +39,7 @@ namespace Grupp9WebbShop.Data.Models
         [StringLength(500)]
         [Display(Name = "Allergiinformation")]
         public string AllergyInfo { get; set; }
+        [Display(Name= "Produkten tillaggd")]
+        public DateTime AddedDate { get; set; }
     }
 }

@@ -27,6 +27,11 @@ namespace Grupp9WebbShop.Data
         {
             return _ctx.Products.Where(p => p.OnSale).Include(i => i.Category).ToList();
         }
+        public IEnumerable<Product> GetLatestProducts()
+        {
+            return _ctx.Products.Include(i => i.Category).OrderByDescending(d => d.AddedDate).Take(3).ToList();
+        }
+
         public int GetProductStock(int id)
         {
             var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault().Quantity;
@@ -108,5 +113,6 @@ namespace Grupp9WebbShop.Data
             _ctx.Orders.Add(newOrder);
             _ctx.SaveChanges();
         }
+
     }
 }
