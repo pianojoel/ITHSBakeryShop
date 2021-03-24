@@ -1,22 +1,102 @@
 ﻿@page
 @model Grupp9WebbShop.Web.Pages.CheckoutModel
 @{
+
 }
-<div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
 
-    <h1><strong>2. Kassa</strong></h1>
+@using Microsoft.AspNetCore.Identity
+@using Grupp9WebbShop.Web.Areas.Identity.Data
 
+@inject SignInManager<WebbShopUser> SignInManager
+@inject UserManager<WebbShopUser> UserManager
 
+@if (SignInManager.IsSignedIn(User) && await UserManager.GetUserAsync(User) != null)
+{
+    var user = await UserManager.GetUserAsync(User);
+    <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+        <h1><strong>2. Kassa</strong></h1>
+        <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+            <h2><strong>Leveransadress</strong></h2>
+            <div class="ml-auto mr-auto mt-5" style="width:100%; background-color:white; color:#642714" ;>
+                <div class=" row m-0">
+                    <div class="col-6 p-2 pink-border border-right-0">@user.FirstName</div>
+                    <div class="col-6 p-2 pink-border">@user.LastName</div>
+                </div>
+                <div class=" row m-0">
+                    <div class="col p-2 pink-border border-bottom-0 border-top-0">@user.StreetAddress</div>
+                </div>
+                <div class=" row m-0">
+                    <div class="col-6 p-2  pink-border border-right-0">@user.PostalCode</div>
+                    <div class="col-6 p-2 pink-border">@user.City</div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+            <h2><strong>Kontaktuppgifter</strong></h2>
+            <div class="ml-auto mr-auto mt-5" style="width:100%; background-color:white; color:#642714" ;>
+                <div class=" row m-0">
+                    <div class="col p-2 pink-border border-bottom-0">@user.Email</div>
+                </div>
+                <div class=" row m-0">
+                    <div class="col p-2 pink-border ">@(user.PhoneNumber != null ? user.PhoneNumber : "Lägg till telefonnummer")</div>
+                </div>
+            </div>
+        </div>
+        <form method="post">
+            <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+                <h2><strong>Välj leveranssätt</strong></h2>
+                <div class="ml-auto mr-auto mt-5" style="width:100%; background-color:white; color:#642714" ;>
+                    <div class="row m-0">
+                        <div class="col-6 p-2 pink-border border-right-0">
+                            <div class="row">
+                                <div class="col-2 text-center"><input type="radio" value="standard" id="standard" name="Delivery" /></div>
+                                <div class="col-7">
+                                    <h5 style="color: #CF7697">Standardfrakt</h5>
+                                    <p>Inom 3-5 vardagar <br />Gratis vid köp över 299 kr</p>
+                                </div>
+                                <div class="col-3"><h5 style="color: #CF7697">29 kr</h5></div>
+                            </div>
+                        </div>
+                        <div class="col-6 p-2 pink-border">
+                            <div class="row">
+                                <div class="col-2 text-center"><input type="radio" value="express" id="express" name="Delivery" /></div>
+                                <div class="col-7">
+                                    <h5 style="color: #CF7697">Expressfrakt</h5>
+                                    <p>Inom 1-2 vardagar <br />Gratis vid köp över 299 kr</p>
+                                </div>
+                                <div class="col-3"><h5 style="color: #CF7697">49 kr</h5></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+                <h2><strong>Välj betalsätt</strong></h2>
+                <div class="ml-auto mr-auto mt-5" style="width:100%; background-color:white; color:#642714" ;>
+                    <div class="row m-0">
+                        <div class="col-2 p-2 pink-border border-bottom-0 border-right-0 text-center"><input type="radio" name="Payment" value="Klarna" /></div>
+                        <div class="col-7 p-2 pink-border border-bottom-0 border-right-0 border-left-0">
+                            <h5 style="color: #CF7697">Klarna</h5>
+                            <p>Betala direkt, med faktura eller delbetalning.<br />Spara kort &amp; bankkonto.</p>
+                        </div>
+                        <div class="col-3 p-2 pink-border border-bottom-0 border-left-0 text-right"><img src="~/images/Klarna_symbol.png" width="100" /></div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col-2 p-2 pink-border border-right-0 text-center"><input type="radio" name="Payment" value="CreditCard" /></div>
+                        <div class="col-7 p-2 pink-border border-right-0 border-left-0">
+                            <h5 style="color: #CF7697">Betala med kort</h5>
+                            <p>Fyll i kortuppgifter.</p>
+                        </div>
+                        <div class="col-3 p-2 pink-border border-left-0 text-right"><img src="~/images/Mastercard_Visa_ikon.png" width="100" /></div>
+                    </div>
+                </div>
+            </div>
+            <a class="pink-button" asp-page="#">Slutför köp</a>
+        </form>
+    </div>
+}
+else
+{
+    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Vänligen logga in för att fortsätta</a>
 
-
-
-
-
-
-
-
-
-
-
-
-</div>
+}
