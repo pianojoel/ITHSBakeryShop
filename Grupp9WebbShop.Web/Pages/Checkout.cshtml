@@ -3,7 +3,7 @@
 @{
 
 }
-
+@using Grupp9WebbShop.Data.Models
 @using Microsoft.AspNetCore.Identity
 @using Grupp9WebbShop.Web.Areas.Identity.Data
 
@@ -49,7 +49,7 @@
                     <div class="row m-0">
                         <div class="col-6 p-2 pink-border border-right-0">
                             <div class="row">
-                                <div class="col-2 text-center"><input type="radio" value="standard" id="standard" name="Delivery" /></div>
+                                <div class="col-2 text-center"><input type="radio" value="@ShippingTypes.Normal" asp-for="Shipping" /></div>
                                 <div class="col-7">
                                     <h5 style="color: #CF7697">Standardfrakt</h5>
                                     <p>Inom 3-5 vardagar <br />Gratis vid köp över 299 kr</p>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-6 p-2 pink-border">
                             <div class="row">
-                                <div class="col-2 text-center"><input type="radio" value="express" id="express" name="Delivery" /></div>
+                                <div class="col-2 text-center"><input type="radio" value="@ShippingTypes.Express" asp-for="Shipping" /></div>
                                 <div class="col-7">
                                     <h5 style="color: #CF7697">Expressfrakt</h5>
                                     <p>Inom 1-2 vardagar <br />Gratis vid köp över 299 kr</p>
@@ -74,7 +74,7 @@
                 <h2><strong>Välj betalsätt</strong></h2>
                 <div class="ml-auto mr-auto mt-5" style="width:100%; background-color:white; color:#642714" ;>
                     <div class="row m-0">
-                        <div class="col-2 p-2 pink-border border-bottom-0 border-right-0 text-center"><input type="radio" name="Payment" value="Klarna" /></div>
+                        <div class="col-2 p-2 pink-border border-bottom-0 border-right-0 text-center"><input type="radio" asp-for="Payment" value="@PaymentTypes.Klarna" /></div>
                         <div class="col-7 p-2 pink-border border-bottom-0 border-right-0 border-left-0">
                             <h5 style="color: #CF7697">Klarna</h5>
                             <p>Betala direkt, med faktura eller delbetalning.<br />Spara kort &amp; bankkonto.</p>
@@ -82,7 +82,7 @@
                         <div class="col-3 p-2 pink-border border-bottom-0 border-left-0 text-right"><img src="~/images/Klarna_symbol.png" width="100" /></div>
                     </div>
                     <div class="row m-0">
-                        <div class="col-2 p-2 pink-border border-right-0 text-center"><input type="radio" name="Payment" value="CreditCard" /></div>
+                        <div class="col-2 p-2 pink-border border-right-0 text-center"><input type="radio" asp-for="Payment" value="@PaymentTypes.CreditCard" /></div>
                         <div class="col-7 p-2 pink-border border-right-0 border-left-0">
                             <h5 style="color: #CF7697">Betala med kort</h5>
                             <p>Fyll i kortuppgifter.</p>
