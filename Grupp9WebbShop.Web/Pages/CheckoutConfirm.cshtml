@@ -1,0 +1,61 @@
+﻿@page
+@using Grupp9WebbShop.Data 
+@using Grupp9WebbShop.Data.Models
+@inject IShopDataService _ds
+
+@model Grupp9WebbShop.Web.Pages.CheckoutConfirmModel
+@{
+    Layout = "./shared/_layout-checkoutflow";
+    ViewData["Title"] = "Bekräftelse";
+
+}
+<h1>Bekräftelse</h1>
+@if (Model.Order != null)
+{
+    decimal shippingCost = 0M;
+    switch (Model.Order.ShippingType)
+    {
+        case ShippingTypes.Normal:
+            shippingCost = 29;
+            break;
+        case ShippingTypes.Express:
+            shippingCost = 49;
+            break;
+        default:
+            break;
+    }
+    if (Model.Order.TotalPrice - shippingCost >= 299)
+        shippingCost = 0;
+    <p>Tack för din order!</p>
+    <p>Detaljer visas nedan.</p>
+    <p>Orderdatum @Model.Order.Date</p>
+    <h2>Produkter</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Antal</th>
+                <th>Styckepris</th>
+                <th>Radpris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order.OrderItems)
+            {
+                var prod = _ds.GetProductById(item.ProductId);
+                <tr>
+                    <td>@prod.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <td>@item.RowPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Frakt: @shippingCost kr</p>
+    <p>Totalsumma: @Model.Order.TotalPrice</p>
+}
+else
+{
+
+}

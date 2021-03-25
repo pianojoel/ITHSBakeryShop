@@ -108,11 +108,15 @@ namespace Grupp9WebbShop.Data
             return _ctx.Orders.ToList();
         }
 
-        public void SaveOrder(Order newOrder)
+        public int SaveOrder(Order newOrder)
         {
             _ctx.Orders.Add(newOrder);
             _ctx.SaveChanges();
+            return newOrder.Id;
         }
-
+        public Order GetOrder(int id)
+        {
+            return _ctx.Orders.Include(o => o.OrderItems).FirstOrDefault(i => i.Id == id);
+        }
     }
 }
