@@ -50,7 +50,7 @@ namespace Grupp9WebbShop.Data.Models
         [StringLength(500)]
         [Display(Name = "Allergiinformation")]
         public string AllergyInfo { get; set; }
-        [Display(Name = "Produkten tillaggd")]
+        [Display(Name = "Produkten tillagd")]
         public DateTime AddedDate { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal OnSalePercentage { get; set; } = 0.8M;
