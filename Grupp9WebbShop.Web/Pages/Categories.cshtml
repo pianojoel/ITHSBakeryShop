@@ -56,7 +56,13 @@ else
                         <img class="card-img-top" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                         <div class="card-body">
                             <h5 class="card-title">@prod.Name</h5>
-                            <h5 class="card-text">@Math.Round((prod.OnSale ? prod.Price * (decimal)0.8 : prod.Price), 0) kr</h5>
+                            <h5 class="card-text">
+                                @if (prod.OnSale)
+                                {
+                                    <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
+                                }
+                                @prod.CalculatedPrice kr
+                            </h5>
 
                             <p class="card-text">@prod.Summary</p>
 

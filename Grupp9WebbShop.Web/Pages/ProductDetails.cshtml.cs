@@ -42,7 +42,7 @@ namespace Grupp9WebbShop.Web.Pages
         {
             Animate = true;
             Product = _ds.GetProductById(ProductId.Value);
-            BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.Price, Number);
+            BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
             OnGet();
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;

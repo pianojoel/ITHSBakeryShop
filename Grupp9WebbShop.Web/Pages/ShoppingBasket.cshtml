@@ -24,7 +24,12 @@
                 Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
                 <tr>
                     <td><img src="./images/@p.ImageFile" width="100" class="pink-border" /></td>
-                    <td>@p.Name <br />@Math.Round(p.Price, 2) kr</td>
+                    <td>@p.Name <br />
+                    @if (p.OnSale)
+                    {
+                    <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
+                    }
+                    @p.CalculatedPrice kr</td>
                     <td>
                         <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
                         <span>@item.Quantity </span>
