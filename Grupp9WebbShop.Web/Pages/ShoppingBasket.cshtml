@@ -25,22 +25,24 @@
                 Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
                 <tr>
                     <td><img src="./images/@p.ImageFile" width="100" class="pink-border" /></td>
-                    <td>@p.Name <br />
+                    <td>
+                        @p.Name <br />
                     @if (p.OnSale)
                     {
-                    <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
+                        <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
                     }
-                    @p.CalculatedPrice kr</td>
-                    <td>
-                        <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
-                        <span>@item.Quantity </span>
-                        <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
-                    </td>
-                    <td>@Math.Round(item.RowPrice, 2) kr</td>
-                    <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
-                </tr>
+                    @p.CalculatedPrice kr
+                </td>
+                <td>
+                    <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
+                    <span>@item.Quantity </span>
+                    <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
+                </td>
+                <td>@Math.Round(item.RowPrice, 2) kr</td>
+                <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
+            </tr>
 
-            }
+        }
             <tr><td></td><td></td><td>Orderbelopp inkl.moms:</td><td><strong>@Math.Round(Model.Basket.Total, 2) kr</strong></td></tr>
         </tbody>
     </table>
@@ -48,5 +50,31 @@
     <a class="blue-button" asp-page="/Index">Fortsätt handla</a>
 </div>
 @section Steps {
-<p>Hello from basket</p>
+
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-fluid checkout-navstyles">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100">
+
+                    <li class="nav-item">
+                        <p style="background-color:#b5d8eb; padding-top: .5rem; padding-bottom: .5rem; margin:0px; font-family: Thonburi-bold;"> 1. Din varukorg</p>
+                    </li>
+                    <li class="checkout-divider"></li>
+                    <li class="nav-item">
+                        <p style="background-color: white; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold; "> 2. Kassa</p>
+                    </li>
+                    <li class="checkout-divider"></li>
+                    <li class="nav-item">
+                        <p style="background-color:white; padding-top:0.5rem; padding-bottom:0.5rem; margin:0px;  font-family: Thonburi-bold;"> 3. Bekräftelse</p>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
 }

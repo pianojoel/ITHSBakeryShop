@@ -14,6 +14,35 @@
 @if (SignInManager.IsSignedIn(User) && await UserManager.GetUserAsync(User) != null)
 {
     var user = await UserManager.GetUserAsync(User);
+
+    @section Steps {
+        <nav class="navbar navbar-expand-md navbar-light">
+            <div class="container-fluid checkout-navstyles">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100" style="">
+
+                        <li class="nav-item">
+                            <p style="background-color: white; padding-top: .5rem; padding-bottom: .5rem; margin: 0px; font-family: Thonburi-bold;"><a asp-page="/ShoppingBasket"> 1. Din varukorg</a></p>
+                        </li>
+                        <li class="checkout-divider"></li>
+                        <li class="nav-item">
+                            <p style="background-color: #b5d8eb; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold; "> 2. Kassa</p>
+                        </li>
+                        <li class="checkout-divider"></li>
+                        <li class="nav-item">
+                            <p style="background-color:white; padding-top:0.5rem; padding-bottom:0.5rem; margin:0px;  font-family: Thonburi-bold;"> 3. Bekräftelse</p>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    }
     <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
         <h1><strong>2. Kassa</strong></h1>
         <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
@@ -55,8 +84,9 @@
                     <div class="row m-0">
                         <div class="col-6 p-2 pink-border border-right-0">
                             <div class="row">
-                                <div class="col-2 text-center"><input onclick="setShippingCost('Normal')"  type="radio" value="@ShippingTypes.Normal" asp-for="Shipping" />
-                                                               
+                                <div class="col-2 text-center">
+                                    <input onclick="setShippingCost('Normal')" type="radio" value="@ShippingTypes.Normal" asp-for="Shipping" />
+
                                 </div>
                                 <div class="col-7">
                                     <h5 style="color: #CF7697">Standardfrakt</h5>
@@ -67,8 +97,9 @@
                         </div>
                         <div class="col-6 p-2 pink-border">
                             <div class="row">
-                                <div class="col-2 text-center"><input onclick="setShippingCost('Express')" type="radio"  value="@ShippingTypes.Express" asp-for="Shipping" />
-                                                               
+                                <div class="col-2 text-center">
+                                    <input onclick="setShippingCost('Express')" type="radio" value="@ShippingTypes.Express" asp-for="Shipping" />
+
                                 </div>
                                 <div class="col-7">
                                     <h5 style="color: #CF7697">Expressfrakt</h5>
@@ -112,7 +143,7 @@
                 <span asp-validation-for="Payment" class="text-danger"></span>
 
             </div>
-           
+
         </form>
     </div>
 }
@@ -143,14 +174,11 @@ else
         }
         else if (shippingType == "Normal") {
 
-            totalSum.innerHTML = 29 + price; 
+            totalSum.innerHTML = 29 + price;
         }
         else {
-            totalSum.innerHTML = 49 + price;  
+            totalSum.innerHTML = 49 + price;
         }
     }
 
 </script>
-@section Steps {
-<p>Hello from checkout!</p>
-} 

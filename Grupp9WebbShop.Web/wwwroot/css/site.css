@@ -97,11 +97,19 @@ body {
         border: solid 2px #fab0c8;
     }
 
-.navstyles{
-    background-color:#b5d8eb;
-    color:#38b6ff;
-    border-radius:25px;
-    width:100%;
+.navstyles {
+    background-color: #b5d8eb;
+    color: #38b6ff;
+    border-radius: 25px;
+    width: 100%;
+    
+}
+.checkout-navstyles {
+    background-color: white;
+    color: #38b6ff;
+    border-radius: 25px;
+    width: 100%;
+    border: 2px solid #b5d8eb;
 }
 
 li a {
@@ -113,6 +121,9 @@ li a {
 }
 .divider{
     border-right:1px solid #f8f6ea;
+}
+.checkout-divider {
+    border-right: 2px solid #b5d8eb;
 }
 .searchstyle{
     border:none;

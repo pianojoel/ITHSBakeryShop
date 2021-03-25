@@ -19,21 +19,23 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col">
-
-                </div>
-                <div class=" col text-center">
+                <div class="col-sm-1 align-middle">
                     <a href="/">
-                        <img class="" style="width:200px" src="~/images/Logo.png" alt="Logga" />
+                        <img class="" style="width:100px" src="~/images/Logo.png" alt="Logga" />
                     </a>
                 </div>
-                <div class="col text-right">
+                <div class=" col-sm-7 text-center">
+                    
+                        <img src="~/images/Slogan.png" style="width:70%" />
+                   
+                </div>
+                <div class="col-3 text-center">
                     <partial name="_LoginPartial" />
                 </div>
-            </div>
+            
 
-            <div class="row" id="myRow">
-                <div id="cart" class="dropdown offset-11">
+            <div class="col-1">
+                <div id="cart" class="dropdown">
                     <a asp-page="/ShoppingBasket">
                         <img id="cartImg" src="~/images/Varukorg_ikon.png" width="40" alt="Varukorg" />
                         (@BasketHelper.NumItems(Context.Session))
@@ -59,6 +61,7 @@
                         <a class="nav-link text-dark" style="text-align:center" asp-page="/ShoppingBasket">Till varukorgen</a>
                     </div>
                 </div>
+                </div>
             </div>
             @*<div class="searchbox">
 
@@ -72,7 +75,7 @@
 
                 </div>*@
 
-            <nav class="navbar navbar-expand-md navbar-light">
+            @*<nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid navstyles">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -80,39 +83,26 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100">
-                            @if (LayoutData != null)
-                            {
-                                var category = LayoutData.Categories.ToList();
-                                @for (int i = 0; i < category.Count() - 1; i++)
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@category[i].Id">@category[i].Name</a>
-                                    </li>
-                                    <li class="divider"></li>
 
-                                }
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-page="/Categories" asp-route-categoryID="@category.Last().Id">@category.Last().Name</a>
-                                </li>
-
-
-                            }
-
-
-                            @*<li class="nav-item">
-                    <a class="nav-link" asp-route-categoryID=1>Färdiga Paket</a>
-                </li>
-                <li class="divider"></li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-route-categoryID=1>Bygg din egen tårta</a>
-                </li>*@
-
-
+                            <li class="nav-item">
+                                <p style="padding-top: .5rem; padding-bottom: .5rem; margin:0px; font-family: Thonburi-bold;"> 1. Din varukorg</p>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="nav-item">
+                                <p style="background-color: white; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold; "> 2. Kassa</p>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="nav-item">
+                                <p style="background-color:white; padding-top:0.5rem; padding-bottom:0.5rem; margin:0px;  font-family: Thonburi-bold;"> 3. Bekräftelse</p>
+                            </li>
+                            
 
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav>*@
+        
+        
         </div>
     </header>
     <div class="container">
