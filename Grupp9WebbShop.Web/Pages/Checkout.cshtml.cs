@@ -10,15 +10,16 @@ using Grupp9WebbShop.Web.Helpers;
 using Grupp9WebbShop.Web.Areas.Identity.Data;
 using Grupp9WebbShop.Data.Models;
 using System.ComponentModel.DataAnnotations;
+using Grupp9WebbShop.Web.Models;
 
 namespace Grupp9WebbShop.Web.Pages
 {
-    public class CheckoutModel : PageModel
+    public class CheckoutModel : BasePageModel
     {
         private readonly UserManager<WebbShopUser> _um;
         private readonly IShopDataService _ds;
 
-        public CheckoutModel(UserManager<WebbShopUser> um, IShopDataService ds)
+        public CheckoutModel(UserManager<WebbShopUser> um, IShopDataService ds) : base(ds)
         {
             _um = um;
             _ds = ds;
@@ -26,6 +27,9 @@ namespace Grupp9WebbShop.Web.Pages
         public void OnGet()
         {
             Basket = BasketHelper.GetBasket(HttpContext.Session);
+            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
+            ViewData["MainLayout"] = MainLayout;
+
         }
         [Required(ErrorMessage = "Du måste välja en leveransmetod")]
         [BindProperty]
@@ -41,7 +45,8 @@ namespace Grupp9WebbShop.Web.Pages
             if (!ModelState.IsValid)
             {
                 Basket = BasketHelper.GetBasket(HttpContext.Session);
-                return Page(new { fail = true });
+                Fail = true;
+                return Page();
             }
             Basket = BasketHelper.GetBasket(HttpContext.Session);
             var userId = _um.GetUserId(User);
@@ -51,6 +56,7 @@ namespace Grupp9WebbShop.Web.Pages
             {
                 _ds.DecreaseProductStock(item.ProductId, item.Quantity);
             }
+            BasketHelper.ClearBasket(HttpContext.Session);
             return RedirectToPage("/Index");
         }
     }

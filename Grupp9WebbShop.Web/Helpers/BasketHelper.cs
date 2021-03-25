@@ -36,6 +36,15 @@ namespace Grupp9WebbShop.Web.Helpers
                 });
             SaveBasket(session, b);
         }
+        public static void ClearBasket(ISession session)
+        {
+            var b = GetBasket(session);
+            if (b != null)
+            {
+                b.Items.Clear();
+                SaveBasket(session, b);
+            }
+        }
         public static void ModifyItem(ISession session, int productId, bool increment, bool delete)
         {
             var b = GetBasket(session);

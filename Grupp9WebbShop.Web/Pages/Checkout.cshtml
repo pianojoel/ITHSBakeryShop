@@ -1,7 +1,7 @@
 ﻿@page
 @model Grupp9WebbShop.Web.Pages.CheckoutModel
 @{
-
+    ViewData["Title"] = "Kassa";
 }
 @using Grupp9WebbShop.Data.Models
 @using Microsoft.AspNetCore.Identity
@@ -37,14 +37,19 @@
                 <div class=" row m-0">
                     <div class="col p-2 pink-border border-bottom-0">@user.Email</div>
                 </div>
+
                 <div class=" row m-0">
                     <div class="col p-2 pink-border ">@(user.PhoneNumber != null ? user.PhoneNumber : "Lägg till telefonnummer")</div>
                 </div>
             </div>
+            <div class="row m-0">
+                <p>Chauffören kommer att kontakta dig 15 minuter före leverans.</p>
+            </div>
+
         </div>
         <form method="post">
             <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
-                <h2><strong>Välj leveranssätt</strong></h2>
+                <h2><strong>Välj fraktalternativ</strong></h2>
                 <div class="ml-auto mr-auto mt-5" style="width:100%; background-color:white; color:#642714" ;>
                     <div class="row m-0">
                         <div class="col-6 p-2 pink-border border-right-0">
@@ -102,6 +107,9 @@
                 <input type="submit" id="kop" class="pink-button " value="Slutför köp" />
                 <br />
                 <span asp-validation-for="Shipping" class="text-danger"></span>
+                <br />
+                <span asp-validation-for="Payment" class="text-danger"></span>
+
             </div>
            
         </form>
@@ -113,12 +121,13 @@ else
 
 }
 
-@if (!Fail) { }
-            {
-                <script>
-
-                </script>
-            }
+@if (Model.Fail != null && Model.Fail.Value)
+{
+    <script>
+        const kopbtn = document.querySelector("#kop");
+        kopbtn.focus();
+    </script>
+}
 <script>
     function setShippingCost(shippingType) {
         console.log("here");
