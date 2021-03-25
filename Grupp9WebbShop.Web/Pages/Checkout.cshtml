@@ -49,22 +49,26 @@
                     <div class="row m-0">
                         <div class="col-6 p-2 pink-border border-right-0">
                             <div class="row">
-                                <div class="col-2 text-center"><input type="radio" value="@ShippingTypes.Normal" asp-for="Shipping" /></div>
-                                <div class="col-8">
-                                    <h5 style="color: #CF7697">Standardfrakt</h5>
-                                    <p>Inom 3-5 vardagar <br />Gratis vid köp över 299 kr</p>
+                                <div class="col-2 text-center"><input onclick="setShippingCost('Normal')"  type="radio" value="@ShippingTypes.Normal" asp-for="Shipping" />
+                                                               
                                 </div>
-                                <div class="col-2"><h5 style="color: #CF7697">29 kr</h5></div>
+                                <div class="col-7">
+                                    <h5 style="color: #CF7697">Standardfrakt</h5>
+                                    <p>Inom 3-5 vardagar <br />Gratis frakt vid köp över 299 kr</p>
+                                </div>
+                                <div class="col-3 "><h5 style="color: #CF7697">29 kr</h5></div>
                             </div>
                         </div>
                         <div class="col-6 p-2 pink-border">
                             <div class="row">
-                                <div class="col-2 text-center"><input type="radio" value="@ShippingTypes.Express" asp-for="Shipping" /></div>
-                                <div class="col-8">
-                                    <h5 style="color: #CF7697">Expressfrakt</h5>
-                                    <p>Inom 1-2 vardagar <br />Gratis vid köp över 299 kr</p>
+                                <div class="col-2 text-center"><input onclick="setShippingCost('Express')" type="radio"  value="@ShippingTypes.Express" asp-for="Shipping" />
+                                                               
                                 </div>
-                                <div class="col-2"><h5 style="color: #CF7697">49 kr</h5></div>
+                                <div class="col-7">
+                                    <h5 style="color: #CF7697">Expressfrakt</h5>
+                                    <p>Inom 1-2 vardagar <br />Gratis frakt vid köp över 299 kr</p>
+                                </div>
+                                <div class="col-3"><h5 style="color: #CF7697">49 kr</h5></div>
                             </div>
                         </div>
                     </div>
@@ -92,9 +96,14 @@
                 </div>
             </div>
             <div class="text-center">
-                <input type="submit" class="pink-button " value="Slutför köp" />
+                <p>
+                    Totalbelopp inkl moms <span id="totalSum">@Model.Basket.Total</span>kr
+                </p>
+                <input type="submit" id="kop" class="pink-button " value="Slutför köp" />
+                <br />
+                <span asp-validation-for="Shipping" class="text-danger"></span>
             </div>
-            @*<a class="pink-button" asp-page="#">Slutför köp</a>*@
+           
         </form>
     </div>
 }
@@ -103,3 +112,32 @@ else
     <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Vänligen logga in för att fortsätta</a>
 
 }
+
+@if (!Fail) { }
+            {
+                <script>
+
+                </script>
+            }
+<script>
+    function setShippingCost(shippingType) {
+        console.log("here");
+        let totalSum = document.getElementById("totalSum");
+        //let shippingType = document.getElementById("Shipping");
+        let price = @Json.Serialize(Model.Basket.Total);
+        console.log(shippingType);
+
+
+        if (price > 299) {
+            totalSum.innerHTML = price;
+        }
+        else if (shippingType == "Normal") {
+
+            totalSum.innerHTML = 29 + price; 
+        }
+        else {
+            totalSum.innerHTML = 49 + price;  
+        }
+    }
+
+</script>
