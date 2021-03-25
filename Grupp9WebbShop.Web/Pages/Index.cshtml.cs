@@ -15,8 +15,9 @@ namespace Grupp9WebbShop.Web.Pages
     public class IndexModel : BasePageModel
     {
         private readonly IShopDataService _ds;
-        public List<Product> Highlighted { get; set; }
-        public List<Product> OnSale { get; set; }
+        public IEnumerable<Product> Highlighted { get; set; }
+        public IEnumerable<Product> OnSale { get; set; }
+        public IEnumerable<Product> Latest { get; set; }
 
         [BindProperty]
         public int? ProductId { get; set; }
@@ -36,8 +37,9 @@ namespace Grupp9WebbShop.Web.Pages
             ViewData["MainLayout"] = MainLayout;
 
 
-            Highlighted = _ds.GetHighlightedProducts().ToList();
-            OnSale = _ds.GetProductsOnSale().ToList();
+            Highlighted = _ds.GetHighlightedProducts();
+            OnSale = _ds.GetProductsOnSale();
+            Latest = _ds.GetLatestProducts();
         }
 
         public void OnPost()

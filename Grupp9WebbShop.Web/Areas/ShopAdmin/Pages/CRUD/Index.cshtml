@@ -10,7 +10,7 @@
 <p>
     <a asp-page="Create">Skapa ny</a>
 </p>
-<table class="table">
+<table class="table w-auto">
     <thead>
         <tr>
             <th>
@@ -26,6 +26,9 @@
                 @Html.DisplayNameFor(model => model.Product[0].Category)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Product[0].AddedDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Product[0].ImageFile)
             </th>
             <th>
@@ -35,33 +38,47 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Product) {
-    var highlightText = item.Highlighted ? "Ta bort från utvald" : "Sätt som utvald";
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllergyInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
-            </td>
-            <td>
-                <a asp-route-id="@item.Id" aria-label="@highlightText" title="Välj om produkten ska vara utvald"><i class="bi @(item.Highlighted ? "bi-check2-square" : "bi-square")"></i></a>
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id" title="Redigera"><i class="bi bi-pencil-square"></i></a>
-                <a asp-page="./Details" asp-route-id="@item.Id" title="Detaljer"><i class="bi bi-info-square"></i></a>
-                <a asp-page="./Delete" asp-route-id="@item.Id" title="Ta bort"><i class="bi bi-x-square"></i></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Product)
+        {
+            var highlightText = item.Highlighted ? "Ta bort från utvald" : "Sätt som utvald";
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllergyInfo)
+                </td>
+                @if (item.OnSale)
+                {
+                    <td>
+                        <del class="mr-2" style="color:#CF7697">@Math.Round(item.Price, 0) </del>
+
+                        @item.CalculatedPrice
+
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @item.CalculatedPrice
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>@item.AddedDate.ToShortDateString()</td>
+                <td>
+                    <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
+                </td>
+                <td>
+                    <a asp-route-id="@item.Id" aria-label="@highlightText" title="Välj om produkten ska vara utvald"><i class="bi @(item.Highlighted ? "bi-check2-square" : "bi-square")"></i></a>
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" title="Redigera"><i class="bi bi-pencil-square"></i></a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" title="Detaljer"><i class="bi bi-info-square"></i></a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" title="Ta bort"><i class="bi bi-x-square"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
