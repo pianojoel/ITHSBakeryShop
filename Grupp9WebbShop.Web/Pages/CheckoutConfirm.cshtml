@@ -1,5 +1,5 @@
 ﻿@page
-@using Grupp9WebbShop.Data 
+@using Grupp9WebbShop.Data
 @using Grupp9WebbShop.Data.Models
 @inject IShopDataService _ds
 
@@ -9,53 +9,84 @@
     ViewData["Title"] = "Bekräftelse";
 
 }
-<h1>Bekräftelse</h1>
-@if (Model.Order != null)
-{
-    decimal shippingCost = 0M;
-    switch (Model.Order.ShippingType)
-    {
-        case ShippingTypes.Normal:
-            shippingCost = 29;
-            break;
-        case ShippingTypes.Express:
-            shippingCost = 49;
-            break;
-        default:
-            break;
-    }
-    if (Model.Order.TotalPrice - shippingCost >= 299)
-        shippingCost = 0;
-    <p>Tack för din order!</p>
-    <p>Detaljer visas nedan.</p>
-    <p>Orderdatum @Model.Order.Date</p>
-    <h2>Produkter</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Produkt</th>
-                <th>Antal</th>
-                <th>Styckepris</th>
-                <th>Radpris</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Order.OrderItems)
-            {
-                var prod = _ds.GetProductById(item.ProductId);
-                <tr>
-                    <td>@prod.Name</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.Price</td>
-                    <td>@item.RowPrice</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <p>Frakt: @shippingCost kr</p>
-    <p>Totalsumma: @Model.Order.TotalPrice</p>
-}
-else
-{
+
+@section Steps {
+
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-fluid checkout-navstyles">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100" style="">
+
+                    <li class="nav-item">
+                        <p style="background-color: white; padding-top: .5rem; padding-bottom: .5rem; margin: 0px; font-family: Thonburi-bold;"><a asp-page="/ShoppingBasket"> 1. Din varukorg</a></p>
+                    </li>
+                    <li class="checkout-divider"></li>
+                    <li class="nav-item">
+                        <p style="background-color: white; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold; "> 2. Kassa</p>
+                    </li>
+                    <li class="checkout-divider"></li>
+                    <li class="nav-item">
+                        <p style="background-color: #b5d8eb; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold;"> 3. Bekräftelse</p>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 }
+    <h1>Bekräftelse</h1>
+    @if (Model.Order != null)
+    {
+        decimal shippingCost = 0M;
+        switch (Model.Order.ShippingType)
+        {
+            case ShippingTypes.Normal:
+                shippingCost = 29;
+                break;
+            case ShippingTypes.Express:
+                shippingCost = 49;
+                break;
+            default:
+                break;
+        }
+        if (Model.Order.TotalPrice - shippingCost >= 299)
+            shippingCost = 0;
+        <p>Tack för din order!</p>
+        <p>Detaljer visas nedan.</p>
+        <p>Orderdatum @Model.Order.Date</p>
+        <h2>Produkter</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Antal</th>
+                    <th>Styckepris</th>
+                    <th>Radpris</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Order.OrderItems)
+                {
+                    var prod = _ds.GetProductById(item.ProductId);
+                    <tr>
+                        <td>@prod.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                        <td>@item.RowPrice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>Frakt: @shippingCost kr</p>
+        <p>Totalsumma: @Model.Order.TotalPrice kr</p>
+    }
+    else
+    {
+
+    }
