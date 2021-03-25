@@ -1,6 +1,7 @@
 ﻿@page
 @model Grupp9WebbShop.Web.Pages.CheckoutModel
 @{
+    Layout = "./shared/_layout-checkoutflow";
     ViewData["Title"] = "Kassa";
 }
 @using Grupp9WebbShop.Data.Models
@@ -150,3 +151,6 @@ else
     }
 
 </script>
+@section Steps {
+<p>Hello from checkout!</p>
+} 

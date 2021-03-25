@@ -2,7 +2,8 @@
 @using Grupp9WebbShop.Data.Models
 @model Grupp9WebbShop.Web.Pages.ShoppingBasketModel
 @{
-
+    Layout = "./shared/_layout-checkoutflow";
+    ViewData["Title"] = "Varukorg";
 }
 
 <div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
@@ -46,3 +47,6 @@
     <a class="pink-button" asp-page="/Checkout">Nästa steg</a>
     <a class="blue-button" asp-page="/Index">Fortsätt handla</a>
 </div>
+@section Steps {
+<p>Hello from basket</p>
+}
