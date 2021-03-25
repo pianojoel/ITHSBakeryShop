@@ -51,13 +51,13 @@ namespace Grupp9WebbShop.Web.Pages
             Basket = BasketHelper.GetBasket(HttpContext.Session);
             var userId = _um.GetUserId(User);
             Order newOrder = _ds.CreateOrderFromBasket(Basket, userId, Shipping.Value, Payment.Value);
-            _ds.SaveOrder(newOrder);
+            var orderId = _ds.SaveOrder(newOrder);
             foreach (var item in Basket.Items)
             {
                 _ds.DecreaseProductStock(item.ProductId, item.Quantity);
             }
             BasketHelper.ClearBasket(HttpContext.Session);
-            return RedirectToPage("/Index");
+            return RedirectToPage("./CheckoutConfirm", new { orderid = orderId });
         }
     }
 }
