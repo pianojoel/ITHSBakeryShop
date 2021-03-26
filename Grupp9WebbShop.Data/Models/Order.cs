@@ -13,7 +13,7 @@ namespace Grupp9WebbShop.Data.Models
 
         public DateTime Date { get; set; }
         [NotMapped]
-        public decimal TotalPrice
+        public decimal GrandTotal
         {
             get
             {
@@ -33,6 +33,15 @@ namespace Grupp9WebbShop.Data.Models
                 var totalPrice = OrderItems.Sum(o => o.RowPrice);
                 if (totalPrice < 299)
                     totalPrice += shippingCost;
+                return totalPrice;
+            }
+        }
+        public decimal TotalPrice
+        {
+            get
+            {
+
+                var totalPrice = OrderItems.Sum(o => o.RowPrice);
                 return totalPrice;
             }
         }

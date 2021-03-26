@@ -55,7 +55,7 @@
             default:
                 break;
         }
-        if (Model.Order.TotalPrice - shippingCost >= 299)
+        if (Model.Order.TotalPrice >= 299)
             shippingCost = 0;
         <p>Tack för din order!</p>
         <p>Detaljer visas nedan.</p>
@@ -77,14 +77,14 @@
                     <tr>
                         <td>@prod.Name</td>
                         <td>@item.Quantity</td>
-                        <td>@item.Price</td>
-                        <td>@item.RowPrice</td>
+                        <td>@Math.Round(item.Price, 0) kr</td>
+                        <td>@Math.Round(item.RowPrice, 0) kr</td>
                     </tr>
                 }
             </tbody>
         </table>
         <p>Frakt: @shippingCost kr</p>
-        <p>Totalsumma: @Model.Order.TotalPrice kr</p>
+        <p>Totalsumma: @Math.Round(Model.Order.GrandTotal, 0) kr</p>
     }
     else
     {
