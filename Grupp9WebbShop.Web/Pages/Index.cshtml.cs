@@ -25,6 +25,10 @@ namespace Grupp9WebbShop.Web.Pages
         [BindProperty]
         public int Number { get; set; }
         public bool Animate { get; set; }
+        [BindProperty]
+        public IEnumerable<Product> BestSellingProducts { get; set; }
+
+
 
         public IndexModel(IShopDataService ds) : base(ds)
         {
@@ -40,6 +44,11 @@ namespace Grupp9WebbShop.Web.Pages
             Highlighted = _ds.GetHighlightedProducts();
             OnSale = _ds.GetProductsOnSale();
             Latest = _ds.GetLatestProducts();
+            BestSellingProducts = _ds
+                .GetBestSellingProducts()
+                .Take(3)
+                .Select(p => _ds
+                .GetProductById(p.ProductId));
         }
 
         public void OnPost()
