@@ -27,27 +27,30 @@
                     <td><img src="./images/@p.ImageFile" width="100" class="pink-border" /></td>
                     <td>
                         @p.Name <br />
-                    @if (p.OnSale)
-                    {
-                        <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
-                    }
-                    @p.CalculatedPrice kr
-                </td>
-                <td>
-                    <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
-                    <span>@item.Quantity </span>
-                    <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
-                </td>
-                <td>@Math.Round(item.RowPrice, 2) kr</td>
-                <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
-            </tr>
+                        @if (p.OnSale)
+                        {
+                            <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
+                        }
+                        @p.CalculatedPrice kr
+                    </td>
+                    <td>
+                        <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
+                        <span>@item.Quantity </span>
+                        <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
+                    </td>
+                    <td>@Math.Round(item.RowPrice, 2) kr</td>
+                    <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
+                </tr>
 
-        }
+            }
             <tr><td></td><td></td><td>Orderbelopp inkl.moms:</td><td><strong>@Math.Round(Model.Basket.Total, 2) kr</strong></td></tr>
         </tbody>
     </table>
-    <a class="pink-button" asp-page="/Checkout">Nästa steg</a>
+    <div class="text-center">
+        <span asp-validation-for="StockStatusOK" class="text-danger"></span>
+    </div>
     <a class="blue-button" asp-page="/Index">Fortsätt handla</a>
+    <a class="pink-button" asp-page-handler="CheckStock">Nästa steg</a>
 </div>
 @section Steps {
 
