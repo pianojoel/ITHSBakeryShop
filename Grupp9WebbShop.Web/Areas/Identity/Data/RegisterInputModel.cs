@@ -45,5 +45,9 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Data
         [Compare("Password", ErrorMessage = "Lösenorden matchar inte.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name ="Godkänn vårt avtal")]
+        [Range(typeof(bool),"true","true", ErrorMessage ="Du måste godkänna de allmänna villkoren")]
+        public bool Agreement { get; set; }
+
     }
 }
