@@ -47,35 +47,43 @@
         </tbody>
     </table>
     <div class="text-center">
-        <span asp-validation-for="StockStatusOK" class="text-danger"></span>
+        @if (!Model.IsNotEmpty)
+        {
+            
+            <p class="text-danger">Du måste lägga något i din varukorg för att gå vidare till kassan!</p>
+        }
+        else if (Model.StockStatusUpdated)
+        {
+            <p class="text-danger">En eller flera av produkterna du försökte köpa finns ej i lager. Din varukorg har uppdaterats.</p>
+        }
     </div>
-    <a class="blue-button" asp-page="/Index">Fortsätt handla</a>
-    <a class="pink-button" asp-page-handler="CheckStock">Nästa steg</a>
+    <a class="blue-button btn" asp-page="/Index">Fortsätt handla</a>
+    <a class="pink-button btn @(!Model.IsNotEmpty ? "disabled" : null)" id="next" asp-page-handler="CheckStock">Nästa steg</a>
 </div>
 @section Steps {
 
     <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid checkout-navstyles">
-            
-            
-
-                <ul class="navbar-nav me-auto nav-fill w-100">
-
-                    <li class="nav-item checkout-p" style="background-color: #b5d8eb;border-bottom-left-radius:25px; border-top-left-radius:25px">
-                        <span>1. Din varukorg</span>
-                    </li>
-                    <li class="checkout-divider"></li>
-                    <li class="nav-item">
-                        <p class="checkout-p"> 2. Kassa</p>
-                    </li>
-                    <li class="checkout-divider"></li>
-                    <li class="nav-item">
-                        <p class="checkout-p"> 3. Bekräftelse</p>
-                    </li>
 
 
-                </ul>
-            
+
+            <ul class="navbar-nav me-auto nav-fill w-100">
+
+                <li class="nav-item checkout-p" style="background-color: #b5d8eb;border-bottom-left-radius:25px; border-top-left-radius:25px">
+                    <span>1. Din varukorg</span>
+                </li>
+                <li class="checkout-divider"></li>
+                <li class="nav-item">
+                    <p class="checkout-p"> 2. Kassa</p>
+                </li>
+                <li class="checkout-divider"></li>
+                <li class="nav-item">
+                    <p class="checkout-p"> 3. Bekräftelse</p>
+                </li>
+
+
+            </ul>
+
         </div>
     </nav>
 }

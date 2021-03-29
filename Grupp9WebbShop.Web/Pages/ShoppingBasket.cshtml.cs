@@ -35,12 +35,30 @@ namespace Grupp9WebbShop.Web.Pages
             return RedirectToPage("/shoppingBasket");
         }
 
+        [BindProperty(SupportsGet = true)]
+        public bool StockStatusUpdated { get; set; }
 
-        [Required(ErrorMessage = "En eller flera av produkterna du försökte köpa finns ej i lager. Din varukorg har uppdaterats.")]
-        public bool? StockStatusOK { get; set; } = true;
+        [BindProperty(SupportsGet = true)]
+        public bool StockStatusOK { get; set; } = true;
+
+        [BindProperty(SupportsGet = true)]
+        public bool IsNotEmpty { get; set; } = true;
+
 
         public IActionResult OnGetCheckStock()
         {
+            Basket = BasketHelper.GetBasket(HttpContext.Session);
+
+            if(Basket.Items.Count == 0)
+            {
+                IsNotEmpty = false;
+                return Page();
+            }
+            else
+            {
+                IsNotEmpty = true;
+            }
+
             Basket = BasketHelper.GetBasket(HttpContext.Session);
 
             foreach (var item in Basket.Items)
@@ -49,23 +67,26 @@ namespace Grupp9WebbShop.Web.Pages
 
                 if (item.Quantity > stockBalance)
                 {
-                    StockStatusOK = null;
-
                     int length = item.Quantity - stockBalance;
 
                     for (int i = 0; i < length; i++)
                     {
                         BasketHelper.ModifyItem(HttpContext.Session, item.ProductId, false, false);
                     }
+                    StockStatusOK = false;
+                StockStatusUpdated = true;
                 }
             }
 
-            if (StockStatusOK == true)
+            if (StockStatusOK)
             { 
                 return RedirectToPage("/Checkout");
             }
+
             Basket = BasketHelper.GetBasket(HttpContext.Session);
-            return  RedirectToPage("/shoppingBasket"); 
+            Products = _ds.GetProducts();
+            MainLayout.ShoppingBasket = Basket;
+            return Page(); 
         }
     }
 }
