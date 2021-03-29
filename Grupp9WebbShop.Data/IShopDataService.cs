@@ -20,5 +20,6 @@ namespace Grupp9WebbShop.Data
         IEnumerable<Order> GetAllOrders();
         IEnumerable<Product> GetLatestProducts();
         Order GetOrder(int id);
+        IEnumerable<BestSellingProduct> GetBestSellingProducts();
     }
 }
