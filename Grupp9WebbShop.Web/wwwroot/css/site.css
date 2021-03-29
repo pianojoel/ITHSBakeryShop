@@ -239,3 +239,11 @@ div #cart {
     text-decoration: none;
     color: #642714;
 }
+
+.checkout-p {
+   
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 0px;
+    font-family: Thonburi-bold;
+}
