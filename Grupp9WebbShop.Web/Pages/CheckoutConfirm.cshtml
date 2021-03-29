@@ -12,30 +12,28 @@
 
 @section Steps {
 
-    <nav class="navbar navbar-expand-md navbar-light">
+    <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid checkout-navstyles">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-fill w-100" style="">
+                <ul class="navbar-nav me-auto nav-fill w-100" style="">
 
                     <li class="nav-item">
-                        <p style="background-color: white; padding-top: .5rem; padding-bottom: .5rem; margin: 0px; font-family: Thonburi-bold;"><a asp-page="/ShoppingBasket"> 1. Din varukorg</a></p>
+                        <p class="checkout-p"><a asp-page="/ShoppingBasket"> 1. Din varukorg</a></p>
                     </li>
                     <li class="checkout-divider"></li>
                     <li class="nav-item">
-                        <p style="background-color: white; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold; "> 2. Kassa</p>
+                        <p class="checkout-p"> 2. Kassa</p>
                     </li>
                     <li class="checkout-divider"></li>
-                    <li class="nav-item">
-                        <p style="background-color: #b5d8eb; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0px; font-family: Thonburi-bold;"> 3. Bekräftelse</p>
+                    <li class="nav-item checkout-p" style="background-color: #b5d8eb; border-bottom-right-radius: 25px; border-top-right-radius: 25px">
+                        <span>3. Bekräftelse</span>
                     </li>
 
 
                 </ul>
-            </div>
+            
         </div>
     </nav>
 
