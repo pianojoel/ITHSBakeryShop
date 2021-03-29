@@ -27,52 +27,63 @@
                     <td><img src="./images/@p.ImageFile" width="100" class="pink-border" /></td>
                     <td>
                         @p.Name <br />
-                    @if (p.OnSale)
-                    {
-                        <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
-                    }
-                    @p.CalculatedPrice kr
-                </td>
-                <td>
-                    <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
-                    <span>@item.Quantity </span>
-                    <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
-                </td>
-                <td>@Math.Round(item.RowPrice, 2) kr</td>
-                <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
-            </tr>
+                        @if (p.OnSale)
+                        {
+                            <del class="mr-2" style="color:#CF7697">@Math.Round(p.Price, 0)  kr </del>
+                        }
+                        @p.CalculatedPrice kr
+                    </td>
+                    <td>
+                        <span><a style="width:38px;" class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem"><img width="30" src="~/images/MinusCartIcon.png" /></a></span>
+                        <span>@item.Quantity </span>
+                        <span><a class="font-weight-bold" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-inc="true"><img width="30" src="~/images/PlusCartIcon.png" /></a></span>
+                    </td>
+                    <td>@Math.Round(item.RowPrice, 2) kr</td>
+                    <td><a class="" asp-route-pid="@item.ProductId" asp-page-handler="ModifyItem" asp-route-delete="true"><img width="20" src="~/images/TrashcanIcon.png" /></a></td>
+                </tr>
 
-        }
+            }
             <tr><td></td><td></td><td>Orderbelopp inkl.moms:</td><td><strong>@Math.Round(Model.Basket.Total, 2) kr</strong></td></tr>
         </tbody>
     </table>
-    <a class="pink-button" asp-page="/Checkout">Nästa steg</a>
-    <a class="blue-button" asp-page="/Index">Fortsätt handla</a>
+    <div class="text-center">
+        @if (!Model.IsNotEmpty)
+        {
+            
+            <p class="text-danger">Du måste lägga något i din varukorg för att gå vidare till kassan!</p>
+        }
+        else if (Model.StockStatusUpdated)
+        {
+            <p class="text-danger">En eller flera av produkterna du försökte köpa finns ej i lager. Din varukorg har uppdaterats.</p>
+        }
+    </div>
+    <a class="blue-button btn" asp-page="/Index">Fortsätt handla</a>
+    <a class="pink-button btn @(!Model.IsNotEmpty ? "disabled" : null)" id="next" asp-page-handler="CheckStock">Nästa steg</a>
 </div>
 @section Steps {
 
     <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid checkout-navstyles">
-            
-            
-
-                <ul class="navbar-nav me-auto nav-fill w-100">
-
-                    <li class="nav-item checkout-p" style="background-color: #b5d8eb;border-bottom-left-radius:25px; border-top-left-radius:25px">
-                        <span>1. Din varukorg</span>
-                    </li>
-                    <li class="checkout-divider"></li>
-                    <li class="nav-item">
-                        <p class="checkout-p"> 2. Kassa</p>
-                    </li>
-                    <li class="checkout-divider"></li>
-                    <li class="nav-item">
-                        <p class="checkout-p"> 3. Bekräftelse</p>
-                    </li>
 
 
-                </ul>
-            
+
+            <ul class="navbar-nav me-auto nav-fill w-100">
+
+                <li class="nav-item checkout-p" style="background-color: #b5d8eb;border-bottom-left-radius:25px; border-top-left-radius:25px">
+                    <span>1. Din varukorg</span>
+                </li>
+                <li class="checkout-divider"></li>
+                <li class="nav-item">
+                    <p class="checkout-p"> 2. Kassa</p>
+                </li>
+                <li class="checkout-divider"></li>
+                <li class="nav-item">
+                    <p class="checkout-p"> 3. Bekräftelse</p>
+                </li>
+
+
+            </ul>
+
         </div>
     </nav>
 }

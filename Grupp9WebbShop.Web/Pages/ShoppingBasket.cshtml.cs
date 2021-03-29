@@ -8,6 +8,7 @@ using Grupp9WebbShop.Data.Models;
 using Grupp9WebbShop.Data;
 using Grupp9WebbShop.Web.Helpers;
 using Grupp9WebbShop.Web.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Grupp9WebbShop.Web.Pages
 {
@@ -19,12 +20,12 @@ namespace Grupp9WebbShop.Web.Pages
         public ShoppingBasket Basket { get; set; }
         public ShoppingBasketModel(IShopDataService ds) : base(ds)
         {
-                        _ds = ds;
+            _ds = ds;
         }
         public void OnGet()
         {
             Basket = BasketHelper.GetBasket(HttpContext.Session);
-                        Products =  _ds.GetProducts();
+            Products = _ds.GetProducts();
             MainLayout.ShoppingBasket = Basket;
             ViewData["MainLayout"] = MainLayout;
         }
@@ -32,6 +33,60 @@ namespace Grupp9WebbShop.Web.Pages
         {
             BasketHelper.ModifyItem(HttpContext.Session, pid, inc, delete);
             return RedirectToPage("/shoppingBasket");
+        }
+
+        [BindProperty(SupportsGet = true)]
+        public bool StockStatusUpdated { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public bool StockStatusOK { get; set; } = true;
+
+        [BindProperty(SupportsGet = true)]
+        public bool IsNotEmpty { get; set; } = true;
+
+
+        public IActionResult OnGetCheckStock()
+        {
+            Basket = BasketHelper.GetBasket(HttpContext.Session);
+
+            if(Basket.Items.Count == 0)
+            {
+                IsNotEmpty = false;
+                return Page();
+            }
+            else
+            {
+                IsNotEmpty = true;
+            }
+
+            Basket = BasketHelper.GetBasket(HttpContext.Session);
+
+            foreach (var item in Basket.Items)
+            {
+                int stockBalance = _ds.GetProductStock(item.ProductId);
+
+                if (item.Quantity > stockBalance)
+                {
+                    int length = item.Quantity - stockBalance;
+
+                    for (int i = 0; i < length; i++)
+                    {
+                        BasketHelper.ModifyItem(HttpContext.Session, item.ProductId, false, false);
+                    }
+                    StockStatusOK = false;
+                StockStatusUpdated = true;
+                }
+            }
+
+            if (StockStatusOK)
+            { 
+                return RedirectToPage("/Checkout");
+            }
+
+            Basket = BasketHelper.GetBasket(HttpContext.Session);
+            Products = _ds.GetProducts();
+            MainLayout.ShoppingBasket = Basket;
+            return Page(); 
         }
     }
 }

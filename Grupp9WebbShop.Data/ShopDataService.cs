@@ -118,5 +118,13 @@ namespace Grupp9WebbShop.Data
         {
             return _ctx.Orders.Include(o => o.OrderItems).FirstOrDefault(i => i.Id == id);
         }
+        public IEnumerable<BestSellingProduct> GetBestSellingProducts()
+        {
+            return _ctx.OrderItems.GroupBy(i => i.ProductId, (g, p) => new BestSellingProduct()
+            {
+                ProductId = g,
+                Count = p.Sum(s => s.Quantity)
+            }).OrderByDescending(o => o.Count).ToList();
+        }
     }
 }
