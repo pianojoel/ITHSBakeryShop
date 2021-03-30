@@ -7,11 +7,17 @@
 
 @if (Model.SearchResults != null)
 {
-
+    @if (Model.SearchResults.Count() == 0)
+    {
+        <div class="text-center">
+            <h4 class="mt-5">Din sökning gav tyvärr inga resultat</h4>
+        </div>
+    }
 
     <div class="row">
         @foreach (var prod in Model.SearchResults)
         {
+
 
             <div class="col-sm-3">
                 <div class="card m-4" style="width:14rem; height:24rem">
@@ -54,10 +60,12 @@
 }
 else
 {
-<div class="text-center">
-    <h4 class="mt-5">Din sökning gav tyvärr inga resultat</h4>
-</div>
+    <div class="text-center">
+        <h4 class="mt-5">Din sökning gav tyvärr inga resultat</h4>
+    </div>
 }
+
+
 
 
 <form method="post" id="myHiddenForm">
