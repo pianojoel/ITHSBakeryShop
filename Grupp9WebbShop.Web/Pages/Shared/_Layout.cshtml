@@ -32,8 +32,29 @@
                 </div>
             </div>
 
-            <div class="row" id="myRow">
-                <div id="cart" class="dropdown offset-11">
+            <div class="row mb-3 flex-nowrap" id="myRow">
+                <div class="col-md-6">
+                    <input id="searchInput" class="searchinput" type="search" aria-label="Search">
+                    <button id="searchButton" class="d-none" onclick="search()" />
+                    <script>
+                        function search() {
+                            let queryString = document.getElementById("searchInput").value;
+                            console.log(queryString);
+                            window.location.href = "/Search?query=" + queryString;
+                        }
+                        const input = document.querySelector("#searchInput");
+                        input.addEventListener("keyup", function (event) {
+                            console.log(event.keyCode)
+                            if (event.keyCode === 13) {
+                                event.preventDefault();
+                                document.querySelector("#searchButton").click();
+                            }
+                        });
+                    </script>
+
+                </div>
+
+                <div id="cart" class="dropdown col-md-6 text-right">
                     <a asp-page="/ShoppingBasket">
                         <img id="cartImg" src="~/images/Varukorg_ikon.png" width="40" alt="Varukorg" />
                         (@BasketHelper.NumItems(Context.Session))
@@ -60,25 +81,9 @@
                     </div>
                 </div>
             </div>
-            <div class="searchbox">
 
 
-                   
-                        <input id="searchInput" class="searchinput" type="search"  aria-label="Search">
-
-                        <button class="btn my-2 my-sm-0" onclick="search()">Search</button>
-                    
-                <script>
-                    function search() {
-                        console.log("Here");
-                        let queryString = document.getElementById("searchInput").value;
-                        console.log(queryString);
-                        window.location.href = "/Search?query=" + queryString;
-                    }
-                 
-                </script>
-
-                </div>
+            
 
             <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid navstyles">

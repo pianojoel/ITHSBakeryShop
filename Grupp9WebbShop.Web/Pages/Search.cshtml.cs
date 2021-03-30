@@ -8,7 +8,7 @@ using Grupp9WebbShop.Web.Helpers;
 using Grupp9WebbShop.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Grupp9WebbShop.Web.Helpers;
+
 
 namespace Grupp9WebbShop.Web.Pages
 {
@@ -34,7 +34,7 @@ namespace Grupp9WebbShop.Web.Pages
         public void OnGet()
         {
             var products = _ds.GetProducts();
-            if(Query != null)
+            if(!String.IsNullOrEmpty(Query))
             {
             SearchResults = products.Where(p => p.Name.ToUpper().Contains(Query.ToUpper())).ToList();
             }

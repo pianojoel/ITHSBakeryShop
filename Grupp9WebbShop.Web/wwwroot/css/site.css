@@ -125,27 +125,21 @@ li a {
 .checkout-divider {
     border-right: 2px solid #b5d8eb;
 }
-.searchstyle{
-    border:none;
-    border-bottom:3px solid #fab0c8;
-    margin:20px;
-}
-.searchbox {
-    width: 25%;
-}
-.searchinput{
-    border:none;
-    width:100%;
-    background-color:transparent;
-}
-input#search {
+
+
+
+.searchinput {
+    border: none;
+    border-bottom: 3px solid #fab0c8;
+    margin: 20px;
+    background-color: transparent;
     background-image: url("../images/searchicon.png");
     background-size: contain;
     background-repeat: no-repeat;
     text-indent: 20px;
 }
 
-    input#search:focus {
+    input#searchInput:focus {
         background-image: none;
         text-indent: 0px;
         outline:none;

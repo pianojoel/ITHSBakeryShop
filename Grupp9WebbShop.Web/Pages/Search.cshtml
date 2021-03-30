@@ -4,14 +4,7 @@
 }
 
 
-<!--<form method="post">
-    <input asp-for="Query" type="text" />
-    <input type="Submit" value="Sök"/>-->
-@*<a asp-route-query="@Model.Query" class="pink-button">Sök</a>*@
 
-
-
-<!--</form>-->
 @if (Model.SearchResults != null)
 {
 
@@ -61,8 +54,9 @@
 }
 else
 {
-    <h1>Inga Sökresultat</h1>
-
+<div class="text-center">
+    <h4 class="mt-5">Din sökning gav tyvärr inga resultat</h4>
+</div>
 }
 
 
