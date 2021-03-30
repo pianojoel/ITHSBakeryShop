@@ -23,6 +23,7 @@ namespace Grupp9WebbShop.Web.Pages
         public Product Product { get; set; }
         [BindProperty]
         public int? ProductId { get; set; }
+        [BindProperty]
         public int Number { get; set; }
        
 
