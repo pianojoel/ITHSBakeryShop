@@ -35,6 +35,7 @@ namespace Grupp9WebbShop.Web
             {
                 options.Conventions.AuthorizeAreaFolder("ShopAdmin", "/", "RequireAdministratorRole");
             });
+            services.AddControllers();
             services.AddAuthorization( options =>
                     {
                 options.AddPolicy("RequireAdministratorRole",
@@ -80,6 +81,7 @@ namespace Grupp9WebbShop.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
         }
     }

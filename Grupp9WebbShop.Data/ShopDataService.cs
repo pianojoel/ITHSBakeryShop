@@ -70,12 +70,13 @@ namespace Grupp9WebbShop.Data
         }
         public IEnumerable<Product> GetProductsByCategory(int categoryId)
         {
-            ProductCategory category = _ctx.ProductCategories.Include(i => i.Products).Where(i => i.Id == categoryId).FirstOrDefault();
-            return category.Products.OrderBy(o => o.Name).ToList();
+            ProductCategory category = _ctx.ProductCategories.Where(i => i.Id == categoryId).FirstOrDefault();
+            var prods = _ctx.Products.Where(c => c.CategoryId == category.Id);
+            return prods.OrderBy(o => o.Name).ToList();
         }
         public Product GetProductById(int id)
         {
-            return _ctx.Products.Find(id);
+            return _ctx.Products.Include(c => c.Category).FirstOrDefault(i => i.Id == id);
         }
         public Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment)
         {
