@@ -1,0 +1,105 @@
+﻿@page
+@model Grupp9WebbShop.Web.Pages.SearchModel
+@{
+}
+
+
+<!--<form method="post">
+    <input asp-for="Query" type="text" />
+    <input type="Submit" value="Sök"/>-->
+@*<a asp-route-query="@Model.Query" class="pink-button">Sök</a>*@
+
+
+
+<!--</form>-->
+@if (Model.SearchResults != null)
+{
+
+
+    <div class="row">
+        @foreach (var prod in Model.SearchResults)
+        {
+
+            <div class="col-sm-3">
+                <div class="card m-4" style="width:14rem; height:24rem">
+                    <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
+                        <img class="card-img-top" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
+                        <div class="card-body pr-1 pl-1" style="height: 90px">
+                            <h5 class="card-title">@prod.Name</h5>
+                            <div class="overflow-hidden pt-0 pb-0 flex-grow-0" style="height: 40px;">
+                                <h5 class="card-text">
+                                    @if (prod.OnSale)
+                                    {
+                                        <del class="mr-2" style="color:#CF7697">@Math.Round(prod.Price, 0)  kr </del>
+                                    }
+                                    @prod.CalculatedPrice kr
+                                </h5>
+
+                            </div>
+
+                            <p class="card-text">@prod.Summary</p>
+
+                        </div>
+                    </a>
+                    <div class="card-footer text-center mt-auto" style="border-top:none; background-color: white;color:#642714;font-family:Thonburi-bold">
+                        <span class="card-text"></span>
+                        <select name="number" id=@($"S{@prod.Id}")>
+                            @for (int i = 1; i < 11; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+
+
+                        <button class="border-0" onclick="buy(@prod.Id)" style="background-color:#CF7697; color:#642714;">Köp</button>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h1>Inga Sökresultat</h1>
+
+}
+
+
+<form method="post" id="myHiddenForm">
+
+    <input type="hidden" id="productId" asp-for="ProductId" />
+    <input type="hidden" id="amount" asp-for="Number" />
+
+</form>
+
+@if (Model.Animate)
+{
+    <script>
+        let cartImg = document.getElementById("cartImg");
+        cartImg.classList.add('animate-cart');
+        let highlighted = document.getElementById('highlighted');
+        setTimeout(function () {
+            highlighted.scrollIntoView({ behavior: 'smooth' });
+        }, 1000);
+
+    </script>
+}
+
+<script>
+    function buy(id) {
+
+        const selectId = "S" + id;
+
+        const mySelect = document.getElementById(selectId);
+        const hiddenForm = document.getElementById("myHiddenForm");
+        const hiddenId = document.getElementById("productId");
+        const hiddenAmount = document.getElementById("amount");
+
+        hiddenId.value = id;
+        hiddenAmount.value = mySelect.value;
+
+        hiddenForm.submit();
+    }
+
+</script>
