@@ -14,77 +14,81 @@
 
     <nav class="navbar navbar-expand navbar-light">
         <div class="container-fluid checkout-navstyles">
-            
-            
-
-                <ul class="navbar-nav me-auto nav-fill w-100" style="">
-
-                    <li class="nav-item">
-                        <p class="checkout-p"><a asp-page="/ShoppingBasket"> 1. Din varukorg</a></p>
-                    </li>
-                    <li class="checkout-divider"></li>
-                    <li class="nav-item">
-                        <p class="checkout-p"> 2. Kassa</p>
-                    </li>
-                    <li class="checkout-divider"></li>
-                    <li class="nav-item checkout-p" style="background-color: #b5d8eb; border-bottom-right-radius: 25px; border-top-right-radius: 25px">
-                        <span>3. Bekräftelse</span>
-                    </li>
 
 
-                </ul>
-            
+
+            <ul class="navbar-nav me-auto nav-fill w-100" style="">
+
+                <li class="nav-item">
+                    <p class="checkout-p"><a asp-page="/ShoppingBasket"> 1. Din varukorg</a></p>
+                </li>
+                <li class="checkout-divider"></li>
+                <li class="nav-item">
+                    <p class="checkout-p"> 2. Kassa</p>
+                </li>
+                <li class="checkout-divider"></li>
+                <li class="nav-item checkout-p" style="background-color: #b5d8eb; border-bottom-right-radius: 25px; border-top-right-radius: 25px">
+                    <span>3. Kvitto</span>
+                </li>
+
+
+            </ul>
+
         </div>
     </nav>
 
-}
-    <h1>Bekräftelse</h1>
-    @if (Model.Order != null)
-    {
-        decimal shippingCost = 0M;
-        switch (Model.Order.ShippingType)
-        {
-            case ShippingTypes.Normal:
-                shippingCost = 29;
-                break;
-            case ShippingTypes.Express:
-                shippingCost = 49;
-                break;
-            default:
-                break;
-        }
-        if (Model.Order.TotalPrice >= 299)
-            shippingCost = 0;
-        <p>Tack för din order!</p>
-        <p>Detaljer visas nedan.</p>
-        <p>Orderdatum @Model.Order.Date</p>
-        <h2>Produkter</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Produkt</th>
-                    <th>Antal</th>
-                    <th>Styckepris</th>
-                    <th>Radpris</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Order.OrderItems)
-                {
-                    var prod = _ds.GetProductById(item.ProductId);
-                    <tr>
-                        <td>@prod.Name</td>
-                        <td>@item.Quantity</td>
-                        <td>@Math.Round(item.Price, 0) kr</td>
-                        <td>@Math.Round(item.RowPrice, 0) kr</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <p>Frakt: @shippingCost kr</p>
-        <p>Totalsumma: @Math.Round(Model.Order.GrandTotal, 0) kr</p>
-    }
-    else
-    {
+    <div class="brownandthin mt-5 p-3">
 
+}
+<h1>Kvitto</h1>
+@if (Model.Order != null)
+{
+    decimal shippingCost = 0M;
+    switch (Model.Order.ShippingType)
+    {
+        case ShippingTypes.Normal:
+            shippingCost = 29;
+            break;
+        case ShippingTypes.Express:
+            shippingCost = 49;
+            break;
+        default:
+            break;
     }
+    if (Model.Order.TotalPrice >= 299)
+        shippingCost = 0;
+    <p>Tack för din order!</p>
+    <p>Detaljer visas nedan.</p>
+    <p>Orderdatum @Model.Order.Date</p>
+    <h2>Produkter</h2>
+    <table class="table" style="color:#642714">
+        <thead >
+            <tr>
+                <th class="border-0">Produkt</th>
+                <th class="border-0">Antal</th>
+                <th class="border-0">Styckepris</th>
+                <th class="border-0">Radpris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order.OrderItems)
+            {
+                var prod = _ds.GetProductById(item.ProductId);
+                <tr>
+                    <td class="border-0">@prod.Name</td>
+                    <td class="border-0">@item.Quantity</td>
+                    <td class="border-0">@Math.Round(item.Price, 0) kr</td>
+                    <td class="border-0">@Math.Round(item.RowPrice, 0) kr</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Frakt: @shippingCost kr</p>
+    <p>Totalsumma: @Math.Round(Model.Order.GrandTotal, 0) kr</p>
+}
+else
+{
+
+}
+
+</div>
