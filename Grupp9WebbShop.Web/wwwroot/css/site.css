@@ -247,7 +247,8 @@ div #cart {
     background-color: #E0D4C7;
     margin: auto;
     font-family: Thonburi-bold;
-    color: #642714
+    color: #642714;
+    padding:10px;
 }
 
 .thnoborder{
