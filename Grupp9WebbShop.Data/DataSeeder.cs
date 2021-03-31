@@ -26,7 +26,7 @@ namespace Grupp9WebbShop.Data
             {
                 string[] chunk = line.Split(';');
                 var c = ctx.ProductCategories.Where(n => n.Name == chunk[0]).FirstOrDefault();
-                                prods.Add(CreateProducts(c, chunk[1], decimal.Parse(chunk[2]), chunk[3], chunk[4], chunk[5]));
+                                prods.Add(CreateProducts(c, chunk[1], decimal.Parse(chunk[2]), chunk[3], chunk[4], chunk[5], chunk[6]));
                 //ctx.Products.Add(CreateProducts(c, chunk[1], decimal.Parse(chunk[2]), chunk[3], chunk[4], chunk[5]));
                 //ctx.SaveChanges();
             }
@@ -59,12 +59,13 @@ namespace Grupp9WebbShop.Data
 
         }
 
-        private static Product CreateProducts(ProductCategory c, string name, decimal price, string description = "", string imageFile = "", string imageDesc = "", string summary = "")
+        private static Product CreateProducts(ProductCategory c, string name, decimal price, string allergyInfo = "", string imageFile = "", string imageDesc = "", string description = "", string summary = "")
         {
             Product prod = new()
             {
                 Name = name,
-                AllergyInfo = description,
+                Description = description,
+                AllergyInfo = allergyInfo,
                 Price = price,
                 Category = c,
                 ImageFile = imageFile,
