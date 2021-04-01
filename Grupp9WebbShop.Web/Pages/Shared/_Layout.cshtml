@@ -69,10 +69,10 @@
                                 var p = LayoutData.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
 
                                 <div>
-                                    <img src="~/images/@p.ImageFile" width="70" style="float: left; margin-left:10px;">
+                                    <img src="~/images/@p.ImageFile" width="70" style="float: left; margin-left:10px; margin-right:10px;">
                                     <p>
-                                        &nbsp;@p.Name<br />
-                                        &nbsp;&nbsp;@item.Quantity st, @item.RowPrice kr
+                                        @p.Name<br />
+                                        &nbsp;@item.Quantity st, @item.RowPrice kr
                                     </p>
                                 </div>
                             }
