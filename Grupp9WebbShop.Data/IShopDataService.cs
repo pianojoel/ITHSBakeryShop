@@ -1,5 +1,6 @@
 ﻿using Grupp9WebbShop.Data.Models;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Grupp9WebbShop.Data
 {
@@ -22,5 +23,7 @@ namespace Grupp9WebbShop.Data
         Order GetOrder(int id);
         IEnumerable<BestSellingProduct> GetBestSellingProducts();
         void ToggleOrderIsProcessed(int id);
+        IEnumerable<Tag> GetTags();
+        List<SelectListItem> GetTagsList();
     }
 }

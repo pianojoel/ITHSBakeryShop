@@ -11,7 +11,13 @@
         <div class="col-sm-6">
             <h1>@Model.Product.Name</h1>
             <p>@Model.Product.Description</p>
-            <p>@Model.Product.AllergyInfo</p>
+            <p>Innehåller</p>
+            <ul>
+                @foreach (var item in Model.Product.AllergyTags)
+                {
+                    <li>@item.Name</li>
+                }
+            </ul>
             @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
         <p>
             @if (Model.Product.OnSale)

@@ -29,7 +29,7 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
             }
 
             Product = await _context.Products
-                .Include(p => p.Category).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.Category).Include(a => a.AllergyTags).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {

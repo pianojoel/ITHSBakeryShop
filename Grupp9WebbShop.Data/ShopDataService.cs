@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Grupp9WebbShop.Data.Models;
+using System.Web.Mvc;
+
 namespace Grupp9WebbShop.Data
 {
     public class ShopDataService : IShopDataService
@@ -76,7 +78,7 @@ namespace Grupp9WebbShop.Data
         }
         public Product GetProductById(int id)
         {
-            return _ctx.Products.Include(c => c.Category).FirstOrDefault(i => i.Id == id);
+            return _ctx.Products.Include(c => c.Category).Include(t => t.AllergyTags).FirstOrDefault(i => i.Id == id);
         }
         public Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment)
         {
@@ -133,6 +135,24 @@ namespace Grupp9WebbShop.Data
             var order = _ctx.Orders.Find(id);
             order.IsProcessed = !order.IsProcessed;
             _ctx.SaveChanges();
+        }
+        public IEnumerable<Tag> GetTags()
+        {
+            return _ctx.Tags.ToList();
+        }
+        public List<SelectListItem> GetTagsList()
+        {
+            var tags = GetTags();
+            List<SelectListItem> items = new();
+            foreach (var t in tags)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                });
+            }
+            return items;
         }
     }
 }
