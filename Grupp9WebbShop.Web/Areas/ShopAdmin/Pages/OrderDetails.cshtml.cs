@@ -18,7 +18,7 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages
         public Order Order { get; set; }
         private readonly IShopDataService _ds;
         private readonly UserManager<WebbShopUser> _userManager;
-        public Task<WebbShopUser> User { get; set; }
+        public WebbShopUser User { get; set; }
 
         public OrderDetailsModel(IShopDataService ds, UserManager<WebbShopUser> userManager)
         {
@@ -27,8 +27,19 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages
         }
         public void OnGet()
         {
-            Order = _ds.GetOrder(OrderId);
-            User = _userManager.FindByIdAsync(Order.UserID);
+            
+            if (OrderId != 0)
+            {
+                Order = _ds.GetOrder(OrderId);
+               if (Order != null)
+                {
+                User = _userManager.Users.Where(u => u.Id == Order.UserID).FirstOrDefault();
+                }
+
+                
+            }
+            
+            
         }
         public IActionResult OnPost()
         {

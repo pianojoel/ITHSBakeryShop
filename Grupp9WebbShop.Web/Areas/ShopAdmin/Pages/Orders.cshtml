@@ -8,9 +8,7 @@
         <tr>
             <th>Id</th>
             <th>Datum</th>
-            @*<th>Pris</th>
-                <th>Fraktalternativ</th>*@
-            @*<th>Total summa</th>*@
+           
             <th>Avslutat ärende</th>
         </tr>
     </thead>
@@ -20,9 +18,7 @@
             <tr>
                 <td><a asp-page="/OrderDetails" asp-route-OrderId="@order.Id">@order.Id</a></td>
                 <td>@order.Date</td>
-                @*<td>@order.TotalPrice</td>
-                    <td>@order.ShippingType</td>
-                    <td>@order.GrandTotal</td>*@
+               
                 <td>@(order.IsProcessed ? "Ja":"Nej")</td>
             </tr>
         }
@@ -35,6 +31,6 @@
     }
     else
     {
-        <a asp-route-ShowNotProcessedOrders="true">Visa ej avslutade ärenden</a>
+        <a asp-route-ShowNotProcessedOrders="true">Visa endast ej avslutade ärenden</a>
     }
 </p>
