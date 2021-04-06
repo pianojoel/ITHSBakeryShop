@@ -25,7 +25,14 @@
         shippingCost = 0;
     <p>Order Id: @Model.Order.Id</p>
     <p>Orderdatum: @Model.Order.Date</p>
-    <table class="table" style="color:#642714">
+    <p>Namn: @Model.User.FirstName @Model.User.LastName</p>
+    <p>Adress: @Model.User.StreetAddress </p>
+    <p>@Model.User.PostalCode @Model.User.City</p>
+    <p>Tel: @Model.User.PhoneNumber</p>
+    <p>E-post: @Model.User.Email</p>
+    
+
+    <table class="table">
         <thead>
             <tr>
                 <th class="border-0">Produkt</th>

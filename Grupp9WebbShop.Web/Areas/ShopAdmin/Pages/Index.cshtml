@@ -5,5 +5,15 @@
 }
 <div class="text-center">
     <h1 class="display-4">Startsida för Admin</h1>
-    <p><a asp-page="/Orders" asp-route-ShowNotProcessedOrders="true">Du har @Model.UnProcessedOrders ej avslutade ordrar</a></p>
+    <p>
+    @if(Model.UnProcessedOrders == 0)
+    {
+        <h5>Du har inga ohanterade ordrar</h5>
+    }
+    else
+    {
+    <a asp-page="/Orders" asp-route-ShowNotProcessedOrders="true"><h5>Du har @Model.UnProcessedOrders ej @(Model.UnProcessedOrders == 1 ? "avslutad order" : "avslutade ordrar")</h5></a>
+    }
 </div>
+
+    
