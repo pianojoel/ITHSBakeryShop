@@ -21,5 +21,6 @@ namespace Grupp9WebbShop.Data
         IEnumerable<Product> GetLatestProducts();
         Order GetOrder(int id);
         IEnumerable<BestSellingProduct> GetBestSellingProducts();
+        void ToggleOrderIsProcessed(int id);
     }
 }

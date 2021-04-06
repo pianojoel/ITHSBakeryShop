@@ -1,0 +1,40 @@
+﻿@page
+@model Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.OrdersModel
+@{
+}
+
+<table class="table">
+    <thead class="thead">
+        <tr>
+            <th>Id</th>
+            <th>Datum</th>
+            @*<th>Pris</th>
+                <th>Fraktalternativ</th>*@
+            @*<th>Total summa</th>*@
+            <th>Avslutat ärende</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td><a asp-page="/OrderDetails" asp-route-OrderId="@order.Id">@order.Id</a></td>
+                <td>@order.Date</td>
+                @*<td>@order.TotalPrice</td>
+                    <td>@order.ShippingType</td>
+                    <td>@order.GrandTotal</td>*@
+                <td>@(order.IsProcessed ? "Ja":"Nej")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    @if (Model.ShowNotProcessedOrders)
+    {
+        <a asp-route-ShowNotProcessedOrders="false">Visa alla ordrar</a>
+    }
+    else
+    {
+        <a asp-route-ShowNotProcessedOrders="true">Visa ej avslutade ärenden</a>
+    }
+</p>
