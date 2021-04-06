@@ -16,5 +16,6 @@ namespace Grupp9WebbShop.Data
         public DbSet<InventoryItem> Inventory { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

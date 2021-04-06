@@ -50,6 +50,7 @@ namespace Grupp9WebbShop.Data.Models
         [StringLength(500)]
         [Display(Name = "Allergiinformation")]
         public string AllergyInfo { get; set; }
+        public ICollection<Tag> AllergyTags { get; set; } = new HashSet<Tag>();
         [Display(Name = "Produkten tillagd")]
         public DateTime AddedDate { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
