@@ -5,4 +5,5 @@
 }
 <div class="text-center">
     <h1 class="display-4">Startsida för Admin</h1>
+    <p><a asp-page="/Orders" asp-route-ShowNotProcessedOrders="true">Du har @Model.UnProcessedOrders ej avslutade ordrar</a></p>
 </div>

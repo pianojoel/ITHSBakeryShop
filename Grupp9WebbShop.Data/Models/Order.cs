@@ -52,6 +52,7 @@ namespace Grupp9WebbShop.Data.Models
 
         public ShippingTypes ShippingType { get; set; }
         public PaymentTypes PaymentType { get; set; }
+        public bool IsProcessed { get; set; }
 
     }
 }

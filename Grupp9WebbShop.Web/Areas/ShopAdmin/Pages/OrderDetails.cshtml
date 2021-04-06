@@ -1,0 +1,63 @@
+﻿@page
+@model Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.OrderDetailsModel
+@using Grupp9WebbShop.Data.Models;
+@using Grupp9WebbShop.Data;
+@inject IShopDataService _ds
+@{
+}
+
+<h1>Orderdetaljer</h1>
+@if (Model.Order != null)
+{
+    decimal shippingCost = 0M;
+    switch (Model.Order.ShippingType)
+    {
+        case ShippingTypes.Normal:
+            shippingCost = 29;
+            break;
+        case ShippingTypes.Express:
+            shippingCost = 49;
+            break;
+        default:
+            break;
+    }
+    if (Model.Order.TotalPrice >= 299)
+        shippingCost = 0;
+    <p>Order Id: @Model.Order.Id</p>
+    <p>Orderdatum: @Model.Order.Date</p>
+    <table class="table" style="color:#642714">
+        <thead>
+            <tr>
+                <th class="border-0">Produkt</th>
+                <th class="border-0">Antal</th>
+                <th class="border-0">Styckepris</th>
+                <th class="border-0">Radpris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Order.OrderItems)
+            {
+                var prod = _ds.GetProductById(item.ProductId);
+                <tr>
+                    <td class="border-0">@prod.Name</td>
+                    <td class="border-0">@item.Quantity</td>
+                    <td class="border-0">@Math.Round(item.Price, 0) kr</td>
+                    <td class="border-0">@Math.Round(item.RowPrice, 0) kr</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>Frakt: @shippingCost kr</p>
+    <p>Totalsumma: @Math.Round(Model.Order.GrandTotal, 0) kr</p>
+    <form method="post">
+        <label asp-for="Order.IsProcessed">
+            Markera denna order som avslutad
+        </label>
+        <input asp-for="Order.IsProcessed" />  <br />
+        <button class="btn btn-primary" type="submit">Spara ändringar</button>
+    </form>
+}
+else
+{
+
+}

@@ -85,7 +85,8 @@ namespace Grupp9WebbShop.Data
                 Date = DateTime.Now,
                 UserID = userId,
                 PaymentType = payment,
-                ShippingType = shipping
+                ShippingType = shipping,
+                IsProcessed = false
             };
             foreach (var item in basket.Items)
             {
@@ -126,6 +127,12 @@ namespace Grupp9WebbShop.Data
                 ProductId = g,
                 Count = p.Sum(s => s.Quantity)
             }).OrderByDescending(o => o.Count).ToList();
+        }
+        public void ToggleOrderIsProcessed(int id)
+        {
+            var order = _ctx.Orders.Find(id);
+            order.IsProcessed = !order.IsProcessed;
+            _ctx.SaveChanges();
         }
     }
 }
