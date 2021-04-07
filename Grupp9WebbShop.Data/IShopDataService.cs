@@ -1,6 +1,7 @@
 ﻿using Grupp9WebbShop.Data.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Web.Mvc;
+
 
 namespace Grupp9WebbShop.Data
 {

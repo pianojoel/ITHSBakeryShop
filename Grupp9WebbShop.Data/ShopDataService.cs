@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Grupp9WebbShop.Data.Models;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Grupp9WebbShop.Data
 {
@@ -19,7 +19,7 @@ namespace Grupp9WebbShop.Data
         }
         public IEnumerable<Product> GetProducts()
         {
-            return _ctx.Products.Include(i => i.Category).ToList();
+            return _ctx.Products.Include(i => i.Category).Include(a => a.AllergyTags).ToList();
         }
         public IEnumerable<Product> GetHighlightedProducts()
         {

@@ -15,15 +15,20 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
 {
     public class EditModel : PageModel
     {
-        private readonly Grupp9WebbShop.Data.ShopContext _context;
+        private readonly ShopContext _context;
+        private readonly IShopDataService _ds;
+
         public IFormFile UploadedFile { get; set; }
-        public EditModel(Grupp9WebbShop.Data.ShopContext context)
+        public EditModel(ShopContext context, IShopDataService ds)
         {
             _context = context;
+            _ds = ds;
         }
 
         [BindProperty]
         public Product Product { get; set; }
+        [BindProperty]
+        public List<SelectListItem> Tags { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,13 +38,14 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
             }
 
             Product = await _context.Products
-                .Include(p => p.Category).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.Category).Include(a => a.AllergyTags).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
+            Tags = _ds.GetTagsList();
             return Page();
         }
 
@@ -68,6 +74,17 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
                 Product.ImageFile = "Uploads/" + UploadedFile.FileName;
             }
 
+            var tagsWithProducts = _context.Tags.Include(p => p.Products);
+            foreach (var tag in tagsWithProducts)
+            {
+                var tagName = $"tag-{tag.Id}";
+                if (HttpContext.Request.Form[tagName].FirstOrDefault() != null)
+                {
+                    if (!tag.Products.Contains(Product))
+                        Product.AllergyTags.Add(tag);
+                }
+                else if (tag.Products.Contains(Product)) tag.Products.Remove(Product);
+            }
 
             try
             {

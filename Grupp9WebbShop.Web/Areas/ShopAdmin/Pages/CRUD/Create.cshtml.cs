@@ -14,23 +14,29 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
 {
     public class CreateModel : PageModel
     {
-        private readonly Grupp9WebbShop.Data.ShopContext _context;
+        private readonly ShopContext _context;
+        private readonly IShopDataService _ds;
+
         [BindProperty]
         public IFormFile UploadedFile { get; set; }
 
-        public CreateModel(Grupp9WebbShop.Data.ShopContext context)
+        public CreateModel(ShopContext context, IShopDataService ds)
         {
             _context = context;
+            _ds = ds;
         }
 
         public IActionResult OnGet()
         {
         ViewData["CategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
+            Tags = _ds.GetTagsList();
             return Page();
         }
 
         [BindProperty]
         public Product Product { get; set; }
+        [BindProperty]
+        public List<SelectListItem> Tags { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -50,6 +56,13 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
                 }
                 Product.ImageFile = "Uploads/" + UploadedFile.FileName;
             }
+            foreach (var tag in _context.Tags)
+            {
+                var tagName = $"tag-{tag.Id}";
+                if (HttpContext.Request.Form[tagName].FirstOrDefault() != null)
+                    Product.AllergyTags.Add(tag);
+            }
+
             _context.Products.Add(Product);
             await _context.SaveChangesAsync();
             InventoryItem inventoryRecord = new()

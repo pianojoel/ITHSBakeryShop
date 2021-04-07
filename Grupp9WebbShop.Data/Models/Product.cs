@@ -47,10 +47,10 @@ namespace Grupp9WebbShop.Data.Models
         public bool Highlighted { get; set; }
         [Display(Name = "Nedsatt Pris")]
         public bool OnSale { get; set; }
-        [StringLength(500)]
-        [Display(Name = "Allergiinformation")]
-        public string AllergyInfo { get; set; }
-        [Display(Name = "Allergiinformation")]
+        //[StringLength(500)]
+        //[Display(Name = "Produkten innehåller")]
+        //public string AllergyInfo { get; set; }
+        [Display(Name = "Produkten innehåller")]
         public ICollection<Tag> AllergyTags { get; set; } = new HashSet<Tag>();
         [Display(Name = "Produkten tillagd")]
         public DateTime AddedDate { get; set; }

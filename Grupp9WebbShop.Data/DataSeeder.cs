@@ -77,7 +77,7 @@ namespace Grupp9WebbShop.Data
             foreach (var c in allergyChunks)
             {
                 var tag = ctx.Tags.Where(n => n.Name == c).FirstOrDefault();
-                if (tag == null)
+                if (tag == null && !string.IsNullOrEmpty(c))
                 {
                     tag = new()
                     {
@@ -86,7 +86,8 @@ namespace Grupp9WebbShop.Data
                     ctx.Tags.Add(tag);
                     ctx.SaveChanges();
                 }
-                prod.AllergyTags.Add(tag);
+                if (tag != null)
+                    prod.AllergyTags.Add(tag);
             }
             return prod;
         }
