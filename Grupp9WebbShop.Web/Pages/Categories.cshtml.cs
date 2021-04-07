@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Grupp9WebbShop.Data;
 using Grupp9WebbShop.Web.Models;
 using Grupp9WebbShop.Web.Helpers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Grupp9WebbShop.Web.Pages
 {
@@ -17,6 +18,7 @@ namespace Grupp9WebbShop.Web.Pages
         [BindProperty(SupportsGet = true)]
         public int? CategoryId { get; set; }
         public IEnumerable<Product> Products {get; set;}
+        public string CategoryName { get; private set; }
         public IEnumerable<ProductCategory> Categories { get; set;  }
 
         [BindProperty]
@@ -31,15 +33,34 @@ namespace Grupp9WebbShop.Web.Pages
                         _ds = ds;
             
         }
-        public void OnGet()
+        public List<SelectListItem> Tags { get; set; }
+        public IActionResult OnGet(string toggleId = null)
         {
+            if (!string.IsNullOrEmpty(toggleId))
+            {
+                Tags = AllergyTagHelper.LoadTags(HttpContext.Session);
+                var tag = Tags.FirstOrDefault(t => t.Value == toggleId);
+                tag.Selected = !tag.Selected;
+                AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
+                return RedirectToPage("./Categories", new  { CategoryId = CategoryId });
+            }
             Categories = _ds.GetProductCategories();
-            if (CategoryId !=  null)
+            Tags = AllergyTagHelper.LoadTags(HttpContext.Session);
+            if (Tags == null)
+            {
+                Tags = _ds.GetTagsList();
+                AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
+            }
+            if (CategoryId != null)
             {
                 Products = _ds.GetProductsByCategory(CategoryId.Value);
+                CategoryName = Categories.FirstOrDefault(c => c.Id == CategoryId).Name;
             }
+            else
+                Products = _ds.GetProducts();
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
+            return Page();
         }
 
         public void OnPost()

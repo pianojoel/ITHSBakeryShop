@@ -149,7 +149,8 @@ namespace Grupp9WebbShop.Data
                 items.Add(new SelectListItem()
                 {
                     Text = t.Name,
-                    Value = t.Id.ToString()
+                    Value = t.Id.ToString(),
+                    Selected = true
                 });
             }
             return items;
