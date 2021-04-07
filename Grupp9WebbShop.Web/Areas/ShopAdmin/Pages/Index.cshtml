@@ -3,17 +3,22 @@
 @{
     ViewData["Title"] = "Admin Start";
 }
-<div class="text-center">
-    <h1 class="display-4">Startsida för Admin</h1>
-    <p>
-    @if(Model.UnProcessedOrders == 0)
-    {
-        <h5>Du har inga ohanterade ordrar</h5>
-    }
-    else
-    {
-    <a asp-page="/Orders" asp-route-ShowNotProcessedOrders="true"><h5>Du har @Model.UnProcessedOrders ej @(Model.UnProcessedOrders == 1 ? "avslutad order" : "avslutade ordrar")</h5></a>
-    }
-</div>
+<div class="text-center brownandthin">
+    <div class="row m-1 align-items-center" >
+        <div class="col p-3 pink-border" style="background-color:white">
+            <h5>Total försäljning: </h5>
+            <h1>@Math.Round(Model.TotalRevenue, 0) kr</h1>
+        </div>
+    </div>
+    <div class="row m-1" style="justify-content:space-between">
+        <div class="col-6 p-3 pink-border" style="background-color:white">
+            <h5>Pågående beställningar: </h5>
+            <a asp-page="/Orders" asp-route-ShowNotProcessedOrders="true"><h1> @Model.UnProcessedOrders</h1></a>
 
-    
+        </div>
+        <div class="col-6 p-3 pink-border" style="background-color:white">
+            <h5>Avslutade beställningar: </h5>
+            <h1>@Model.FinishedOrders</h1>
+        </div>
+    </div>
+</div>

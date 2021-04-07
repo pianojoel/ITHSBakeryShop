@@ -15,6 +15,8 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages
     {
         private readonly IShopDataService _ds;
         public int UnProcessedOrders { get; set; }
+        public decimal TotalRevenue { get; set; }
+        public int FinishedOrders { get; set; }
 
         public IndexModel(IShopDataService ds)
         {
@@ -24,6 +26,9 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages
         public void OnGet()
         {
             UnProcessedOrders = _ds.GetAllOrders().Where(o => !o.IsProcessed).Count();
+            TotalRevenue = _ds.GetAllOrders().Where(o => o.IsProcessed).Select(o => _ds.GetOrder(o.Id).TotalPrice)
+                .Sum();
+            FinishedOrders = _ds.GetAllOrders().Where(o => o.IsProcessed).Count();
         }
     }
 }
