@@ -59,6 +59,7 @@ namespace Grupp9WebbShop.Web.Pages
             else
                 Products = _ds.GetProducts();
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
+            Products = _ds.FilteredProducts(Products, Tags);
             ViewData["MainLayout"] = MainLayout;
             return Page();
         }

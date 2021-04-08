@@ -155,5 +155,22 @@ namespace Grupp9WebbShop.Data
             }
             return items;
         }
+        public IEnumerable<Product> FilteredProducts(IEnumerable<Product> prods, List<SelectListItem> filter)
+        {
+            List<Product> filteredList = new();
+            filteredList.AddRange(prods);
+
+            foreach (var f in filter)
+            {
+                if (f.Selected) continue;
+                var tagId = int.Parse(f.Value);
+                var removeList = prods.Where(t => t.AllergyTags.Select(i => i.Id).Contains(tagId));
+                foreach (var item in removeList)
+                {
+                    filteredList.Remove(item);
+                }
+            }
+            return filteredList;
+        }
     }
 }

@@ -26,5 +26,6 @@ namespace Grupp9WebbShop.Data
         void ToggleOrderIsProcessed(int id);
         IEnumerable<Tag> GetTags();
         List<SelectListItem> GetTagsList();
+        IEnumerable<Product> FilteredProducts(IEnumerable<Product> prods, List<SelectListItem> filter);
     }
 }
