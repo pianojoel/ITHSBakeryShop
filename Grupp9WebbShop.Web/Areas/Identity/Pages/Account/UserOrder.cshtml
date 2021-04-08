@@ -1,0 +1,88 @@
+﻿@page
+@model Grupp9WebbShop.Web.Areas.Identity.Pages.Account.UserOrderModel
+@using Grupp9WebbShop.Data.Models;
+@using Grupp9WebbShop.Data;
+@inject IShopDataService _ds
+@{
+}
+<div class="brownandthin">
+    @if (Model.OrderId != 0)
+    {
+        <h1>Orderdetaljer</h1>
+        @if (Model.Order != null)
+        {
+            decimal shippingCost = 0M;
+            switch (Model.Order.ShippingType)
+            {
+                case ShippingTypes.Normal:
+                    shippingCost = 29;
+                    break;
+                case ShippingTypes.Express:
+                    shippingCost = 49;
+                    break;
+                default:
+                    break;
+            }
+            if (Model.Order.TotalPrice >= 299)
+                shippingCost = 0;
+            <p>Order Id: @Model.Order.Id</p>
+            <p>Orderdatum: @Model.Order.Date</p>
+            @*<p>Namn: @Model.User.FirstName @Model.User.LastName</p>
+            <p>Adress: @Model.User.StreetAddress </p>
+            <p>@Model.User.PostalCode @Model.User.City</p>
+            <p>Tel: @Model.User.PhoneNumber</p>
+            <p>E-post: @Model.User.Email</p>*@
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="border-0">Produkt</th>
+                        <th class="border-0">Antal</th>
+                        <th class="border-0">Styckepris</th>
+                        <th class="border-0">Radpris</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Order.OrderItems)
+                    {
+                        var prod = _ds.GetProductById(item.ProductId);
+                        <tr>
+                            <td class="border-0">@prod.Name</td>
+                            <td class="border-0">@item.Quantity</td>
+                            <td class="border-0">@Math.Round(item.Price, 0) kr</td>
+                            <td class="border-0">@Math.Round(item.RowPrice, 0) kr</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p>Frakt: @shippingCost kr</p>
+            <p>Totalsumma: @Math.Round(Model.Order.GrandTotal, 0) kr</p>
+            <form method="post">
+               
+                <button class="btn btn-primary" type="submit">Köp igen</button>
+            </form>
+        }
+        else
+        {
+
+        }
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Datum</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td><a asp-route-OrderId="@order.Id">@order.Date</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
