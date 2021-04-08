@@ -57,7 +57,7 @@ namespace Grupp9WebbShop.Web.Pages
                 CategoryName = Categories.FirstOrDefault(c => c.Id == CategoryId).Name;
             }
             else
-                Products = _ds.GetProducts();
+                Products = _ds.GetProducts().OrderBy(o => o.Name);
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             Products = _ds.FilteredProducts(Products, Tags);
             ViewData["MainLayout"] = MainLayout;
