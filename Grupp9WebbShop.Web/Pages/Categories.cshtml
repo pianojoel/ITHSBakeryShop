@@ -6,22 +6,23 @@
 
 
 <div class="brownandthin mt-5">
+    @if (Model.CategoryId == null)
+    {
+        <h2 class="text-center">Alla bakverk</h2>
+    }
+    else
+    {
+        <h2 class="text-center">@Model.CategoryName</h2>
+    }
+
     <h3 class="ml-2">Bakverket får innehålla</h3>
     <div class="row">
         @foreach (var item in Model.Tags)
         {
-            <a class="m-3" asp-route-toggleId="@item.Value" asp-route-CategoryId="@Model.CategoryId"><i class="bi @(item.Selected ? "bi-check2-square" : "bi-square")" aria-label="@(item.Selected ? "Får innehålla" : "Får inte innehålla") "></i>@item.Text</a>
+            <a class="m-3 text-decoration-none" style="color: #642714;" asp-route-toggleId="@item.Value" asp-route-CategoryId="@Model.CategoryId"><i class="bi @(item.Selected ? "bi-check2-square" : "bi-square")" aria-label="@(item.Selected ? "Får innehålla" : "Får inte innehålla") "></i>@item.Text</a>
         }
     </div>
 
-    @if (Model.CategoryId == null)
-    {
-        <h3>Alla bakverk</h3>
-    }
-    else
-    {
-        <h3>@Model.CategoryName</h3>
-    }
     <div class="row">
         @foreach (var prod in Model.Products)
         {
