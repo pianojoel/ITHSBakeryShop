@@ -52,7 +52,7 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
                     BasketHelper.AddToBasket(HttpContext.Session, item.ProductId, item.Price, item.Quantity);
                 }
             }
-            return Page();
+            return RedirectToPage("/ShoppingBasket");
         }
     }
 }
