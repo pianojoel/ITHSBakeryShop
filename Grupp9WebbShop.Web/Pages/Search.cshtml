@@ -5,8 +5,8 @@
 }
 
 <div class="brownandthin">
-    <h3 class="ml-2">Bakverket får innehålla</h3>
-    <div class="row">
+    <h3 class="text-center">Bakverket får innehålla</h3>
+    <div class="text-center">
         @foreach (var item in Model.Tags)
         {
             <a class="m-3 text-decoration-none" style="color: #642714;" asp-route-toggleId="@item.Value" asp-route-Query="@Model.Query"><i class="bi @(item.Selected ? "bi-check2-square" : "bi-square")" aria-label="@(item.Selected ? "Får innehålla" : "Får inte innehålla") "></i>@item.Text</a>
