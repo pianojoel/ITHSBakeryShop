@@ -16,7 +16,7 @@ namespace Grupp9WebbShop.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
             // Initialize the database
@@ -33,7 +33,7 @@ namespace Grupp9WebbShop.Web
                 {
                     DataSeeder.SeedDatabaseFromCsv(db);
                     udb.Database.Migrate();
-                    foreach (var prod in ds.GetProducts())
+                    foreach (var prod in await ds.GetProductsAsync())
                     {
                         ds.SetProductStock(prod.Id, 10);
                     }

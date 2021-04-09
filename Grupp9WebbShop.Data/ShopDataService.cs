@@ -17,17 +17,22 @@ namespace Grupp9WebbShop.Data
         {
             _ctx = ctx;
         }
-        public IEnumerable<Product> GetProducts()
+        public async Task<IEnumerable<Product>> GetProductsAsync()
+        {
+            return await _ctx.Products.Include(i => i.Category).Include(a => a.AllergyTags).ToListAsync();
+        }
+    public IEnumerable<Product> GetProducts()
         {
             return _ctx.Products.Include(i => i.Category).Include(a => a.AllergyTags).ToList();
         }
-        public IEnumerable<Product> GetHighlightedProducts()
+
+        public async Task<IEnumerable<Product>> GetHighlightedProductsAsync()
         {
-            return _ctx.Products.Where(h => h.Highlighted).Include(i => i.Category).ToList();
+            return await _ctx.Products.Where(h => h.Highlighted).Include(i => i.Category).ToListAsync();
         }
-        public IEnumerable<Product> GetProductsOnSale()
+        public async Task<IEnumerable<Product>> GetProductsOnSaleAsync()
         {
-            return _ctx.Products.Where(p => p.OnSale).Include(i => i.Category).ToList();
+            return await _ctx.Products.Where(p => p.OnSale).Include(i => i.Category).ToListAsync();
         }
         public IEnumerable<Product> GetLatestProducts()
         {

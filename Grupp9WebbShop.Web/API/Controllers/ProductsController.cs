@@ -22,10 +22,10 @@ namespace Grupp9WebbShop.Web.API.Controllers
         }
         // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public async Task<IEnumerable<Product>> GetAsync()
         {
             
-            return _ds.GetProducts();
+            return await _ds.GetProductsAsync();
         }
 
         // GET api/<ProductsController>/5

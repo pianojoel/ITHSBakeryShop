@@ -35,14 +35,14 @@ namespace Grupp9WebbShop.Web.Pages
             _ds = ds;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
 
 
-            Highlighted = _ds.GetHighlightedProducts();
-            OnSale = _ds.GetProductsOnSale();
+            Highlighted = await _ds.GetHighlightedProductsAsync();
+            OnSale = await _ds.GetProductsOnSaleAsync();
             Latest = _ds.GetLatestProducts();
             BestSellingProducts = _ds
                 .GetBestSellingProducts()
@@ -51,12 +51,12 @@ namespace Grupp9WebbShop.Web.Pages
                 .GetProductById(p.ProductId));
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
             Product = _ds.GetProductById(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
-            OnGet();
+            return RedirectToPage("/Index");
             //MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             //ViewData["MainLayout"] = MainLayout;
         }

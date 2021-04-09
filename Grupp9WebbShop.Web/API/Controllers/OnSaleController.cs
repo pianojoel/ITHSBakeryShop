@@ -20,9 +20,9 @@ namespace Grupp9WebbShop.Web.API.Controllers
             _ds = ds;
         }
         [HttpGet]
-        public IEnumerable<Product> get()
+        public async Task<IEnumerable<Product>> getAsync()
         {
-            return _ds.GetProductsOnSale();
+            return await _ds.GetProductsOnSaleAsync();
         }
     }
 }

@@ -17,9 +17,9 @@ namespace Grupp9WebbShop.Web.Pages
         private readonly IShopDataService _ds;
         [BindProperty(SupportsGet = true)]
         public int? CategoryId { get; set; }
-        public IEnumerable<Product> Products {get; set;}
+        public IEnumerable<Product> Products { get; set; }
         public string CategoryName { get; private set; }
-        public IEnumerable<ProductCategory> Categories { get; set;  }
+        public IEnumerable<ProductCategory> Categories { get; set; }
 
         [BindProperty]
         public int? ProductId { get; set; }
@@ -30,11 +30,11 @@ namespace Grupp9WebbShop.Web.Pages
 
         public CategoriesModel(IShopDataService ds) : base(ds)
         {
-                        _ds = ds;
-            
+            _ds = ds;
+
         }
         public List<SelectListItem> Tags { get; set; }
-        public IActionResult OnGet(string toggleId = null)
+        public async Task<IActionResult> OnGetAsync(string toggleId = null)
         {
             if (!string.IsNullOrEmpty(toggleId))
             {
@@ -42,7 +42,7 @@ namespace Grupp9WebbShop.Web.Pages
                 var tag = Tags.FirstOrDefault(t => t.Value == toggleId);
                 tag.Selected = !tag.Selected;
                 AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
-                return RedirectToPage("./Categories", new  { CategoryId = CategoryId });
+                return RedirectToPage("./Categories", new { CategoryId = CategoryId });
             }
             Categories = _ds.GetProductCategories();
             Tags = AllergyTagHelper.LoadTags(HttpContext.Session);
@@ -57,19 +57,22 @@ namespace Grupp9WebbShop.Web.Pages
                 CategoryName = Categories.FirstOrDefault(c => c.Id == CategoryId).Name;
             }
             else
-                Products = _ds.GetProducts().OrderBy(o => o.Name);
+            {
+                var list = await _ds.GetProductsAsync();
+                Products = list.OrderBy(o => o.Name);
+            }
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             Products = _ds.FilteredProducts(Products, Tags);
             ViewData["MainLayout"] = MainLayout;
             return Page();
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
             Product = _ds.GetProductById(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
-            OnGet();
+            return RedirectToPage("/Categories");
         }
     }
 }

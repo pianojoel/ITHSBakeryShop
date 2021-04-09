@@ -22,10 +22,10 @@ namespace Grupp9WebbShop.Web.Pages
         {
             _ds = ds;
         }
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             Basket = BasketHelper.GetBasket(HttpContext.Session);
-            Products = _ds.GetProducts();
+            Products = await _ds.GetProductsAsync();
             MainLayout.ShoppingBasket = Basket;
             ViewData["MainLayout"] = MainLayout;
         }
@@ -45,7 +45,7 @@ namespace Grupp9WebbShop.Web.Pages
         public bool IsNotEmpty { get; set; } = true;
 
 
-        public IActionResult OnGetCheckStock()
+        public async Task<IActionResult> OnGetCheckStockAsync()
         {
             Basket = BasketHelper.GetBasket(HttpContext.Session);
 
@@ -84,7 +84,7 @@ namespace Grupp9WebbShop.Web.Pages
             }
 
             Basket = BasketHelper.GetBasket(HttpContext.Session);
-            Products = _ds.GetProducts();
+            Products = await _ds.GetProductsAsync();
             MainLayout.ShoppingBasket = Basket;
             return Page(); 
         }

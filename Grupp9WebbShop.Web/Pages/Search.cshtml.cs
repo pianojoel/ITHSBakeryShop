@@ -31,7 +31,7 @@ namespace Grupp9WebbShop.Web.Pages
         {
             _ds = ds;
         }
-        public IActionResult OnGet(string toggleId = null)
+        public async Task<IActionResult> OnGetAsync(string toggleId = null)
         {
             if (!string.IsNullOrEmpty(toggleId))
             {
@@ -49,7 +49,7 @@ namespace Grupp9WebbShop.Web.Pages
                 AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
             }
 
-            var products = _ds.GetProducts();
+            var products = await _ds.GetProductsAsync();
             if(!String.IsNullOrEmpty(Query))
             {
             SearchResults = products.Where(p => p.Name.ToUpper().Contains(Query.ToUpper())).ToList();
@@ -64,12 +64,12 @@ namespace Grupp9WebbShop.Web.Pages
             return Page();
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
             Product = _ds.GetProductById(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
-            OnGet();
+            return RedirectToPage("/Search");
 
 
         }
