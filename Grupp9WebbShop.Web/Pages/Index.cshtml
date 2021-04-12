@@ -13,13 +13,13 @@
 <div class="text-center mt-5">
     <h2 style="font-family:Thonburi-bold;color:#642714">Våra kunders storfavoriter</h2>
 </div>
-<div class="row justify-content-sm-around mt-5 g-0" id="highlighted" style="margin:auto; width:80%; background-color: #E0D4C7;">
+<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted" >
 
     @foreach (var prod in Model.BestSellingProducts)
     {
 
         <div class="col-3" style="max-width: none;">
-            <div class="card m-3 border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
+            <div class="card border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
                 <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>
@@ -232,13 +232,13 @@
 <div class="text-center mt-5">
     <h2 style="font-family:Thonburi-bold;color:#642714">Färskt från bageriet</h2>
 </div>
-<div class="row justify-content-sm-around mt-5 g-0" id="highlighted" style="margin:auto; width:80%; background-color: #E0D4C7;">
+<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted" >
 
     @foreach (var prod in Model.Latest)
     {
 
         <div class="col-3" style="max-width: none;">
-            <div class="card m-3 border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
+            <div class="card border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
                 <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>
@@ -297,13 +297,13 @@
     </h2>
 </div>
 
-<div class="row justify-content-sm-around mt-5 g-0" id="highlighted" style="margin:auto; width:80%; background-color: #E0D4C7;">
+<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted">
 
     @foreach (var prod in Model.OnSale)
     {
 
         <div class="col-3" style="max-width: none;">
-            <div class="card m-3 border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
+            <div class="card border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
                 <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>

@@ -23,11 +23,11 @@
         }
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
         @foreach (var prod in Model.Products)
         {
 
-            <div class="col-3" style="max-width: none;">
+            <div class="col-3 text-center" style="max-width: none;">
                 <div class="card m-3 border-0" style="background-color: #E0D4C7; width: 14rem;height:24rem">
                     <a class="text-decoration-none text-body" asp-page="/ProductDetails" asp-route-productID="@prod.Id">
                         <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
