@@ -16,7 +16,7 @@ namespace Grupp9WebbShop.Data.Models
         [StringLength(500)]
         [Display(Name = "Beskrivning")]
         public string Description { get; set; }
-        [StringLength(200)]
+        [StringLength(250)]
         public string Summary { get; set; }
         [Display(Name = "Pris")]
         [Column(TypeName = "decimal(18, 2)")]
