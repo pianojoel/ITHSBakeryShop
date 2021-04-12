@@ -123,6 +123,13 @@ namespace Grupp9WebbShop.Data
                 ImageFile = "cupcake.jpeg",
                 ImageDescription = "En bild på cupcakes"
             });
+            cats.Add(new ProductCategory()
+            {
+                Name = "Färdiga paket",
+                Description = "",
+                ImageFile = "",
+                ImageDescription = ""
+            });
 
 
             return cats;
