@@ -34,15 +34,16 @@ namespace Grupp9WebbShop.Data
         {
             return await _ctx.Products.Where(p => p.OnSale).Include(i => i.Category).ToListAsync();
         }
-        public IEnumerable<Product> GetLatestProducts()
+        public async Task<IEnumerable<Product>> GetLatestProductsAsync()
         {
-            return _ctx.Products.Include(i => i.Category).OrderByDescending(d => d.AddedDate).Take(3).ToList();
+            return await _ctx.Products.Include(i => i.Category).OrderByDescending(d => d.AddedDate).Take(3).ToListAsync();
         }
 
-        public int GetProductStock(int id)
+        public async Task<int> GetProductStockAsync(int id)
         {
-            var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault().Quantity;
-            return q;
+            var q = await _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefaultAsync();
+
+            return q.Quantity;
         }
         public void SetProductStock(int id, int quant)
         {
@@ -62,29 +63,39 @@ namespace Grupp9WebbShop.Data
             }
             _ctx.SaveChanges();
         }
-        public bool DecreaseProductStock(int id, int quant)
+        public async Task<bool> DecreaseProductStockAsync(int id, int quant)
         {
 
-            var q = _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefault();
+            var q = await _ctx.Inventory.Where(p => p.ProductId == id).FirstOrDefaultAsync();
             if (q == null || (q.Quantity - quant < 0)) return false;
             q.Quantity -= quant;
-            _ctx.SaveChanges();
+            await _ctx.SaveChangesAsync();
             return true;
+        }
+        public async Task<IEnumerable<ProductCategory>> GetProductCategoriesAsync()
+        {
+            return await _ctx.ProductCategories.OrderBy(o => o.Name).ToListAsync();
         }
         public IEnumerable<ProductCategory> GetProductCategories()
         {
             return _ctx.ProductCategories.OrderBy(o => o.Name).ToList();
         }
-        public IEnumerable<Product> GetProductsByCategory(int categoryId)
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
         {
-            ProductCategory category = _ctx.ProductCategories.Where(i => i.Id == categoryId).FirstOrDefault();
+            ProductCategory category = await _ctx.ProductCategories.Where(i => i.Id == categoryId).FirstOrDefaultAsync();
             var prods = _ctx.Products.Where(c => c.CategoryId == category.Id);
-            return prods.OrderBy(o => o.Name).ToList();
+            return await prods.OrderBy(o => o.Name).ToListAsync();
+        }
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            return await _ctx.Products.Include(c => c.Category).Include(t => t.AllergyTags).FirstOrDefaultAsync(i => i.Id == id);
         }
         public Product GetProductById(int id)
         {
             return _ctx.Products.Include(c => c.Category).Include(t => t.AllergyTags).FirstOrDefault(i => i.Id == id);
         }
+
         public Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment)
         {
             Order order = new()
@@ -108,13 +119,13 @@ namespace Grupp9WebbShop.Data
             return order;
         }
 
-        public IEnumerable<Order> GetOrdersForUser(string userId)
+        public async Task<IEnumerable<Order>> GetOrdersForUserAsync(string userId)
         {
-            return _ctx.Orders.Where(o => o.UserID == userId).ToList();
+            return await _ctx.Orders.Where(o => o.UserID == userId).ToListAsync();
         }
-        public IEnumerable<Order> GetAllOrders()
+        public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
-            return _ctx.Orders.ToList();
+            return await _ctx.Orders.ToListAsync();
         }
 
         public int SaveOrder(Order newOrder)
@@ -133,7 +144,7 @@ namespace Grupp9WebbShop.Data
             {
                 ProductId = g,
                 Count = p.Sum(s => s.Quantity)
-            }).OrderByDescending(o => o.Count).ToList();
+            }).OrderByDescending(o => o.Count).Take(3).ToList();
         }
         public void ToggleOrderIsProcessed(int id)
         {
@@ -141,13 +152,13 @@ namespace Grupp9WebbShop.Data
             order.IsProcessed = !order.IsProcessed;
             _ctx.SaveChanges();
         }
-        public IEnumerable<Tag> GetTags()
+        public async Task<IEnumerable<Tag>> GetTagsAsync()
         {
-            return _ctx.Tags.ToList();
+            return await _ctx.Tags.ToListAsync();
         }
-        public List<SelectListItem> GetTagsList()
+        public async Task<List<SelectListItem>> GetTagsListAsync()
         {
-            var tags = GetTags();
+            var tags = await GetTagsAsync();
             List<SelectListItem> items = new();
             foreach (var t in tags)
             {

@@ -30,9 +30,9 @@ namespace Grupp9WebbShop.Web.API.Controllers
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public ActionResult<Product> Get(int id)
+        public async Task<ActionResult<Product>> GetAsync(int id)
         {
-            var prod = _ds.GetProductById(id);
+            var prod = await _ds.GetProductByIdAsync(id);
             if (prod == null)
                 return NotFound();
             return prod;

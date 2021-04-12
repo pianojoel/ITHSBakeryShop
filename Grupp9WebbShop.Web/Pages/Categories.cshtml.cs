@@ -44,16 +44,16 @@ namespace Grupp9WebbShop.Web.Pages
                 AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
                 return RedirectToPage("./Categories", new { CategoryId = CategoryId });
             }
-            Categories = _ds.GetProductCategories();
+            Categories = await _ds.GetProductCategoriesAsync();
             Tags = AllergyTagHelper.LoadTags(HttpContext.Session);
             if (Tags == null)
             {
-                Tags = _ds.GetTagsList();
+                Tags = await _ds.GetTagsListAsync();
                 AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
             }
             if (CategoryId != null)
             {
-                Products = _ds.GetProductsByCategory(CategoryId.Value);
+                Products = await _ds.GetProductsByCategoryAsync(CategoryId.Value);
                 CategoryName = Categories.FirstOrDefault(c => c.Id == CategoryId).Name;
             }
             else
@@ -70,7 +70,7 @@ namespace Grupp9WebbShop.Web.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
-            Product = _ds.GetProductById(ProductId.Value);
+            Product = await _ds.GetProductByIdAsync(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
             return RedirectToPage("/Categories");
         }

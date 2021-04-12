@@ -63,7 +63,7 @@ namespace Grupp9WebbShop.Web.Pages
 
             foreach (var item in Basket.Items)
             {
-                int stockBalance = _ds.GetProductStock(item.ProductId);
+                int stockBalance = await _ds.GetProductStockAsync(item.ProductId);
 
                 if (item.Quantity > stockBalance)
                 {

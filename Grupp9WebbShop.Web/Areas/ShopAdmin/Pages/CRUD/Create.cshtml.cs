@@ -26,10 +26,10 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
             _ds = ds;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
         ViewData["CategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
-            Tags = _ds.GetTagsList();
+            Tags = await _ds.GetTagsListAsync();
             return Page();
         }
 

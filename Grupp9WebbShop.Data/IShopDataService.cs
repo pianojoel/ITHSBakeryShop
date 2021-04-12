@@ -7,26 +7,28 @@ namespace Grupp9WebbShop.Data
 {
     public interface IShopDataService
     {
+        Task<Product> GetProductByIdAsync(int id);
         Product GetProductById(int id);
+        Task<IEnumerable<ProductCategory>> GetProductCategoriesAsync();
         IEnumerable<ProductCategory> GetProductCategories();
         IEnumerable<Product> GetProducts();
         Task<IEnumerable<Product>> GetProductsAsync();
         Task<IEnumerable<Product>> GetHighlightedProductsAsync();
         Task<IEnumerable<Product>> GetProductsOnSaleAsync();
-        int GetProductStock(int id);
+        Task<int> GetProductStockAsync(int id);
         void SetProductStock(int id, int quant);
-        bool DecreaseProductStock(int id, int quant);
-        IEnumerable<Product> GetProductsByCategory(int categoryId);
+        Task<bool> DecreaseProductStockAsync(int id, int quant);
+        Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
         int SaveOrder(Order newOrder);
         Order CreateOrderFromBasket(ShoppingBasket basket, string userId, ShippingTypes shipping, PaymentTypes payment);
-        IEnumerable<Order> GetOrdersForUser(string userId);
-        IEnumerable<Order> GetAllOrders();
-        IEnumerable<Product> GetLatestProducts();
+        Task<IEnumerable<Order>> GetOrdersForUserAsync(string userId);
+        Task<IEnumerable<Order>> GetAllOrdersAsync();
+        Task<IEnumerable<Product>> GetLatestProductsAsync();
         Order GetOrder(int id);
         IEnumerable<BestSellingProduct> GetBestSellingProducts();
         void ToggleOrderIsProcessed(int id);
-        IEnumerable<Tag> GetTags();
-        List<SelectListItem> GetTagsList();
+        Task<IEnumerable<Tag>> GetTagsAsync();
+        Task<List<SelectListItem>> GetTagsListAsync();
         IEnumerable<Product> FilteredProducts(IEnumerable<Product> prods, List<SelectListItem> filter);
     }
 }

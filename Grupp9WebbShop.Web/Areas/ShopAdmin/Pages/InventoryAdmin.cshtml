@@ -18,6 +18,7 @@
     <tbody>
         @foreach (var item in Model.Products)
         {
+            var qInStock = await _ds.GetProductStockAsync(item.Id);
             <tr>
                 <td>@item.Name</td>
                 <td>
@@ -28,7 +29,7 @@
                 {
 <form>
     <input type="hidden" name="id" value="@item.Id" />
-    <td><input type="number" id="q" name="q" value="@_ds.GetProductStock(item.Id)" /></td>
+    <td><input type="number" id="q" name="q" value="@qInStock" /></td>
     <td><button class="btn btn-primary" type="submit">Spara</button></td>
 </form>
                 <script>
@@ -38,7 +39,7 @@
                 }
                 else
                 {
-                    <td>@_ds.GetProductStock(item.Id)</td>
+                    <td>@qInStock</td>
                     <td>
                         <a asp-page="./InventoryAdmin" asp-route-editId="@item.Id" title="Ändra lagersaldo"><i class="bi bi-pencil-square"></i></a>
                     </td>

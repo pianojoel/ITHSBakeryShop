@@ -27,21 +27,23 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
             _ds = ds;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
             var userID = _um.GetUserId(User);
-            Orders = _ds.GetAllOrders().Where(o => o.UserID == userID);
-            if(OrderId != 0)
+            var q = await _ds.GetAllOrdersAsync();
+            Orders = q.Where(o => o.UserID == userID);
+            if (OrderId != 0)
             {
                 Order = _ds.GetOrder(OrderId);
             }
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             var userID = _um.GetUserId(User);
-            Orders = _ds.GetAllOrders().Where(o => o.UserID == userID);
+            var q = await _ds.GetAllOrdersAsync();
+            Orders = q.Where(o => o.UserID == userID);
 
             if (OrderId != 0)
             {

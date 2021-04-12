@@ -45,7 +45,7 @@ namespace Grupp9WebbShop.Web.Pages
             Tags = AllergyTagHelper.LoadTags(HttpContext.Session);
             if (Tags == null)
             {
-                Tags = _ds.GetTagsList();
+                Tags = await _ds.GetTagsListAsync();
                 AllergyTagHelper.SaveTags(HttpContext.Session, Tags);
             }
 
@@ -67,7 +67,7 @@ namespace Grupp9WebbShop.Web.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
-            Product = _ds.GetProductById(ProductId.Value);
+            Product = await _ds.GetProductByIdAsync(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
             return RedirectToPage("/Search");
 

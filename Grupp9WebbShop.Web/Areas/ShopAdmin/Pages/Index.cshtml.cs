@@ -23,12 +23,13 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages
             _ds = ds;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            UnProcessedOrders = _ds.GetAllOrders().Where(o => !o.IsProcessed).Count();
-            TotalRevenue = _ds.GetAllOrders().Where(o => o.IsProcessed).Select(o => _ds.GetOrder(o.Id).TotalPrice)
+            var q = await _ds.GetAllOrdersAsync();
+            UnProcessedOrders = q.Where(o => !o.IsProcessed).Count();
+            TotalRevenue = q.Where(o => o.IsProcessed).Select(o => _ds.GetOrder(o.Id).TotalPrice)
                 .Sum();
-            FinishedOrders = _ds.GetAllOrders().Where(o => o.IsProcessed).Count();
+            FinishedOrders = q.Where(o => o.IsProcessed).Count();
         }
     }
 }

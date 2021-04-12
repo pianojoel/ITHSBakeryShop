@@ -45,7 +45,7 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.ProductCategories, "Id", "Name");
-            Tags = _ds.GetTagsList();
+            Tags = await _ds.GetTagsListAsync();
             return Page();
         }
 

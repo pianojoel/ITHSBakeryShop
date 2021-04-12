@@ -24,12 +24,12 @@ namespace Grupp9WebbShop.Web.Pages
             _ds = ds;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             if (ProductId != null)
             {
-                Product = _ds.GetProductById(ProductId.Value);
-                ProductQuantity = _ds.GetProductStock(ProductId.Value);
+                Product = await _ds.GetProductByIdAsync(ProductId.Value);
+                ProductQuantity = await _ds.GetProductStockAsync(ProductId.Value);
             }
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
             ViewData["MainLayout"] = MainLayout;
@@ -38,14 +38,14 @@ namespace Grupp9WebbShop.Web.Pages
         [BindProperty]
         public int Number { get; set; }
        
-        public void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
-            Product = _ds.GetProductById(ProductId.Value);
+            Product = await _ds.GetProductByIdAsync(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
-            OnGet();
-            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
-            ViewData["MainLayout"] = MainLayout;
+            return RedirectToPage("ProductDetails", new { ProductId = ProductId });
+//            MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
+//            ViewData["MainLayout"] = MainLayout;
         }
     }
 }

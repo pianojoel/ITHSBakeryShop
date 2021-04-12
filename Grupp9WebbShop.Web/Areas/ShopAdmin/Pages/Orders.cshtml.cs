@@ -21,9 +21,9 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages
             _ds = ds;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
-            Orders = _ds.GetAllOrders();
+            Orders = await _ds.GetAllOrdersAsync();
             if (ShowNotProcessedOrders)
             {
                 Orders = Orders.Where(o => !o.IsProcessed);

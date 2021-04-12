@@ -43,18 +43,18 @@ namespace Grupp9WebbShop.Web.Pages
 
             Highlighted = await _ds.GetHighlightedProductsAsync();
             OnSale = await _ds.GetProductsOnSaleAsync();
-            Latest = _ds.GetLatestProducts();
-            BestSellingProducts = _ds
+            Latest = await _ds.GetLatestProductsAsync();
+            BestSellingProducts =  _ds
                 .GetBestSellingProducts()
-                .Take(3)
-                .Select(p => _ds
+                
+                .Select( p => _ds
                 .GetProductById(p.ProductId));
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             Animate = true;
-            Product = _ds.GetProductById(ProductId.Value);
+            Product = await _ds.GetProductByIdAsync(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
             return RedirectToPage("/Index");
             //MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);

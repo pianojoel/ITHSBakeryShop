@@ -54,7 +54,7 @@ namespace Grupp9WebbShop.Web.Pages
             var orderId = _ds.SaveOrder(newOrder);
             foreach (var item in Basket.Items)
             {
-                _ds.DecreaseProductStock(item.ProductId, item.Quantity);
+                await _ds.DecreaseProductStockAsync(item.ProductId, item.Quantity);
             }
             BasketHelper.ClearBasket(HttpContext.Session);
             return RedirectToPage("./CheckoutConfirm", new { orderid = orderId });
