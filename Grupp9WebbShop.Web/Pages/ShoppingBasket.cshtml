@@ -6,17 +6,18 @@
     ViewData["Title"] = "Varukorg";
 }
 
-<div class="ml-auto mr-auto mt-5 p-3" style="width:80%; background-color:#e0d4c7; color:#642714" ;>
+<div class="ml-auto mr-auto mt-5 p-3" style="width:90%;background-color:#e0d4c7; color:#642714" ;>
     <h1><strong>1. Din varukorg</strong></h1>
     @*<p>Antal varor: @Grupp9WebbShop.Web.Helpers.BasketHelper.NumItems(HttpContext.Session)</p>*@
+
     <table class="table" style="color:#642714">
-        <thead class="" style="border:none; border-bottom:2px solid">
-            <tr style="border:none; border-bottom:2px solid">
-                <th>Produkter</th>
-                <th></th>
-                <th class="pl-4">Antal</th>
-                <th>Summa</th>
-                <th></th>
+        <thead class="border-0" >
+            <tr >
+                <th class="border-bottom-0">Produkter</th>
+                <th class="border-bottom-0 d-md-block d-none"></th>
+                <th class="border-bottom-0 pl-4">Antal</th>
+                <th class="border-bottom-0">Summa</th>
+                <th class="border-bottom-0"></th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,7 @@
             {
                 Product p = Model.Products.Where(i => i.Id == item.ProductId).FirstOrDefault();
                 <tr>
-                    <td><img src="./images/@p.ImageFile" width="100" class="pink-border" /></td>
+                    <td class="d-md-block d-none"><img src="./images/@p.ImageFile" width="100" class="pink-border " /></td>
                     <td>
                         @p.Name <br />
                         @if (p.OnSale)
@@ -43,9 +44,10 @@
                 </tr>
 
             }
-            <tr><td></td><td></td><td>Orderbelopp inkl.moms:</td><td><strong>@Math.Round(Model.Basket.Total, 2) kr</strong></td></tr>
+            <tr><td></td><td>Orderbelopp inkl.moms:</td><td><strong>@Math.Round(Model.Basket.Total, 2) kr</strong></td><td></td></tr>
         </tbody>
     </table>
+
     <div class="text-center">
         @if (!Model.IsNotEmpty)
         {
