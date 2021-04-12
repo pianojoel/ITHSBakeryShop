@@ -5,84 +5,85 @@
     ViewData["Title"] = "Detaljer";
     string tags = "";
 }
+<div class="brownandthin w-100">
+    <h1>Detaljer</h1>
 
-<h1>Detaljer</h1>
+    <div>
+        <h4>Produkt</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.AllergyTags)
+            </dt>
+            <dd class="col-sm-10">
+                @*@Html.DisplayFor(model => model.Product.AllergyInfo)*@
+                @foreach (var item in Model.Product.AllergyTags)
+                {
+                    tags += $"{item.Name}, ";
+                }
+                @{ tags = tags.TrimEnd(new char[] { ',', ' ' }); }
+                <span>@tags</span>
+            </dd>
 
-<div>
-    <h4>Produkt</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.AllergyTags)
-        </dt>
-        <dd class="col-sm-10">
-            @*@Html.DisplayFor(model => model.Product.AllergyInfo)*@
-            @foreach (var item in Model.Product.AllergyTags)
-            {
-                tags += $"{item.Name}, ";
-            }
-            @{ tags = tags.TrimEnd(new char[] { ',', ' ' }); }
-            <span>@tags</span>
-        </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Category)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Category.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.AddedDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Product.AddedDate.ToShortDateString()
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.ImageFile)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="~/images/@Model.Product.ImageFile" alt="Bild på produkten" width="300" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.ImageDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.ImageDescription)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Highlighted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Highlighted)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.OnSale)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.OnSale)
+            </dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Category.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.AddedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Product.AddedDate.ToShortDateString()
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageFile)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="~/images/@Model.Product.ImageFile" alt="Bild på produkten" width="300" />
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageDescription)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ImageDescription)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Highlighted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Highlighted)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.OnSale)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.OnSale)
-        </dd>
-
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Product.Id">Redigera</a> |
-    <a asp-page="./Index">Tillbaka till listan</a>
+        </dl>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Product.Id">Redigera</a> |
+        <a asp-page="./Index">Tillbaka till listan</a>
+    </div>
 </div>

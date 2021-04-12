@@ -3,35 +3,24 @@
 
 @inject SignInManager<WebbShopUser> SignInManager
 @inject UserManager<WebbShopUser> UserManager
-@*<ul class="navbar-nav">*@
-@*To make sure we don't get a null exception if the user still has a valid cookie, we must check so that the returned user object isn't null *@
+
 @if (SignInManager.IsSignedIn(User) && await UserManager.GetUserAsync(User) != null)
 {
     var user = await UserManager.GetUserAsync(User);
     var fullName = user.FirstName != null ? $"{user.FirstName} {user.LastName}" : "";
     string isAdmin = await UserManager.IsInRoleAsync(user, "Administrator") ? " (Admin)" : "";
-    @*<li class="nav-item">*@
-    <a id="manage" class=" text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Mina sidor">Hej @user.FirstName@isAdmin!<img width="50" src="~/images/MyPageIcon.png" alt="Min sida" /></a>
+
+    <a id="manage" style="color: #642714;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Mina sidor">Hej @user.FirstName@isAdmin!<img width="50" src="~/images/MyPageIcon.png" alt="Min sida" /></a>
     @if (!string.IsNullOrEmpty(isAdmin))
     {
         <a id="admin" class=" text-dark" asp-area="ShopAdmin" asp-page="./index" title="Administration"><img width="40" src="~/images/Admin_ikon_new.png" alt="Administration" /></a>
     }
+    @*<form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
 
-    @*</li>*@
-    @*<li class="nav-item">*@
-    <form id="logoutForm" class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-        <button id="logout" type="submit" class="">Logga ut</button>
-    </form>
-    @*</li>*@
+        <button id="logout" type="submit" class="blue-button">Logga ut</button>
+    </form>*@
 }
 else
 {
-    @*  <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Registrera</a>
-        </li>*@
-    @*<li class="nav-item">*@
     <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login"><img width="50" src="~/images/MyPageIcon.png" alt="Min sida" /></a>
-    @*</li>*@
 }
-@*</ul>*@
-

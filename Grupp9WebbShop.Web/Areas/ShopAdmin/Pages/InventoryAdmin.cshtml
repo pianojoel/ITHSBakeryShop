@@ -5,46 +5,49 @@
 @{
     ViewData["Title"] = "Lagerhantering";
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>Produkt</th>
-            <th></th>
-            <th>Kategori</th>
-            <th>I lager</th>
-            <th>Åtgärd</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Products)
-        {
-            var qInStock = await _ds.GetProductStockAsync(item.Id);
+<div class="brownandthin w-100">
+    <h1>Lagerhantering</h1>
+    <table class="table" style="color: #642714;">
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>
-                    <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
-                </td>
-                <td>@item.Category.Name</td>
-                @if (Model.EditId != null && item.Id == Model.EditId.Value)
-                {
-<form>
-    <input type="hidden" name="id" value="@item.Id" />
-    <td><input type="number" id="q" name="q" value="@qInStock" /></td>
-    <td><button class="btn blue-button" type="submit">Spara</button></td>
-</form>
-                <script>
-                    var elem = document.querySelector("#q");
-                    elem.focus();
-                </script>
-                }
-                else
-                {
-                    <td>@qInStock</td>
-                    <td>
-                        <a asp-page="./InventoryAdmin" asp-route-editId="@item.Id" title="Ändra lagersaldo"><i class="bi bi-pencil-square"></i></a>
-                    </td>
-                }
+                <th>Produkt</th>
+                <th></th>
+                <th>Kategori</th>
+                <th>I lager</th>
+                <th>Åtgärd</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                var qInStock = await _ds.GetProductStockAsync(item.Id);
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <img src="~/images/@item.ImageFile" alt="Produktbild" width="80" />
+                    </td>
+                    <td>@item.Category.Name</td>
+                    @if (Model.EditId != null && item.Id == Model.EditId.Value)
+                    {
+                        <form>
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <td><input type="number" id="q" name="q" value="@qInStock" /></td>
+                            <td><button class="btn blue-button" type="submit">Spara</button></td>
+                        </form>
+                        <script>
+                            var elem = document.querySelector("#q");
+                            elem.focus();
+                        </script>
+                    }
+                    else
+                    {
+                        <td>@qInStock</td>
+                        <td>
+                            <a asp-page="./InventoryAdmin" asp-route-editId="@item.Id" title="Ändra lagersaldo"><i class="bi bi-pencil-square"></i></a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

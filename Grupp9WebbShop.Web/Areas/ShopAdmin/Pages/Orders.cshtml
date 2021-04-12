@@ -2,8 +2,9 @@
 @model Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.OrdersModel
 @{
 }
-<div class="brownandthin">
-<table class="table">
+<div class="brownandthin w-100">
+    <h1>Orderhantering</h1>
+<table class="table" style="color: #642714;">
     <thead class="thead">
         <tr>
             <th>Id</th>
@@ -17,7 +18,7 @@
         {
             <tr>
                 <td><a asp-page="/OrderDetails" asp-route-OrderId="@order.Id">@order.Id</a></td>
-                <td>@order.Date</td>
+                <td><a asp-page="/OrderDetails" asp-route-OrderId="@order.Id">@order.Date</a></td>
                
                 <td>@(order.IsProcessed ? "Ja":"Nej")</td>
             </tr>

@@ -4,6 +4,7 @@
 @using Grupp9WebbShop.Data;
 @inject IShopDataService _ds
 @{
+
 }
 <div class="brownandthin">
     @if (Model.OrderId != 0)
@@ -28,13 +29,13 @@
             <p>Order Id: @Model.Order.Id</p>
             <p>Orderdatum: @Model.Order.Date</p>
             @*<p>Namn: @Model.User.FirstName @Model.User.LastName</p>
-            <p>Adress: @Model.User.StreetAddress </p>
-            <p>@Model.User.PostalCode @Model.User.City</p>
-            <p>Tel: @Model.User.PhoneNumber</p>
-            <p>E-post: @Model.User.Email</p>*@
+                <p>Adress: @Model.User.StreetAddress </p>
+                <p>@Model.User.PostalCode @Model.User.City</p>
+                <p>Tel: @Model.User.PhoneNumber</p>
+                <p>E-post: @Model.User.Email</p>*@
 
 
-            <table class="table">
+            <table class="table" style="color: #642714;">
                 <thead>
                     <tr>
                         <th class="border-0">Produkt</th>
@@ -59,7 +60,7 @@
             <p>Frakt: @shippingCost kr</p>
             <p>Totalsumma: @Math.Round(Model.Order.GrandTotal, 0) kr</p>
             <form method="post">
-               
+
                 <button class="btn pink-button" type="submit">Köp igen</button>
             </form>
         }
@@ -69,8 +70,8 @@
         }
     }
 
-    <h2 class="text-center">Tidigare ordrar</h2>
-    <table class="table">
+    <h2 class="text-left">Tidigare ordrar</h2>
+    <table class="table" style="color: #642714;">
         <thead>
             <tr>
                 <th>Id</th>
@@ -87,4 +88,5 @@
             }
         </tbody>
     </table>
+
 </div>
