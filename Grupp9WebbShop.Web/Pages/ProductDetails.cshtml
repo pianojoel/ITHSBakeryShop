@@ -10,22 +10,25 @@
         </div>
         <div class="col-sm-6">
             <h1>@Model.Product.Name</h1>
-            <p>@Model.Product.Description</p>
-            <p>Innehåller</p>
-            <ul>
-                @foreach (var item in Model.Product.AllergyTags)
-                {
-                    <li>@item.Name</li>
-                }
-            </ul>
-            @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
-        <p>
-            @if (Model.Product.OnSale)
+            <p>@Html.Raw(Model.Product.Description)</p>
+            @if (Model.Product.AllergyTags.Count != 0)
             {
-                <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del> 
+                <p>Innehåller</p>
+                <ul>
+                    @foreach (var item in Model.Product.AllergyTags)
+                    {
+                        <li>@item.Name</li>
+                    }
+                </ul>
             }
-            @Model.Product.CalculatedPrice kr
-        </p>
+            @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
+            <p>
+                @if (Model.Product.OnSale)
+                {
+                    <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
+                }
+                @Model.Product.CalculatedPrice kr
+            </p>
             <p>I butik: @Model.ProductQuantity</p>
 
             <form method="post">
@@ -39,14 +42,14 @@
             </form>
         </div>
     </div>
-    
-        
-    
+
+
+
 </div>
 @if (Model.Animate)
 {
-<script>   
-    let cartImg = document.getElementById("cartImg");
-    cartImg.classList.add('animate-cart');             
-</script>
+    <script>
+        let cartImg = document.getElementById("cartImg");
+        cartImg.classList.add('animate-cart');
+    </script>
 }

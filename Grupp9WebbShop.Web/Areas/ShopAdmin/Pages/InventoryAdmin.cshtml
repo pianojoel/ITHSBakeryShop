@@ -29,8 +29,8 @@
                 {
 <form>
     <input type="hidden" name="id" value="@item.Id" />
-    <td><input type="number" id="q" name="q" value="@qInStock" /></td>
-    <td><button class="btn btn-primary" type="submit">Spara</button></td>
+    <td><input type="number" id="q" name="q" value="@_ds.GetProductStock(item.Id)" /></td>
+    <td><button class="btn blue-button" type="submit">Spara</button></td>
 </form>
                 <script>
                     var elem = document.querySelector("#q");
