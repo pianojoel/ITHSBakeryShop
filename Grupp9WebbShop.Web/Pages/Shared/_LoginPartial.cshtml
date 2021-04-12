@@ -11,10 +11,10 @@
     var fullName = user.FirstName != null ? $"{user.FirstName} {user.LastName}" : "";
     string isAdmin = await UserManager.IsInRoleAsync(user, "Administrator") ? " (Admin)" : "";
     @*<li class="nav-item">*@
-    <a id="manage" class=" text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @user.FirstName@isAdmin!<img width="50" src="~/images/MyPageIcon.png" alt="Min sida" /></a>
+    <a id="manage" class=" text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Mina sidor">Hej @user.FirstName@isAdmin!<img width="50" src="~/images/MyPageIcon.png" alt="Min sida" /></a>
     @if (!string.IsNullOrEmpty(isAdmin))
     {
-        <a id="admin" class=" text-dark" asp-area="ShopAdmin" asp-page="./index" title="admin">Administration</a>
+        <a id="admin" class=" text-dark" asp-area="ShopAdmin" asp-page="./index" title="Administration"><img width="40" src="~/images/Admin_ikon_new.png" alt="Administration" /></a>
     }
 
     @*</li>*@
