@@ -4,61 +4,62 @@
 @{
     ViewData["Title"] = "Ta bort";
 }
+<div class="brownandthin w-100">
+    <h1>Ta bort</h1>
 
-<h1>Ta bort</h1>
+    <h3>Är du säker på att du vill ta bort denna?</h3>
+    <div>
+        <h4>Produkt</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Category)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Category.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.ImageFile)
+            </dt>
+            <dd class="col-sm-10">
+                <img src="~/images/@Model.Product.ImageFile" alt="Bild på produkten" width="300" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.ImageDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.ImageDescription)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Highlighted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Highlighted)
+            </dd>
+        </dl>
 
-<h3>Är du säker på att du vill ta bort denna?</h3>
-<div>
-    <h4>Produkt</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Category.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageFile)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="~/images/@Model.Product.ImageFile" alt="Bild på produkten" width="300" />
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ImageDescription)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ImageDescription)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Highlighted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Highlighted)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="Product.Id" />
-        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
-        <a asp-page="./Index">Tillbaka till listan</a>
-    </form>
+        <form method="post">
+            <input type="hidden" asp-for="Product.Id" />
+            <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+            <a asp-page="./Index">Tillbaka till listan</a>
+        </form>
+    </div>
 </div>
