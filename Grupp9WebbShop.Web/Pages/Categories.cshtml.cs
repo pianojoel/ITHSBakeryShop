@@ -55,6 +55,10 @@ namespace Grupp9WebbShop.Web.Pages
             {
                 Products = _ds.GetProductsByCategory(CategoryId.Value);
                 CategoryName = Categories.FirstOrDefault(c => c.Id == CategoryId).Name;
+                if (CategoryName == "Färdiga paket")
+                {
+                    Products = Products.OrderBy(o => o.Price);
+                }
             }
             else
                 Products = _ds.GetProducts().OrderBy(o => o.Name);
