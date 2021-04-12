@@ -76,7 +76,7 @@ namespace Grupp9WebbShop.Web.Pages
             Animate = true;
             Product = await _ds.GetProductByIdAsync(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
-            return RedirectToPage("/Categories");
+            return RedirectToPage("/Categories", new { CategoryId = CategoryId });
         }
     }
 }
