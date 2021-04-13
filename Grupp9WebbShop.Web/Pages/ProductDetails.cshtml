@@ -3,49 +3,64 @@
 @{
     ViewData["Title"] = Model.Product.Name;
 }
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6">
-            <img style="width:100%" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
-        </div>
-        <div class="col-sm-6">
-            <h1>@Model.Product.Name</h1>
-            <p>@Html.Raw(Model.Product.Description)</p>
-            @if (Model.Product.AllergyTags.Count != 0)
-            {
-                <p>Innehåller</p>
-                <ul>
-                    @foreach (var item in Model.Product.AllergyTags)
+<div class="brownandthin mt-3">
+    <div class="card mb-3" style="width: 90%;">
+        <div class="row no-gutters">
+            <div class="col-md-8">
+                <img class="card-img" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
+            </div>
+            <div class="col-md-4">
+                <div class="card-body text-center p-0">
+                   <h5 class="card-title">@Model.Product.Name</h5>
+                    </div>
+                <div class="card-body" style="max-height:300px;overflow-y:auto">
+                    <p class="card-text">
+                    <p>@Html.Raw(Model.Product.Description)</p>
+                    @if (Model.Product.AllergyTags.Count != 0)
                     {
-                        <li>@item.Name</li>
+                        <p>Innehåller</p>
+                        <ul>
+                            @foreach (var item in Model.Product.AllergyTags)
+                            {
+                                <li>@item.Name</li>
+                            }
+                        </ul>
                     }
-                </ul>
-            }
-            @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
-            <p>
-                @if (Model.Product.OnSale)
-                {
-                    <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
-                }
-                @Model.Product.CalculatedPrice kr
-            </p>
-            <p>I butik: @Model.ProductQuantity</p>
-
-            <form method="post">
-                <select name="number">
-                    @for (int i = 1; i < 11; i++)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-                <button type="submit" onclick="">Köp</button>
-            </form>
+                    @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
+                    <p>
+                        @if (Model.Product.OnSale)
+                        {
+                            <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
+                        }
+                        @Model.Product.CalculatedPrice kr
+                    </p>
+                    <p>I butik: @Model.ProductQuantity</p>
+                    </div>
+                    <div class="card-text pb-0 text-center align-items-center">
+                    <form method="post">
+                        <select name="number">
+                            @for (int i = 1; i < 11; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <button type="submit" onclick="">Köp</button>
+                    </form>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 
-
+</div>
+<div class="col-6 pink-border border-left-0 p-3">
 
 </div>
+        </div>
+
+
+
+    </div>
 @if (Model.Animate)
 {
     <script>
@@ -53,3 +68,5 @@
         cartImg.classList.add('animate-cart');
     </script>
 }
+    </div>
+</div>
