@@ -98,37 +98,27 @@ namespace Grupp9WebbShop.Data
             cats.Add(new ProductCategory()
             {
                 Name = "Tårtor",
-                Description = "Våra tårtor bakas med organiska varor. Lokalproducerat och ekologiskt. Fairtrade certifierat.",
-                ImageFile = "tartor.jpeg",
-                ImageDescription = "En bild på en tårta"
+                DisplayOrder = 4
             });
             cats.Add(new ProductCategory()
             {
                 Name = "Bullar",
-                Description = "Bullar direkt ur ugnen!",
-                ImageFile = "kaffebullar.jpg",
-                ImageDescription = "En bild på bullar"
+                DisplayOrder = 1
             });
             cats.Add(new ProductCategory()
             {
                 Name = "Småkakor",
-                Description = "Hos oss hittar ni goda, festliga småkakor som bara vill hoppa in i munnen. Passar både till fikat eller kalaset!",
-                ImageFile = "smakakor.jpg",
-                ImageDescription = "En bild på småkakor"
+                DisplayOrder = 3
             });
             cats.Add(new ProductCategory()
             {
                 Name = "Cupcakes",
-                Description = "Här hittar ni fantastiska smarriga cupcakes med färgglada frostings. Kan förgylla er dag!",
-                ImageFile = "cupcake.jpeg",
-                ImageDescription = "En bild på cupcakes"
+                DisplayOrder = 2
             });
             cats.Add(new ProductCategory()
             {
                 Name = "Färdiga paket",
-                Description = "",
-                ImageFile = "",
-                ImageDescription = ""
+                DisplayOrder = 5
             });
 
 

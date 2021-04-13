@@ -63,10 +63,11 @@ namespace Grupp9WebbShop.Web.Pages
             else
             {
                 var list = await _ds.GetProductsAsync();
-                Products = list.OrderBy(o => o.Name);
+                Products = list.Where(c => c.Category.Name != "Färdiga paket").OrderBy(o => o.Name);
             }
             MainLayout.ShoppingBasket = BasketHelper.GetBasket(HttpContext.Session);
-            Products = _ds.FilteredProducts(Products, Tags);
+            if (CategoryName != "Färdiga paket")
+                Products = _ds.FilteredProducts(Products, Tags);
             ViewData["MainLayout"] = MainLayout;
             return Page();
         }

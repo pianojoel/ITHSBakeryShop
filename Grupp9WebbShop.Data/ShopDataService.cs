@@ -74,11 +74,11 @@ namespace Grupp9WebbShop.Data
         }
         public async Task<IEnumerable<ProductCategory>> GetProductCategoriesAsync()
         {
-            return await _ctx.ProductCategories.OrderBy(o => o.Name).ToListAsync();
+            return await _ctx.ProductCategories.OrderBy(o => o.DisplayOrder).ToListAsync();
         }
         public IEnumerable<ProductCategory> GetProductCategories()
         {
-            return _ctx.ProductCategories.OrderBy(o => o.Name).ToList();
+            return _ctx.ProductCategories.OrderBy(o => o.DisplayOrder).ToList();
         }
 
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)

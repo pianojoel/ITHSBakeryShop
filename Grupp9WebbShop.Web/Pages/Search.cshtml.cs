@@ -52,7 +52,7 @@ namespace Grupp9WebbShop.Web.Pages
             var products = await _ds.GetProductsAsync();
             if(!String.IsNullOrEmpty(Query))
             {
-            SearchResults = products.Where(p => p.Name.ToUpper().Contains(Query.ToUpper())).ToList();
+            SearchResults = products.Where(p => p.Name.ToUpper().Contains(Query.ToUpper()) && p.Category.Name != "Färdiga paket").ToList();
                 if (SearchResults.Count() >0)
                     SearchResults = _ds.FilteredProducts(SearchResults, Tags);
             }
