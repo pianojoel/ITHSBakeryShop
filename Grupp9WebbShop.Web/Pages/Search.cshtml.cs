@@ -70,7 +70,7 @@ namespace Grupp9WebbShop.Web.Pages
             Animate = true;
             Product = await _ds.GetProductByIdAsync(ProductId.Value);
             BasketHelper.AddToBasket(HttpContext.Session, ProductId.Value, Product.CalculatedPrice, Number);
-            return RedirectToPage("/Search");
+            return RedirectToPage("/Search", new { Query = Query });
 
 
         }
