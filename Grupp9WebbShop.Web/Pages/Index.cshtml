@@ -13,7 +13,7 @@
 <div class="text-center mt-5">
     <h2 style="font-family:Thonburi-bold;color:#642714">Våra kunders storfavoriter</h2>
 </div>
-<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted" >
+<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted">
 
     @foreach (var prod in Model.BestSellingProducts)
     {
@@ -24,7 +24,9 @@
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>
                 <div class="card-body flex-grow-0 text-center pink-border pr-1 pl-1" style=" border-top: none; border-bottom: none; height: 90px; background-color: white; color: #642714; font-family: Thonburi-bold">
-                    <h5 class="card-title">@prod.Name</h5>
+                    <a asp-page="/ProductDetails" asp-route-productID="@prod.Id" style="color: #642714">
+                        <h5 class="card-title">@prod.Name</h5>
+                    </a>
                 </div>
                 <div class="card-body text-center overflow-hidden pt-0 pb-0 flex-grow-0 pink-border" style="border-top:none;border-bottom:none; height:40px;background-color: white;color:#642714;font-family:Thonburi-bold">
 
@@ -106,7 +108,9 @@
                                 </div>
                                 <div class="col-md-4" style=" background-color: white; color: #642714; font-family: Thonburi-bold">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title">@prod.Name</h5>
+                                        <a asp-page="/ProductDetails" asp-route-productID="@prod.Id" style="color: #642714">
+                                            <h5 class="card-title">@prod.Name</h5>
+                                        </a>
                                     </div>
                                     <div class="card-body text-center" style="background-color: white;color:#642714;font-family:Thonburi-bold">
 
@@ -169,7 +173,9 @@
                                 </div>
                                 <div class="col-md-4" style=" background-color: white; color: #642714; font-family: Thonburi-bold">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title">@prod.Name</h5>
+                                        <a asp-page="/ProductDetails" asp-route-productID="@prod.Id" style="color: #642714">
+                                            <h5 class="card-title">@prod.Name</h5>
+                                        </a>
                                     </div>
                                     <div class="card-body text-center" style="background-color: white;color:#642714;font-family:Thonburi-bold">
 
@@ -232,7 +238,7 @@
 <div class="text-center mt-5">
     <h2 style="font-family:Thonburi-bold;color:#642714">Färskt från bageriet</h2>
 </div>
-<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted" >
+<div class="row justify-content-center mt-5 g-0 brownandthin" id="highlighted">
 
     @foreach (var prod in Model.Latest)
     {
@@ -243,7 +249,9 @@
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>
                 <div class="card-body flex-grow-0 text-center pink-border pr-1 pl-1" style=" border-top: none; border-bottom: none; height: 90px; background-color: white; color: #642714; font-family: Thonburi-bold">
-                    <h5 class="card-title">@prod.Name</h5>
+                    <a asp-page="/ProductDetails" asp-route-productID="@prod.Id" style="color: #642714">
+                        <h5 class="card-title">@prod.Name</h5>
+                    </a>
                 </div>
                 <div class="card-body text-center overflow-hidden pt-0 pb-0 flex-grow-0 pink-border" style="border-top:none;border-bottom:none; height:40px;background-color: white;color:#642714;font-family:Thonburi-bold">
 
@@ -308,7 +316,9 @@
                     <img class="card-img-top" style="border:3px solid #FAB0C8;" src="~/images/@prod.ImageFile" alt="@prod.ImageDescription">
                 </a>
                 <div class="card-body flex-grow-0 text-center pink-border pr-1 pl-1" style=" border-top: none; border-bottom: none; height: 90px; background-color: white; color: #642714; font-family: Thonburi-bold">
-                    <h5 class="card-title">@prod.Name</h5>
+                    <a asp-page="/ProductDetails" asp-route-productID="@prod.Id" style="color: #642714">
+                        <h5 class="card-title">@prod.Name</h5>
+                    </a>
                 </div>
                 <div class="card-body text-center overflow-hidden pt-0 pb-0 flex-grow-0 pink-border" style="border-top:none;border-bottom:none; height:40px;background-color: white;color:#642714;font-family:Thonburi-bold">
 
