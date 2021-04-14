@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="text-center" style="background-color: white;color:#642714;font-family:Thonburi-bold">
                                         <span class="card-text"></span>
-                                        <select name="number" id=@($"S{@prod.Id}")>
+                                        <select name="number" id=@($"B{@prod.Id}")>
                                             @for (int i = 1; i < 11; i++)
                                             {
                                                 <option value="@i">@i</option>
@@ -149,7 +149,7 @@
                                         </select>
 
 
-                                        <button class="btn pink-button" onclick="buy(@prod.Id)">Köp</button>
+                                        <button class="btn pink-button" onclick="buy(@prod.Id, 'B')">Köp</button>
                                     </div>
 
 
