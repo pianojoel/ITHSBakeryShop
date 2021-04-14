@@ -6,50 +6,50 @@
 <div class="brownandthin mt-3">
     <div class="card mb-3 mx-auto" style="width: 70%;">
         <div class="row no-gutters">
-            @*<div class="col-md-8">*@
-                <img class="card-img" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
-            @*  *@</div>
-           @* <div class="col-md-4">*@
-                <div class="card-body text-center p-0">
-                   <h5 class="card-title">@Model.Product.Name</h5>
-                    </div>
-                <div class="card-body pt-0" style=" max-height:325px;overflow-y:hidden">
-                    <p class="card-text">
-                    <p>@Html.Raw(Model.Product.Description)</p>
-                    @if (Model.Product.AllergyTags.Count != 0)
-                    {
-                        <p>Innehåller</p>
-                        <ul>
-                            @foreach (var item in Model.Product.AllergyTags)
-                            {
-                                <li>@item.Name</li>
-                            }
-                        </ul>
-                    }
-                    @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
-                    <p>
-                        @if (Model.Product.OnSale)
-                        {
-                            <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
-                        }
-                        @Model.Product.CalculatedPrice kr
-                    </p>
-                    <p>I butik: @Model.ProductQuantity</p>
-                    </div>
-                    <div class="pb-0 text-center">
-                    <form method="post">
-                        <select name="number">
-                            @for (int i = 1; i < 11; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
-                        <button class="btn pink-button" type="submit" onclick="">Köp</button>
-                    </form>
-                        </div>
-                 @*</div>*@
-            </div>
+
+            <img class="card-img" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
         </div>
+
+        <div class="card-body text-center p-0">
+            <h5 class="card-title">@Model.Product.Name</h5>
+        </div>
+        <div class="card-body pt-0" style=" max-height:325px;overflow-y:hidden">
+            <p class="card-text">
+            <p>@Html.Raw(Model.Product.Description)</p>
+            @if (Model.Product.AllergyTags.Count != 0)
+            {
+                <p>Innehåller</p>
+                <ul>
+                    @foreach (var item in Model.Product.AllergyTags)
+                    {
+                        <li>@item.Name</li>
+                    }
+                </ul>
+            }
+            @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
+            <p>
+                @if (Model.Product.OnSale)
+                {
+                    <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
+                }
+                @Model.Product.CalculatedPrice kr
+            </p>
+            <p>I butik: @Model.ProductQuantity</p>
+        </div>
+        <div class="pb-0 text-center">
+            <form method="post">
+                <select name="number">
+                    @for (int i = 1; i < 11; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <button class="btn pink-button" type="submit" onclick="">Köp</button>
+            </form>
+        </div>
+        @*</div>*@
+    </div>
+</div>
     </div>
 
 </div>
