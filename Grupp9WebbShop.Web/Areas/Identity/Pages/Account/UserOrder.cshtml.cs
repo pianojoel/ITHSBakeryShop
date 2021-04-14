@@ -51,7 +51,8 @@ namespace Grupp9WebbShop.Web.Areas.Identity.Pages.Account
 
                 foreach (var item in Order.OrderItems)
                 {
-                    BasketHelper.AddToBasket(HttpContext.Session, item.ProductId, item.Price, item.Quantity);
+                    var prod = await _ds.GetProductByIdAsync(item.ProductId);
+                    BasketHelper.AddToBasket(HttpContext.Session, item.ProductId, prod.CalculatedPrice, item.Quantity);
                 }
             }
             return RedirectToPage("/ShoppingBasket");
