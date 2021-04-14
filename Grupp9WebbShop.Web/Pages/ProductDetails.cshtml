@@ -4,69 +4,73 @@
     ViewData["Title"] = Model.Product.Name;
 }
 <div class="brownandthin mt-3">
-    <div class="card mb-3 mx-auto" style="width: 70%;">
-        <div class="row no-gutters">
+    <div class="card mb-3 mx-auto pink-border" style="width: 70%;">
 
+        <div class="row no-gutters pink-border border-top-0 border-left-0 border-right-0">
             <img class="card-img" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
         </div>
 
-        <div class="card-body text-center p-0">
-            <h5 class="card-title">@Model.Product.Name</h5>
+        <div class="card-body text-center p-1">
+            <h1 class="card-title">@Model.Product.Name</h1>
         </div>
-        <div class="card-body pt-0" style=" max-height:325px;overflow-y:hidden">
-            <p class="card-text">
-            <p>@Html.Raw(Model.Product.Description)</p>
-            @if (Model.Product.AllergyTags.Count != 0)
-            {
-                <p>Innehåller</p>
-                <ul>
-                    @foreach (var item in Model.Product.AllergyTags)
+        <p class="text-center">@Html.Raw(Model.Product.Description)</p>
+        <div class="row">
+            <div class="col-6">
+                <p class="card-text">
+
+                    @if (Model.Product.AllergyTags.Count != 0)
                     {
-                        <li>@item.Name</li>
-                    }
-                </ul>
-            }
-            @*<p>Pris: @Math.Round((Model.Product.OnSale ? Model.Product.Price * (decimal)0.8 : Model.Product.Price), 0) kr</p>*@
-            <p>
-                @if (Model.Product.OnSale)
-                {
-                    <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
+                    <p class="text-center">Innehåller</p>
+                    <ul class="ml-3">
+                        @foreach (var item in Model.Product.AllergyTags)
+                        {
+                            <li>@item.Name</li>
+                        }
+                    </ul>
                 }
-                @Model.Product.CalculatedPrice kr
-            </p>
-            <p>I butik: @Model.ProductQuantity</p>
+                    <p />
+                </div>
+                <div class="col-6 text-center pt-5">
+                    <div>
+                        <h1>
+                            @if (Model.Product.OnSale)
+                            {
+                                <del class="mr-2" style="color:#CF7697">@Math.Round(Model.Product.Price, 0)  kr </del>
+                            }
+                            @Model.Product.CalculatedPrice kr
+                        </h1>
+                        <p>I butik: @Model.ProductQuantity</p>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+            <div class="p-2 text-center">
+                <form method="post">
+                    <select name="number">
+                        @for (int i = 1; i < 11; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <button class="btn pink-button" type="submit" onclick="">Köp</button>
+                </form>
+            </div>
         </div>
-        <div class="pb-0 text-center">
-            <form method="post">
-                <select name="number">
-                    @for (int i = 1; i < 11; i++)
-                    {
-                        <option value="@i">@i</option>
-                    }
-                </select>
-                <button class="btn pink-button" type="submit" onclick="">Köp</button>
-            </form>
-        </div>
-        @*</div>*@
-    </div>
-</div>
     </div>
 
-</div>
-<div class="col-6 pink-border border-left-0 p-3">
-
-</div>
-        </div>
-
-
-
-    </div>
-@if (Model.Animate)
-{
-    <script>
-        let cartImg = document.getElementById("cartImg");
-        cartImg.classList.add('animate-cart');
-    </script>
-}
-    </div>
-</div>
+    
+    @if (Model.Animate)
+    {
+        <script>
+            let cartImg = document.getElementById("cartImg");
+            cartImg.classList.add('animate-cart');
+        </script>
+    }
+   
