@@ -4,16 +4,16 @@
     ViewData["Title"] = Model.Product.Name;
 }
 <div class="brownandthin mt-3">
-    <div class="card mb-3" style="width: 90%;">
+    <div class="card mb-3 mx-auto" style="width: 70%;">
         <div class="row no-gutters">
-            <div class="col-md-8">
+            @*<div class="col-md-8">*@
                 <img class="card-img" src="~/images/@Model.Product.ImageFile" alt="@Model.Product.ImageDescription" />
-            </div>
-            <div class="col-md-4">
+            @*  *@</div>
+           @* <div class="col-md-4">*@
                 <div class="card-body text-center p-0">
                    <h5 class="card-title">@Model.Product.Name</h5>
                     </div>
-                <div class="card-body" style="max-height:300px;overflow-y:auto">
+                <div class="card-body pt-0" style=" max-height:325px;overflow-y:hidden">
                     <p class="card-text">
                     <p>@Html.Raw(Model.Product.Description)</p>
                     @if (Model.Product.AllergyTags.Count != 0)
@@ -36,7 +36,7 @@
                     </p>
                     <p>I butik: @Model.ProductQuantity</p>
                     </div>
-                    <div class="card-text pb-0 text-center align-items-center">
+                    <div class="pb-0 text-center">
                     <form method="post">
                         <select name="number">
                             @for (int i = 1; i < 11; i++)
@@ -44,10 +44,10 @@
                                 <option value="@i">@i</option>
                             }
                         </select>
-                        <button type="submit" onclick="">Köp</button>
+                        <button class="btn pink-button" type="submit" onclick="">Köp</button>
                     </form>
                         </div>
-                </div>
+                 @*</div>*@
             </div>
         </div>
     </div>
