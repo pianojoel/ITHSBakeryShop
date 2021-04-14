@@ -12,12 +12,13 @@ namespace Grupp9WebbShop.Data
     public class DataSeeder
     {
         private static string fileName = "DataImport.csv";
+        private static string catsFileName = "Categories.csv";
         private static Random rnd = new();
         public static void SeedDatabaseFromCsv(ShopContext ctx)
         {
             List<Product> prods = new();
 
-            List<ProductCategory> cats = CreateCategories();
+            List<ProductCategory> cats = CreateCategoriesFromFile();
             ctx.ProductCategories.AddRange(cats);
             ctx.SaveChanges();
 
@@ -92,48 +93,54 @@ namespace Grupp9WebbShop.Data
             return prod;
         }
 
-        private static List<ProductCategory> CreateCategories()
+        private static List<ProductCategory> CreateCategoriesFromFile()
         {
             List<ProductCategory> cats = new();
-            cats.Add(new ProductCategory()
+            var data = File.ReadLines(catsFileName);
+            foreach (var line in data)
             {
-                Name = "Tårtor",
-                Description = "Våra tårtor bakas med organiska varor. Lokalproducerat och ekologiskt. Fairtrade certifierat.",
-                ImageFile = "tartor.jpeg",
-                ImageDescription = "En bild på en tårta"
-            });
-            cats.Add(new ProductCategory()
-            {
-                Name = "Bullar",
-                Description = "Bullar direkt ur ugnen!",
-                ImageFile = "kaffebullar.jpg",
-                ImageDescription = "En bild på bullar"
-            });
-            cats.Add(new ProductCategory()
-            {
-                Name = "Småkakor",
-                Description = "Hos oss hittar ni goda, festliga småkakor som bara vill hoppa in i munnen. Passar både till fikat eller kalaset!",
-                ImageFile = "smakakor.jpg",
-                ImageDescription = "En bild på småkakor"
-            });
-            cats.Add(new ProductCategory()
-            {
-                Name = "Cupcakes",
-                Description = "Här hittar ni fantastiska smarriga cupcakes med färgglada frostings. Kan förgylla er dag!",
-                ImageFile = "cupcake.jpeg",
-                ImageDescription = "En bild på cupcakes"
-            });
-            cats.Add(new ProductCategory()
-            {
-                Name = "Färdiga paket",
-                Description = "",
-                ImageFile = "",
-                ImageDescription = ""
-            });
+                string[] chunk = line.Split(';');
+                cats.Add(new ProductCategory()
+                {
+                    Name = chunk[1],
+                    DisplayOrder = int.Parse(chunk[0])
+                });
 
-
+            }
             return cats;
         }
+        //private static List<ProductCategory> CreateCategories()
+        //{
+        //    List<ProductCategory> cats = new();
+        //    cats.Add(new ProductCategory()
+        //    {
+        //        Name = "Tårtor",
+        //        DisplayOrder = 4
+        //    });
+        //    cats.Add(new ProductCategory()
+        //    {
+        //        Name = "Bullar",
+        //        DisplayOrder = 1
+        //    });
+        //    cats.Add(new ProductCategory()
+        //    {
+        //        Name = "Småkakor",
+        //        DisplayOrder = 3
+        //    });
+        //    cats.Add(new ProductCategory()
+        //    {
+        //        Name = "Cupcakes",
+        //        DisplayOrder = 2
+        //    });
+        //    cats.Add(new ProductCategory()
+        //    {
+        //        Name = "Färdiga paket",
+        //        DisplayOrder = 5
+        //    });
+
+
+        //    return cats;
+        //}
         private static DateTime CreateRandomDate()
         {
             DateTime startDate = DateTime.Now - TimeSpan.FromDays(30);
