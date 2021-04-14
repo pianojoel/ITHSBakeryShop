@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Bekräftelse";
 }
-
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
-<p>Grattis, ditt konto är nu klart att använda!</p>
-<p><a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Klicka här för att Logga in</a></p>
+<div class="brownandthin">
+    <h1>@ViewData["Title"]</h1>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <p>Grattis, ditt konto är nu klart att använda!</p>
+    <p><a class="btn blue-button" id="login" asp-area="Identity" asp-page="/Account/Login">Klicka här för att Logga in</a></p>
+</div>

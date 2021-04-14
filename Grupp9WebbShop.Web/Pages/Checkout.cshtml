@@ -150,8 +150,9 @@
 }
 else
 {
-    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Vänligen logga in för att fortsätta</a>
-
+<div class="brownandthin text-center">
+    <a class="btn blue-button" id="login" asp-area="Identity" asp-page="/Account/Login">Vänligen logga in för att fortsätta</a>
+</div>
 }
 
 @if (Model.Fail != null && Model.Fail.Value)
