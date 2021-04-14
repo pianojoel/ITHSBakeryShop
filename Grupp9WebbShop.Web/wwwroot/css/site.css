@@ -92,10 +92,10 @@ body {
 .card{
     border:2px solid transparent;
 }
-    .card:hover {
+    /*.card:hover {*/
         /*box-shadow: 0 -3px red;*/
-        border: solid 2px #fab0c8;
-    }
+        /*border: solid 2px #fab0c8;
+    }*/
 
 .navstyles {
     background-color: #b5d8eb;
