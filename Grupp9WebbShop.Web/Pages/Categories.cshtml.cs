@@ -26,6 +26,7 @@ namespace Grupp9WebbShop.Web.Pages
         public Product Product { get; set; }
         [BindProperty]
         public int Number { get; set; }
+        [TempData]
         public bool Animate { get; set; }
 
         public CategoriesModel(IShopDataService ds) : base(ds)

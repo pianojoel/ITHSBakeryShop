@@ -14,11 +14,12 @@ namespace Grupp9WebbShop.Web.Pages
 {
     public class SearchModel : BasePageModel
     {
-        [BindProperty(SupportsGet =true)]
+        [BindProperty(SupportsGet = true)]
         public string Query { get; set; }
         [BindProperty]
         public IEnumerable<Product> SearchResults { get; set; }
         private readonly IShopDataService _ds;
+        [TempData]
         public bool Animate { get; set; }
         public Product Product { get; set; }
         [BindProperty]
@@ -50,10 +51,10 @@ namespace Grupp9WebbShop.Web.Pages
             }
 
             var products = await _ds.GetProductsAsync();
-            if(!String.IsNullOrEmpty(Query))
+            if (!String.IsNullOrEmpty(Query))
             {
-            SearchResults = products.Where(p => p.Name.ToUpper().Contains(Query.ToUpper()) && p.Category.Name != "Färdiga paket").ToList();
-                if (SearchResults.Count() >0)
+                SearchResults = products.Where(p => p.Name.ToUpper().Contains(Query.ToUpper()) && p.Category.Name != "Färdiga paket").ToList();
+                if (SearchResults.Count() > 0)
                     SearchResults = _ds.FilteredProducts(SearchResults, Tags);
             }
 

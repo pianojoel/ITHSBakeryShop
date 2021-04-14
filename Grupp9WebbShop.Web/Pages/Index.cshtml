@@ -65,7 +65,7 @@
                     </select>
 
 
-                    <button class="btn pink-button" onclick="buy(@prod.Id)">Köp</button>
+                    <button class="btn pink-button" onclick="buy(@prod.Id, 'S')">Köp</button>
                 </div>
             </div>
         </div>
@@ -206,7 +206,7 @@
                                     </div>
                                     <div class="text-center" style="background-color: white;color:#642714;font-family:Thonburi-bold">
                                         <span class="card-text"></span>
-                                        <select name="number" id=@($"S{@prod.Id}")>
+                                        <select name="number" id=@($"B{@prod.Id}")>
                                             @for (int i = 1; i < 11; i++)
                                             {
                                                 <option value="@i">@i</option>
@@ -214,7 +214,7 @@
                                         </select>
 
 
-                                        <button class="pink-button" onclick="buy(@prod.Id)">Köp</button>
+                                        <button class="pink-button" onclick="buy(@prod.Id, 'B')">Köp</button>
                                     </div>
 
 
@@ -282,7 +282,7 @@
                 </div>
                 <div class="card-footer text-center pink-border" style="border-top:none; background-color: white;color:#642714;font-family:Thonburi-bold">
                     <span class="card-text"></span>
-                    <select name="number" id=@($"S{@prod.Id}")>
+                    <select name="number" id=@($"F{@prod.Id}")>
                         @for (int i = 1; i < 11; i++)
                         {
                             <option value="@i">@i</option>
@@ -290,7 +290,7 @@
                     </select>
 
 
-                    <button class="btn pink-button" onclick="buy(@prod.Id)">Köp</button>
+                    <button class="btn pink-button" onclick="buy(@prod.Id, 'F')">Köp</button>
                 </div>
             </div>
         </div>
@@ -349,7 +349,7 @@
                 </div>
                 <div class="card-footer text-center pink-border" style="border-top:none; background-color: white;color:#642714;font-family:Thonburi-bold">
                     <span class="card-text"></span>
-                    <select name="number" id=@($"S{@prod.Id}")>
+                    <select name="number" id=@($"D{@prod.Id}")>
                         @for (int i = 1; i < 11; i++)
                         {
                             <option value="@i">@i</option>
@@ -357,7 +357,7 @@
                     </select>
 
 
-                    <button class="btn pink-button" onclick="buy(@prod.Id)">Köp</button>
+                    <button class="btn pink-button" onclick="buy(@prod.Id, 'D')">Köp</button>
                 </div>
             </div>
         </div>
@@ -390,9 +390,9 @@
 }
 
 <script>
-    function buy(id) {
+    function buy(id, prefix) {
 
-        const selectId = "S" + id;
+        const selectId = prefix + id;
 
         const mySelect = document.getElementById(selectId);
         const hiddenForm = document.getElementById("myHiddenForm");
