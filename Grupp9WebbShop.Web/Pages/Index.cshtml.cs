@@ -24,6 +24,7 @@ namespace Grupp9WebbShop.Web.Pages
         public Product Product { get; set; }
         [BindProperty]
         public int Number { get; set; }
+        [TempData]
         public bool Animate { get; set; }
         [BindProperty]
         public IEnumerable<Product> BestSellingProducts { get; set; }
