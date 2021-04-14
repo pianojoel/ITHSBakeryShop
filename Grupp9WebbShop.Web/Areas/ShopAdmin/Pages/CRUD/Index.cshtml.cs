@@ -24,7 +24,7 @@ namespace Grupp9WebbShop.Web.Areas.ShopAdmin.Pages.CRUD
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             Product = await _context.Products
-                .Include(p => p.Category).ToListAsync();
+                .Include(p => p.Category).OrderBy(o => o.Name).ToListAsync();
             if (id != null)
             {
                 await SetHighlighted(id.Value);
